@@ -1,0 +1,26 @@
+/** API **/
+
+
+PROTECTED
+================
+POST /users
+//creating a new user in the db
+
+POST /users/books
+//creating a new user-book relationship or add a reaction
+//post data will have unique book identifier, user ID, and any reactions
+
+UNPROTECTED
+=================
+GET /books
+//loading book titles before you add a new one, displaying on front page
+//query params:
+  //titles => all book titles, no particular order
+  //popular => all books, ordered by number of users who have read
+
+GET /profile
+//query params:
+  //user_id => if provided, send back corresponding user's profile
+               if not, use JWT to send back logged-in user's profile
+
+
