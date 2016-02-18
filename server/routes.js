@@ -1,5 +1,4 @@
 var path = require('path');
-
 var public = path.resolve('public') + '/';
 
 var routes = [
@@ -17,7 +16,9 @@ var routes = [
   }  
 ];
 
-module.exports = function (app) {
+module.exports = function (app, express) {
+  app.use(express.static(public + '/client'))
+
   routes.forEach(function (route){
     for (var key in route) {
       if (key === 'path') { continue; }
