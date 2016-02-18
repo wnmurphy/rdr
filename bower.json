@@ -1,0 +1,23 @@
+{
+  "name": "greenfield",
+  "description": "Book list app",
+  "main": "index.html",
+  "authors": [
+    "T-Rex"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-route": "~1.5.1"
+  }
+}
