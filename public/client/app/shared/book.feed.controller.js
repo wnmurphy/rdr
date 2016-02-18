@@ -1,6 +1,6 @@
 angular.module('booklist.feed', [])
 
-.controller('FeedController', ['$scope, Books', function($scope, Books){
+.controller('FeedController', ['$scope', function($scope, Books){
   $scope.data = {};
   $scope.data.books = [{'title': 'Prince Rainbow 1', 'authorName': 'Appleman1' }, {'title': 'LampLoving', 'authorName': 'Brett'}, {'title': 'Zoolander', 'authorName': 'Derek Zoolander'}];
   $scope.getBooks = function(){
