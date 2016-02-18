@@ -4,9 +4,14 @@ angular.module('booklist', [
   'ngRoute'
 ])
 .config(['$routeProvider',function($routeProvider) {
+  console.log('routing');
   $routeProvider
     .when('/', {
-      templateURL: '/shared/book.feed.html',
+      templateUrl: '/app/shared/book.feed.html',
+      controller: 'FeedController'
+    })
+    .otherwise({
+      templateUrl: '/app/shared/book.feed.html',
       controller: 'FeedController'
     })
 }])
