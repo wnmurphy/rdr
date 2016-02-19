@@ -15,33 +15,40 @@ describe('', function() {
 
   describe('Bookshelf ', function() {
 
-    it('Should retrieve author from book', function(done) {
-      Author.forge({name: 'Dr. Seuss'}).fetch()
-        .then(function (author) {
-          if (!author) {
-            author = new Author({name: 'Dr. Seuss'});
-          }
-          author.save().then( function () {
-            var book = new Book({
-              title: 'Cat in the Hat',
-              author_id: author.get('id')
-            });
+    describe('Models', function () {
+      describe('Book', function() {
+        var author, book;
+        it('Should retrieve author from book', function(done) {
+          Author.forge({name: 'Dr. Seuss'}).fetch()
+            .then(function (author) {
+              if (!author) {
+                author = new Author({name: 'Dr. Seuss'});
+              }
+              author.save().then( function () {
+                book = new Book({
+                  title: 'Cat in the Hat',
+                  author_id: author.get('id')
+                });
 
-            book.save().then(function () {
+                book.save().then(function () {
 
-              Book.forge({title: 'Cat in the Hat'}).fetch({withRelated: ['author']})
-              .then(function (book) {
-                for (var key in book.related('author').attributes) {
-                  expect(book.related('author')[key]).to.equal(author[key]);
-                }
-                done();
-                book.destroy();
+                  Book.forge({title: 'Cat in the Hat'}).fetch({withRelated: ['author']})
+                  .then(function (book) {
+                    for (var key in book.related('author').attributes) {
+                      expect(book.related('author')[key]).to.equal(author[key]);
+                    }
+                    done();
+                    book.destroy();
+                  });
+                });
               });
             });
           });
+        it('Should count how many people have read book', function(done) {
+          // TODO write test for checking books popularity
         });
+      });
     });
-
     describe('Find or create', function () {
       it('Should provide an object', function(done) {
         helpers.findOrCreate(Author, {name: 'Chicken Salad'})
