@@ -51,8 +51,11 @@ var addBook = function (author, book, reaction, user, success, fail) {
     .catch(function (error) {
       fail(error);
     });  
-  
 };
+
+var getBooks = function (success, fail) {
+  req.param('clock_id')
+}
 
 module.exports = {
 
