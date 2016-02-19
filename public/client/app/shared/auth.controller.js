@@ -8,10 +8,16 @@ angular.module('booklist.auth', [])
         store.set('profile', profile);
         store.set('token', token);
         $location.path('/');
-      }, function () {
-        // Error callback
+      }, function (error) {
+        console.log(error);
+        return;
       });
     };
+    $scope.logout = function() {
+      auth.signout();
+      store.remove('profile');
+      store.remove('token');
+    }
   }]);
 
 // <!-- login.tpl.html -->
