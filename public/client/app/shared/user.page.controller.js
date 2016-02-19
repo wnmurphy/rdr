@@ -1,21 +1,12 @@
 angular.module('booklist.user', [])
 
-.controller('UserController', ['$scope', function($scope, Books){
+.controller('UserController', ['$scope', '$rootScope', function($scope, Books, $rootScope){
   $scope.user = {};
-
+  // $scope.books = $rootScope.books
   $scope.addBook = function(){
     //TODO: check how to do error handling
-    Books.postBook($scope.bookName, $scope.authorName, $scope.userID, $scope.reaction);
+    Books.postBook($scope.bookName, $scope.authorName, $scope.reaction);
+    //TODO: add the new book to the user's page
   };
-  $scope.getBooks = function(){
-    //TODO: specify only books for the particular user
-    Books.getBooks()
-    .then(function(resp){
-      $scope.data.books = resp;
-    })
-    .catch(function(error){
-      console.log(error);
-      return;
-    });
-  };
+  //get books on signin
 }]);
