@@ -49,10 +49,37 @@ table {
 }
 /*End of CSS Reset*/
 /** COLORS **/
+*, *:after, *:before {
+  font-family: 'Lato'; }
+
 h1, h2, h3, h4, h5, h6 {
   color: #466182; }
 
 body {
   background-color: #163152; }
+
+.book-entry .card-content {
+  line-height: 200%; }
+
+.book-entry .card-title {
+  margin-left: 5px; }
+
+.book-entry .card-action {
+  width: 100%;
+  margin: auto;
+  margin-top: 10px; }
+  .book-entry .card-action .btn {
+    background-color: #466182; }
+  .book-entry .card-action .btn:hover {
+    background-color: #6d849f; }
+  .book-entry .card-action .btn:active {
+    background-color: #2b486a; }
+
+.book-entry img {
+  border-radius: 4px; }
+
+.author {
+  float: right;
+  font-style: italic; }
 
 /*# sourceMappingURL=main.css.map */
