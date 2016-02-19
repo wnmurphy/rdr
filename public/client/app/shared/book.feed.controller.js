@@ -1,6 +1,6 @@
 angular.module('booklist.feed', [])
 
-.controller('FeedController', ['$scope, Books', function($scope, Books){
+.controller('FeedController', ['$scope', function($scope, Books){
   $scope.data = {};
   $scope.getBooks = function(){
     Books.getBooks()
@@ -11,6 +11,8 @@ angular.module('booklist.feed', [])
     .catch(function(error){
       console.log(error);
       return;
-    })
+    });
   };
+  //TODO - see if there is a better way to preload the books
+  $scope.getBooks();
 }]);
