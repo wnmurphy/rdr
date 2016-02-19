@@ -12,13 +12,14 @@ $darkest-color: rgba(  6, 28, 54,1);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: $lighter-color;
+  color: $lightest-color;
 }
 
 body {
-  background-color: $darker-color;
+  background: linear-gradient(to left, $primary-color, $darker-color);
 }
 
+/** TRENDS PAGE **/
 .book-entry {
 
   .card-content {
@@ -58,4 +59,15 @@ body {
 .author {
   float: right;
   font-style: italic;
+}
+
+nav {
+  background: linear-gradient(to right, $primary-color, $darker-color);
+}
+
+/** PROFILE **/
+
+input[type=text]:focus {
+   border-bottom: 1px solid $lightest-color;
+   box-shadow: 0 1px 0 0 #000;
 }
