@@ -4,7 +4,7 @@ var Book = db.Model.extend({
   tableName: 'books',
   author: function() {
     return this.belongsTo(Author, 'author_id');
-  }
+  },
   users: function () {
     return this.hasMany(User).through(UserBook);
   }
