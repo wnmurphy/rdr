@@ -28,6 +28,10 @@ var User = db.Model.extend({
   }
 });
 
+var Read = db.Model.extend({
+  tableName: 'books-users',
+});
+
 module.exports = {
   Book: Book,
   Author: Author,
