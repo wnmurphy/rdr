@@ -5,20 +5,33 @@ var Book = db.Model.extend({
   author: function() {
     return this.belongsTo(Author, 'author_id');
   }
+  // TODO add reactions and users
 });
 
 var Author = db.Model.extend({
   tableName: 'authors',
   books: function () {
-    return this.hasMany(Book, 'book_id');
+    return this.hasMany(Book);
   }
 });
 
-//TODO write model for Reaction
+var Reaction = db.Model.extend({
+  tableName: 'reactions',
+  userBookReactions: function () {
+    return this.hasMany(UserBook).through(UserBookReaction);
+  }
+});
 
-//TODO write model for User
+var User = db.Model.extend({
+  tableName: 'users',
+  books: function () {
+    return this.hasMany(Book).through(UserBook);
+  }
+});
 
 module.exports = {
   Book: Book,
-  Author: Author
+  Author: Author,
+  Reaction: Reaction,
+  Book: Book
 };
