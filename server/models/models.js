@@ -6,38 +6,31 @@ var Book = db.Model.extend({
     return this.belongsTo(Author, 'author_id');
   },
   users: function () {
-    return this.belongsToMany(Read, 'books-users', null, 'book_id');
+    return this.belongsToMany(User, 'books-users', 'user_id', 'book_id');
   }
 });
 
 var Author = db.Model.extend({
   tableName: 'authors',
   books: function () {
-    return this.hasMany(Book);
+    return this.hasMany(Book, 'author_id');
   }
 });
 
 var Reaction = db.Model.extend({
   tableName: 'reactions',
-  userBookReactions: function () {
-    return this.hasMany(UserBook).through(UserBookReaction);
-  }
 });
 
 var User = db.Model.extend({
   tableName: 'users',
   books: function () {
-    return this.belongsToMany(Read, 'books-users', null, 'user_id');
+    return this.belongsToMany(Book, 'books-users', 'book_id', 'user_id');
   }
-});
-
-var Read = db.Model.extend({
-  tableName: 'books-users',
 });
 
 module.exports = {
   Book: Book,
   Author: Author,
   Reaction: Reaction,
-  Book: Book
+  User: User
 };
