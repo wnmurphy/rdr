@@ -13,26 +13,29 @@ describe('', function() {
   describe('Bookshelf models: ', function() {
 
     it('Should retrieve author from book', function(done) {
-      var author = new Author({
-        name: 'Dr. Seuss'
-      });
-      author.save().then( function () {
-        var book = new Book({
-          title: 'Cat in the Hat',
-          author_id: author.get('id')
-        });
+      Author.forge({name: 'Dr. Seuss'}).fetch()
+        .then(function (author) {
+          if (!author) {
+            author = new Author({name: 'Dr. Seuss'});
+          }
+          author.save().then( function () {
+            var book = new Book({
+              title: 'Cat in the Hat',
+              author_id: author.get('id')
+            });
 
-        book.save().then(function () {
+            book.save().then(function () {
 
-          Book.forge({title: 'Cat in the Hat'}).fetch({withRelated: ['author']})
-          .then(function (book) {
-            expect(book.related('author')).to.deep.equal(author);
-            done();
+              Book.forge({title: 'Cat in the Hat'}).fetch({withRelated: ['author']})
+              .then(function (book) {
+                for (var key in book.related('author').attributes) {
+                  expect(book.related('author')[key]).to.equal(author[key]);
+                }
+                done();
+              });
+            });
           });
         });
-      });
     });
-
   }); 
-
 });
