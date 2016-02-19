@@ -27,8 +27,12 @@ var Reaction = db.Model.extend({
 var User = db.Model.extend({
   tableName: 'users',
   books: function () {
-    return this.hasMany(Book).through(UserBook);
+    return this.belongsToMany(Read, 'books-users', null, 'user_id');
   }
+});
+
+var Read = db.Model.extend({
+  tableName: 'books-users',
 });
 
 module.exports = {
