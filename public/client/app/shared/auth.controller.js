@@ -19,8 +19,3 @@ angular.module('booklist.auth', [])
       store.remove('token');
     }
   }]);
-
-// <!-- login.tpl.html -->
-// <!-- ... -->
-// <input type="submit" ng-click="login()" />
-// <!-- ... -->
