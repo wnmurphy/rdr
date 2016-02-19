@@ -38,7 +38,7 @@ var createUsers = function () {
     } else {
       createAuthors();
     }
-  })
+  });
 }
 
 var createAuthors = function () {
@@ -125,7 +125,7 @@ var createBooksUsers = function () {
       })
       .catch( function (err) {
         console.error(err);
-      })
+      });
     } else {
       createBooksUsersReactions();
     }
@@ -146,7 +146,7 @@ var createBooksUsersReactions = function () {
       })
       .catch( function (err) {
         console.error(err);
-      })
+      });
     }
   });
 };
