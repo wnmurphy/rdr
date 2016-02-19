@@ -4,7 +4,6 @@ var Promise = require('bluebird');
 var findOrCreate = function (Model, attributes) {
 
   return new Promise (function (resolve, reject) {
-
     Model.forge(attributes).fetch()
     .then(function (model) {
       if (!model) {
