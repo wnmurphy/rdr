@@ -37,7 +37,8 @@ var routes = [
       }    
     },
     'get': function (req, res) {
-      
+      var limit = req.param('limit');
+      var list = req.param('list');
     }
   }  
 ];
