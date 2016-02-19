@@ -1,5 +1,4 @@
 var db = require(__dirname + '/../../db/db.js');
-// var Author = require('./author.js');
 
 var Book = db.Model.extend({
   tableName: 'books',
@@ -14,6 +13,10 @@ var Author = db.Model.extend({
     return this.hasMany(Book, 'book_id');
   }
 });
+
+//TODO write model for Reaction
+
+//TODO write model for User
 
 module.exports = {
   Book: Book,
