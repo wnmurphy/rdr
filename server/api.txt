@@ -15,8 +15,9 @@ UNPROTECTED
 GET /books
 //loading book titles before you add a new one, displaying on front page
 //query params:
-  //titles => all book titles, no particular order
-  //popular => all books, ordered by number of users who have read
+  //list (titles/popular) => all book titles, no particular order
+                          => all books, ordered by number of users who have read
+  //limit => limit the number of books returned
 
 GET /profile
 //query params:
