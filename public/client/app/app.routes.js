@@ -10,6 +10,9 @@ angular.module('booklist', [
       templateUrl: '/app/shared/book.feed.html',
       controller: 'FeedController'
     })
+    .when('',{
+
+    })
     .otherwise({
       templateUrl: '/app/shared/book.feed.html',
       controller: 'FeedController'
