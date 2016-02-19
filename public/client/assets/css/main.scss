@@ -19,6 +19,25 @@ body {
   background: linear-gradient(to left, $primary-color, $darker-color);
 }
 
+.std-btn {
+
+  background-color: $lighter-color;
+
+  &:hover {
+    background-color: $lightest-color;
+  }
+
+  &:active {
+    background-color: $primary-color;
+  }
+
+  &[disabled=disabled] {
+    background-color: #dfdfdf;
+    color: #9f9f9f;
+  }
+}
+
+
 /** TRENDS PAGE **/
 .book-entry {
 
@@ -35,17 +54,6 @@ body {
     margin: auto;
     margin-top: 10px;
 
-    .btn {
-      background-color: $lighter-color;
-    }
-
-    .btn:hover {
-      background-color: $lightest-color;
-    }
-
-    .btn:active {
-      background-color: $primary-color;
-    }
   }
 
   img {
@@ -71,3 +79,17 @@ input[type=text]:focus {
    border-bottom: 1px solid $lightest-color;
    box-shadow: 0 1px 0 0 #000;
 }
+
+.reactions {
+
+  .card-title {
+    margin-left: 5px;    
+  }
+
+  .btn {
+    margin: 5px;
+  }
+
+}
+
+

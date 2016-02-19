@@ -1,7 +1,7 @@
 <div class="user-page">
   <h1>Hello, {{name || 'you'}}</h1>
-  <div>Add a Book</div>
     <form name="bookSubmission" ng-submit="addBook()">
+      <legend>Add a new book</legend>
       <div class="input-field">
         <label for="title">Title</label>
         <input id="title" type="text" ng-model="user.bookName" required>
@@ -12,8 +12,18 @@
         <input id="author" class="input-field" type="text" ng-model="user.authorName" required>
       </div>
 
+      <div id="reactions" class="card reactions center-align">
+        <div class="card-title">Reactions</div>
+        <div class="card-action">
+          <a class="std-btn btn">Love it</a>
+          <a class="std-btn btn">Like it</a>
+          <a class="std-btn btn">Decent</a>
+          <a class="std-btn btn">Dislike it</a>
+          <a class="std-btn btn">Hate it</a>
+        </div>
+      </div>
       
-      <button class="btn" type="submit" ng-disabled="bookSubmission.$invalid">Add Book</button>
+      <a class="std-btn btn" ng-disabled="bookSubmission.$invalid">Add Book</a>
     </form>
   <div>Your book list</div>
   <div ng-repeat="book in data.books">
