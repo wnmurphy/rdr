@@ -1,4 +1,3 @@
-var db = require('../db/db.js');
 var path = require('path');
 var public = path.resolve('public') + '/';
 var helpers = require(path.resolve('server/models/helpers'));
@@ -24,35 +23,18 @@ var routes = [
     'post': function (req, res) {
       var author = req.body.author;
       var book = req.body.book; 
+      var reaction = req.body.reaction;
       if (!author || !book) {
         res.sendStatus(409);
       } else {
-
-        helpers.findOrCreate(Author, author)
-        .then(function (author) {
-          book.author_id = author.get('id');
-          helpers.findOrCreate(Book, book)
-          .then(function (book) {
-          //posted a valid book
+        helpers.addBook(author, book, reaction, null, 
+          function(data) {
             res.statusCode = 201;
-            res.send(JSON.stringify({
-              book: {
-                title: book.get('title')
-              },
-              author: {
-                name: author.get('name')
-              }
-            }));
-          })
-          .catch(function (error) {
-            console.error(error);
+            res.send(data);
+          }, function(error) {
+            console.error(error)
             res.sendStatus(409);
           });
-        })
-        .catch(function (error) {
-          console.error(error);
-          res.sendStatus(409);
-        });  
       }    
     }
   }  
