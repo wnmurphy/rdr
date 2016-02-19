@@ -27,6 +27,17 @@ module.exports = function(grunt) {
       }
     },
 
+    sass: {
+      options: {
+        sourceMap: true
+      },
+      dist: {
+        files: {
+          'public/client/assets/css/main.css': 'public/client/assets/css/main.scss'
+        }
+      }
+    },
+
     watch: {
       scripts: {
         files: [
@@ -37,6 +48,14 @@ module.exports = function(grunt) {
           'build', 
           'test'
         ]
+      },
+      sass: {
+        files: [
+          'public/client/assets/css/**/*.scss'
+        ],
+        tasks: [
+          'sass'
+        ]
       }
     }
 
@@ -45,8 +64,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-sass');
 
-  grunt.registerTask('build', ['jshint']);
+  grunt.registerTask('sassy', ['sass']);
+
+  grunt.registerTask('build', ['jshint', 'sass']);
   grunt.registerTask('test', ['mochaTest']);
 
   grunt.registerTask('default', ['watch']);
