@@ -1,6 +1,7 @@
 angular.module('booklist', [
   'booklist.services',
   'booklist.feed',
+  'booklist.user',
   'ngRoute'
 ])
 .config(['$routeProvider',function($routeProvider) {
@@ -10,8 +11,9 @@ angular.module('booklist', [
       templateUrl: '/app/shared/book.feed.html',
       controller: 'FeedController'
     })
-    .when('',{
-
+    .when('/profile', {
+      templateUrl: '/app/shared/user.page.html',
+      controller: 'UserController'
     })
     .otherwise({
       templateUrl: '/app/shared/book.feed.html',
