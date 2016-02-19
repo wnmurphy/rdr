@@ -3,11 +3,12 @@
   font-family: 'Railway', sans-serif; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #466182; }
+  color: #6d849f; }
 
 body {
-  background-color: #163152; }
+  background: linear-gradient(to left, #2b486a, #163152); }
 
+/** TRENDS PAGE **/
 .book-entry .card-content {
   line-height: 200%; }
 
@@ -31,5 +32,13 @@ body {
 .author {
   float: right;
   font-style: italic; }
+
+nav {
+  background: linear-gradient(to right, #2b486a, #163152); }
+
+/** PROFILE **/
+input[type=text]:focus {
+  border-bottom: 1px solid #6d849f;
+  box-shadow: 0 1px 0 0 #000; }
 
 /*# sourceMappingURL=main.css.map */
