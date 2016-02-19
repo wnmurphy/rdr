@@ -1,0 +1,17 @@
+<div class="user-page">
+  <h1>Hello {{name}}</h1>
+  <div>Add a Book</div>
+    <form name="bookSubmission">
+      <input type="text" ng-model="user.authorName" placeholder="Enter the author name here." required>
+      <input type="text" ng-model="user.bookName" placeholder="Enter the book here." required>
+      <input type="text" ng-model="user.reaction" placeholder="How did you like it?"></input>
+      <button type="submit" ng-disabled="bookSubmission.$invalid">Add Book</button>
+    </form>
+  <div>Your book list</div>
+  <div ng-repeat="book in data.books">
+    <div class="book-entry">
+      <div class="title">Book: {{book.title}}</div>
+      <div class="author">Author: {{book.authorName}}</div>
+    </div>
+  </div>
+</div>

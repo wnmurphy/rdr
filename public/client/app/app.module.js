@@ -14,11 +14,11 @@ angular.module('booklist.services', [])
     });
    };
 
-   var postBook = function (bookID, userID, reaction){
+   var postBook = function (bookName, authorName, userID, reaction){
     return $http({
       method: 'POST',
       url: '/users/books',
-      data: {'bookID': bookID, 'userID': userID, 'reaction': reaction}
+      data: {'bookName': bookName, 'authorName': authorName, 'userID': userID, 'reaction': reaction}
     })
     .then(function(resp){
       return resp.data;
