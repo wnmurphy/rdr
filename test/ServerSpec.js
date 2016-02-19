@@ -92,7 +92,7 @@ describe('', function() {
           done();
         });
       });
-      it('Should return 201 when a book is posted/update', function(done) {
+      it('Should return 201 and valid objects when a new book is posted', function(done) {
 
         var options = {
           'method': 'POST',
@@ -109,6 +109,8 @@ describe('', function() {
         };
         request(options, function (err, res, body) {
           expect(res.statusCode).to.equal(201);
+          expect(res.body.book).to.be.an('object');
+          expect(res.body.author).to.be.an('object');
           done();
         });
       });
