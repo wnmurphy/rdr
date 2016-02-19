@@ -1,3 +1,4 @@
+var db = require('../db/db.js');
 var path = require('path');
 var public = path.resolve('public') + '/';
 
@@ -18,7 +19,7 @@ var routes = [
 
 module.exports = function (app, express) {
   app.use(express.static(public + '/client'))
-
+    
   routes.forEach(function (route){
     for (var key in route) {
       if (key === 'path') { continue; }
