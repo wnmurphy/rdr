@@ -1,6 +1,6 @@
 angular.module('booklist.auth', [])
 
-.controller('LoginController', ['$scope', '$http', 'auth', 'store', '$location', 
+.controller('AuthController', ['$scope', '$http', 'auth', 'store', '$location', 
   function($scope, $http, auth, store, $location){
     $scope.login = function () {
       auth.signin({}, function (profile, token) {
