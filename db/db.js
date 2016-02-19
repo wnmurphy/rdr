@@ -24,8 +24,8 @@ var createUsers = function () {
     if (!exists) {
       db.knex.schema.createTable('users', function (user) {
         user.increments('id').primary();
-        user.string('amz_auth_id', 255).notNullable().index();
-        user.string('email', 255).notNullable();
+        user.string('amz_auth_id', 255).notNullable().index().unique();
+        user.string('email', 255).notNullable().unique();
         user.string('name', 255).notNullable();
       })
         .then(function(table) {
@@ -47,7 +47,7 @@ var createAuthors = function () {
     if (!exists) {
       db.knex.schema.createTable('authors', function (author) {
         author.increments('id').primary();
-        author.string('name', 255).notNullable();
+        author.string('name', 255).notNullable().unique();
       })
       .then (function (table) {
         console.log('created table authors');
@@ -70,7 +70,7 @@ var createBooks = function () {
         book.increments('id').primary();
         book.string('title', 255).index().notNullable();
         book.integer('author_id').unsigned().references('id').inTable('authors').index().notNullable();
-        book.string('amazon_id', 255);
+        book.string('amazon_id', 255).unique();
         book.string('publisher', 255);
         book.date('pub_year');
       })
@@ -93,7 +93,7 @@ var createReactions = function () {
     if (!exists) {
       db.knex.schema.createTable('reactions', function (author) {
         author.increments('id').primary();
-        author.string('verbiage', 255);
+        author.string('verbiage', 255).unique();
       })
       .then (function (table) {
         console.log('created table reactions');
