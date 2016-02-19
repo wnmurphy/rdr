@@ -4,9 +4,9 @@ var db = require(path.resolve('db/db'));
 var Author = require(__dirname + '/../server/models/models.js').Author;
 var Book = require(__dirname + '/../server/models/models.js').Book;
 var helpers = require(path.resolve('server/models/helpers'));
+var request = require('request');
 
 
-//
 describe('', function() {
 
   beforeEach(function() {
@@ -35,6 +35,7 @@ describe('', function() {
                   expect(book.related('author')[key]).to.equal(author[key]);
                 }
                 done();
+                book.destroy();
               });
             });
           });
@@ -80,6 +81,37 @@ describe('', function() {
               retrieved.destroy();   
             });
           });
+        });
+      });
+    });
+
+    describe('REST API', function () {
+      it('Should return 409 when posting/patching an invalid book', function(done) {
+        request.post('http://127.0.0.1:8080/users/books', function (err, res, body){
+          expect(res.statusCode).to.equal(409);
+          done();
+        });
+      });
+      it('Should return 201 and valid objects when a new book is posted', function(done) {
+
+        var options = {
+          'method': 'POST',
+          'followAllRedirects': true,
+          'uri': 'http://127.0.0.1:8080/users/books',
+          'json': {
+            'book': {
+              title: 'a;owinvawe',
+            },
+            'author': {
+              name: 'Dr. Seuss'
+            }
+          }
+        };
+        request(options, function (err, res, body) {
+          expect(res.statusCode).to.equal(201);
+          expect(res.body.book).to.be.an('object');
+          expect(res.body.author).to.be.an('object');
+          done();
         });
       });
     });
