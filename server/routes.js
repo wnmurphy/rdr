@@ -19,7 +19,6 @@ var routes = [
   },
   {
     path: '/users/books',
-    //TODO: take reactions into account
     'post': function (req, res) {
       var author = req.body.author;
       var book = req.body.book; 
@@ -36,6 +35,10 @@ var routes = [
             res.sendStatus(409);
           });
       }    
+    },
+    'get': function (req, res) {
+      var limit = req.param('limit');
+      var list = req.param('list');
     }
   }  
 ];
