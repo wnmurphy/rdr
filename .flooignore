@@ -2,7 +2,9 @@
 *.o
 *.pyc
 *~
+*.env
 extern/
 node_modules/
 tmp
 vendor/
+.env
