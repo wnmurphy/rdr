@@ -6,7 +6,7 @@ var Book = db.Model.extend({
     return this.belongsTo(Author, 'author_id');
   },
   users: function () {
-    return this.hasMany(User).through(UserBook);
+    return this.belongsToMany(Read, 'books-users', null, 'book_id');
   }
 });
 
