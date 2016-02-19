@@ -8,6 +8,16 @@ h1, h2, h3, h4, h5, h6 {
 body {
   background: linear-gradient(to left, #2b486a, #163152); }
 
+.std-btn {
+  background-color: #466182; }
+  .std-btn:hover {
+    background-color: #6d849f; }
+  .std-btn:active {
+    background-color: #2b486a; }
+  .std-btn[disabled=disabled] {
+    background-color: #dfdfdf;
+    color: #9f9f9f; }
+
 /** TRENDS PAGE **/
 .book-entry .card-content {
   line-height: 200%; }
@@ -19,12 +29,6 @@ body {
   width: 100%;
   margin: auto;
   margin-top: 10px; }
-  .book-entry .card-action .btn {
-    background-color: #466182; }
-  .book-entry .card-action .btn:hover {
-    background-color: #6d849f; }
-  .book-entry .card-action .btn:active {
-    background-color: #2b486a; }
 
 .book-entry img {
   border-radius: 4px; }
@@ -40,5 +44,11 @@ nav {
 input[type=text]:focus {
   border-bottom: 1px solid #6d849f;
   box-shadow: 0 1px 0 0 #000; }
+
+.reactions .card-title {
+  margin-left: 5px; }
+
+.reactions .btn {
+  margin: 5px; }
 
 /*# sourceMappingURL=main.css.map */
