@@ -3,7 +3,7 @@
    License: none (public domain)
 */
 
-$primary-color: rgba( 43, 72,106,1); // Main Primary color */
+$primary-color: rgba( 43, 72,106,1); 
 $lightest-color: rgba(109,132,159,1);
 $lighter-color: rgba( 70, 97,130,1);
 $darker-color: rgba( 22, 49, 82,1);
@@ -57,6 +57,11 @@ table {
 /*End of CSS Reset*/
 
 /** COLORS **/
+
+*, *:after, *:before {
+  font-family: 'Lato';
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: $lighter-color;
 }
@@ -65,12 +70,44 @@ body {
   background-color: $darker-color;
 }
 
-.book-entry{
-  
+.book-entry {
+
+  .card-content {
+    line-height: 200%;
+  }
+
+  .card-title {
+    margin-left: 5px;
+  }
+
+  .card-action {
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+
+    .btn {
+      background-color: $lighter-color;
+    }
+
+    .btn:hover {
+      background-color: $lightest-color;
+    }
+
+    .btn:active {
+      background-color: $primary-color;
+    }
+  }
+
+
+  img {
+    border-radius: 4px;
+  }
 }
-.title{
+
+.title {
 
 }
-.author{
-
+.author {
+  float: right;
+  font-style: italic;
 }

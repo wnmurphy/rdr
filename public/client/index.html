@@ -2,7 +2,10 @@
 <html>
 <head>
   <title>Book List</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,100' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
   <!-- The next 13 lines apply to Auth 0 -->
@@ -35,6 +38,29 @@
     src="http://i.imgur.com/x86kKmF.png" 
     alt="Built at Hack Reactor Remote Beta"> 
   </a>
+
+  <div class="row">
+    <div class="col s12 m7">
+      <div class="card book-entry">
+        <div class="card-image">
+          <img src="assets/img/antique-book.jpg">
+        </div>
+        <span class="card-title">Tale of Two Cities</span>
+        <div class="card-content">
+          This book is about stuff and it's purty good. I really like it in fact I'd probably read it about 1000 times because it is so awesome.
+          <span class="author">Author: John C. Riley</span>
+        </div>
+          <div class="reactions card-action center-align">
+            <a href="#" class="btn">Loved it</a>
+            <a href="#" class="btn">Like it</a>
+            <a href="#" class="btn">Meh</a>
+            <a href="#" class="btn">Didn't like</a>
+            <a href="#" class="btn">Rubbish</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div ng-view></div>
   
