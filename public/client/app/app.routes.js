@@ -2,6 +2,7 @@ angular.module('booklist', [
   'booklist.services',
   'booklist.feed',
   'booklist.user',
+  'booklist.auth',
   'auth0', 
   'angular-storage', 
   'angular-jwt',
