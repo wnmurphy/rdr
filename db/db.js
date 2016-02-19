@@ -39,7 +39,7 @@ var createUsers = function () {
       createAuthors();
     }
   });
-}
+};
 
 var createAuthors = function () {
   db.knex.schema.hasTable('authors')
