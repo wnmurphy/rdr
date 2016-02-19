@@ -25,6 +25,10 @@ var findOrCreate = function (Model, attributes) {
 
 };
 
+var addBook = function (author, book, reaction) {
+  
+};
+
 module.exports = {
 
   findOrCreate: findOrCreate
