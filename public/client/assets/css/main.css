@@ -1,19 +1,21 @@
 /** COLORS **/
 *, *:after, *:before {
-  font-family: 'Railway', sans-serif; }
+  font-family: 'Railway', sans-serif;
+  font-weight: 100; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #6d849f; }
+  color: white;
+  font-weight: 100; }
 
 body {
-  background: linear-gradient(to left, #2b486a, #163152); }
+  background: linear-gradient(to right, #5a475b, #392b3a); }
 
 .std-btn {
-  background-color: #466182; }
+  background-color: #5a475b; }
   .std-btn:hover {
-    background-color: #6d849f; }
+    background-color: #776378; }
   .std-btn:active {
-    background-color: #2b486a; }
+    background-color: #392b3a; }
   .std-btn[disabled=disabled] {
     background-color: #dfdfdf;
     color: #9f9f9f; }
@@ -38,17 +40,39 @@ body {
   font-style: italic; }
 
 nav {
-  background: linear-gradient(to right, #2b486a, #163152); }
+  background: linear-gradient(to right, #392b3a, #29182a); }
 
 /** PROFILE **/
-input[type=text]:focus {
-  border-bottom: 1px solid #6d849f;
-  box-shadow: 0 1px 0 0 #000; }
+.input-field label {
+  color: #29182a; }
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #392b3a;
+  box-shadow: 0 1px 0 0 #392b3a; }
+
+.input-field input[type=text] {
+  border-bottom: 1px solid #776378;
+  box-shadow: 0 1px 0 0 #776378; }
 
 .reactions .card-title {
   margin-left: 5px; }
 
 .reactions .btn {
   margin: 5px; }
+
+form.book {
+  padding: 15px;
+  background-color: #5a475b;
+  border-radius: 5px; }
+  form.book h3 {
+    color: #29182a; }
+
+.greet {
+  font-size: 2em;
+  color: #250e26;
+  font-weight: 100; }
+
+.spinner-layer {
+  border-color: white; }
 
 /*# sourceMappingURL=main.css.map */
