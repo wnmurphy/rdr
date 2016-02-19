@@ -35,7 +35,14 @@ var routes = [
           .then(function (book) {
           //posted a valid book
             res.statusCode = 201;
-            res.end();
+            res.send(JSON.stringify({
+              book: {
+                title: book.get('title')
+              },
+              author: {
+                name: author.get('name')
+              }
+            }));
           })
           .catch(function (error) {
             console.error(error);
