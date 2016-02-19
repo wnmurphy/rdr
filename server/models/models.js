@@ -5,7 +5,9 @@ var Book = db.Model.extend({
   author: function() {
     return this.belongsTo(Author, 'author_id');
   }
-  // TODO add reactions and users
+  users: function () {
+    return this.hasMany(User).through(UserBook);
+  }
 });
 
 var Author = db.Model.extend({
