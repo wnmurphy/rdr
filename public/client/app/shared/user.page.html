@@ -1,64 +1,76 @@
 <div class="user-page">
-  <p class="greet">Hello, {{name || 'you'}}</p>
-
+  <div class="row">
+    <p class="greet">Hello, {{name || 'you'}}</p>
     <ul class="collapsible new-book" data-collapsible="accordian">
-    <li>
-      <div class="collapsible-header">Add Book</div>
-      <div class="collapsible-body">
-      <form class="book z-depth-5" name="bookSubmission" ng-submit="addBook()">
-        <div class="preloader-wrapper active right" ng-show="data.submitting">
-          <div class="spinner-layer">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
-            </div>
-          </div>
+      <li>
+        <div class="collapsible-header">
+          <i class="material-icons">library_books</i>
+          Add Book
         </div>
-          <div class="col s6">
-            <div class="input-field">
-              <label for="title">Title</label>
-              <input id="title" type="text" ng-model="user.bookName" required>
+        <div class="collapsible-body">
+          <form class="book z-depth-5" name="bookSubmission" ng-submit="addBook()">
+            <div class="preloader-wrapper active right" ng-show="data.submitting">
+              <div class="spinner-layer">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                  <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="col s6">
-            <div class="input-field">
-              <label for="author">Author</label>
-              <input id="author" class="input-field" type="text" ng-model="user.authorName" required>
+            <div>
+              <div class="input-field">
+                <label for="title">Title</label>
+                <input id="title" type="text" ng-model="user.bookName" required>
+              </div>
             </div>
-        </div>
+            <div>
+              <div class="input-field">
+                <label for="author">Author</label>
+                <input id="author" class="input-field" type="text" ng-model="user.authorName" required>
+              </div>
+            </div>
 
-
-        <div id="reactions" class="card reactions center-align">
-          <div class="card-title">Reactions</div>
-          <div class="card-action">
-            <a class="std-btn btn">Love it</a>
-            <a class="std-btn btn">Like it</a>
-            <a class="std-btn btn">Decent</a>
-            <a class="std-btn btn">Dislike it</a>
-            <a class="std-btn btn">Hate it</a>
-          </div>
+            <div id="reactions" class="card reactions center-align">
+              <div class="card-title">
+                Reaction(s)
+              </div>
+              <div class="card-action">
+                <a class="std-btn btn">Love it</a>
+                <a class="std-btn btn">Like it</a>
+                <a class="std-btn btn">Decent</a>
+                <a class="std-btn btn">Dislike it</a>
+                <a class="std-btn btn">Hate it</a>
+              </div>
+            </div>
+            
+            <a class="std-btn btn" ng-disabled="bookSubmission.$invalid">Add Book</a>
+          </form>
         </div>
-        
-        <a class="std-btn btn" ng-disabled="bookSubmission.$invalid">Add Book</a>
-      </form>
       </li>
-      </ul>
+    </ul>
+  </div>
 
   <div class="row">
     <h3>Your book list</h3>
-    <div ng-repeat="book in data.books">
-      <div class="book-entry">
-        <div class="title">Book: {{book.title}}</div>
-        <div class="author">Author: {{book.authorName}}</div>
-      </div>
-    </div>
+    <ul>
+        <li ng-repeat="book in books" ng-include="bookTemplate">
+        </li>
+        <div class="message card" ng-show="!books.length">
+          <div class="card-content">
+          Start adding books above!
+          </div>
+        </div>
+    </ul>
   </div>
+  <script>
+    $('.collapsible').collapsible();
+  </script>
 
-</div>
+</div
 
-<script>
-  $('.collapsible').collapsible();
-</script>
+
