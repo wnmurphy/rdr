@@ -111,7 +111,15 @@ form.book {
   }
   padding: 15px;
   background-color: $lighter-color;
+  
+}
+
+.collapsible {
+  border-color: $primary-color;
   border-radius: 5px;
+  .collapsible-body {
+    border-color: $primary-color;
+  }
 }
 
 .greet {
