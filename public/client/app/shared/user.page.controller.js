@@ -3,6 +3,9 @@ angular.module('booklist.user', [])
 .controller('UserController', ['$scope', 'Books','$rootScope', function($scope, Books, $rootScope){
   $scope.user = {};
   // $scope.books = $rootScope.books
+
+  $scope.bookTemplate = 'app/shared/book.entry.html';
+
   $scope.addBook = function(){
 
     //TODO: check how to do error handling
