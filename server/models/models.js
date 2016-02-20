@@ -7,6 +7,9 @@ var Book = db.Model.extend({
   },
   users: function () {
     return this.belongsToMany(User, 'books-users', 'user_id', 'book_id');
+  },
+  popularity: function () {
+    return this.users().toJSON().length;
   }
 });
 

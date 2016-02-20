@@ -47,9 +47,10 @@ describe('', function() {
           });
         it('Should count how many people have read book', function(done) {
           // TODO write test for checking books popularity
-          new Book({id: 16}).fetch().then( function (found) {
-            found.count();
-          });
+          expect(book.popularity).to.be.a('function');
+          expect(book.popularity()).to.be.a('number');
+          expect(true).to.equal(false);
+          done();
         });
       });
     });
@@ -101,8 +102,13 @@ describe('', function() {
       describe('addBook', function () {
         it('Should add a book to the database', function(done) {
           helpers.addBook({name: 'Leo Tolstoy'}, {title: 'War and Peace'}, null, null,
-            function(book){
-              expect(typeof book.toJSON().id).to.equal('Number');
+            function(data){
+              data = JSON.parse(data);
+              expect(typeof data.book.id).to.equal('number');
+              expect(typeof data.author.id).to.equal('number');
+              expect(data.book.title).to.equal('War and Peace');
+              expect(data.author.name).to.equal('Leo Tolstoy');
+              done();
             }, function (error) {
               console.log(error);
             });
@@ -146,7 +152,7 @@ describe('', function() {
           'uri': 'http://127.0.0.1:8080/users/books',
           'json': {
             'book': {
-              title: 'a;owinvawe',
+              title: 'Oh the Places You\'ll Go',
             },
             'author': {
               name: 'Dr. Seuss'
