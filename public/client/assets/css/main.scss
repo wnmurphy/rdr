@@ -1,24 +1,47 @@
 
 /** COLORS **/
-$primary-color: rgba( 43, 72,106,1); 
-$lightest-color: rgba(109,132,159,1);
-$lighter-color: rgba( 70, 97,130,1);
-$darker-color: rgba( 22, 49, 82,1);
-$darkest-color: rgba(  6, 28, 54,1);
+$primary-color: rgba( 57, 43, 58,1); 
+$lightest-color: rgba(119, 99,120,1);
+$lighter-color: rgba( 90, 71, 91,1);
+$darker-color: rgba( 41, 24, 42,1);
+$darkest-color: rgba( 37, 14, 38,1);
+$spinner-default-color: red;
 
 
 *, *:after, *:before {
   font-family: 'Railway', sans-serif;
+  font-weight: 100;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: $lighter-color;
+  color: white;
+  font-weight: 100;
 }
 
 body {
-  background-color: $darker-color;
+  background: linear-gradient(to right, $lighter-color, $primary-color);
 }
 
+.std-btn {
+
+  background-color: $lighter-color;
+
+  &:hover {
+    background-color: $lightest-color;
+  }
+
+  &:active {
+    background-color: $primary-color;
+  }
+
+  &[disabled=disabled] {
+    background-color: #dfdfdf;
+    color: #9f9f9f;
+  }
+}
+
+
+/** TRENDS PAGE **/
 .book-entry {
 
   .card-content {
@@ -34,17 +57,6 @@ body {
     margin: auto;
     margin-top: 10px;
 
-    .btn {
-      background-color: $lighter-color;
-    }
-
-    .btn:hover {
-      background-color: $lightest-color;
-    }
-
-    .btn:active {
-      background-color: $primary-color;
-    }
   }
 
   img {
@@ -59,3 +71,59 @@ body {
   float: right;
   font-style: italic;
 }
+
+nav {
+  background: linear-gradient(to right, $primary-color, $darker-color);
+}
+
+/** PROFILE **/
+
+.input-field label {
+  color: $darker-color;
+}
+
+.input-field input[type=text]:focus {
+   border-bottom: 1px solid $primary-color;
+   box-shadow: 0 1px 0 0 $primary-color;
+}
+
+.input-field input[type=text] {
+  border-bottom: 1px solid $lightest-color;
+  box-shadow: 0 1px 0 0 $lightest-color;
+}
+
+
+.reactions {
+
+  .card-title {
+    margin-left: 5px;    
+  }
+
+  .btn {
+    margin: 5px;
+  }
+
+}
+
+form.book {
+  h3 {
+    color: $darker-color;
+  }
+  padding: 15px;
+  background-color: $lighter-color;
+  border-radius: 5px;
+}
+
+.greet {
+  font-size: 2em;
+  color: $darkest-color;
+  font-weight: 100;
+}
+
+.spinner-layer {
+  border-color: white;
+}
+
+
+
+
