@@ -20,7 +20,8 @@ describe('', function() {
         var author, book;
         it('Should retrieve author from book', function(done) {
           Author.forge({name: 'Dr. Seuss'}).fetch()
-            .then(function (author) {
+            .then(function (found) {
+              author = found;
               if (!author) {
                 author = new Author({name: 'Dr. Seuss'});
               }
@@ -46,47 +47,84 @@ describe('', function() {
           });
         it('Should count how many people have read book', function(done) {
           // TODO write test for checking books popularity
-        });
-      });
-    });
-    describe('Find or create', function () {
-      it('Should provide an object', function(done) {
-        helpers.findOrCreate(Author, {name: 'Chicken Salad'})
-        .then(function (newAuthor) {
-          expect(newAuthor).to.be.an('object');
-          done();
-        });
-      });
-
-      it('Should retrieve the existing model when one exists', function(done) {
-        Author.forge({}).fetch()
-        .then(function (author) {
-          var id = author.get('id');
-          helpers.findOrCreate(Author, author.attributes)
-          .then(function (retrieved) {
-            expect(retrieved.get('id')).to.equal(id);
-            done();
+          new Book({id: 16}).fetch().then( function (found) {
+            found.count();
           });
         });
       });
+    });
+    
+    describe('Helper functions', function () {
+      describe('Find or create', function () {
+        it('Should provide an object', function(done) {
+          helpers.findOrCreate(Author, {name: 'Chicken Salad'})
+          .then(function (newAuthor) {
+            expect(newAuthor).to.be.an('object');
+            done();
+          });
+        });
 
-      it('Should create a new model when there are no matches', function(done) {
-        db.knex('authors').max('name').then(function (name) {
-            var checkName;
-            for (var key in name[0]) {
-              checkName = name[0][key];
-            }
-            db.knex('authors').max('id').then(function (id) {
-            helpers.findOrCreate(Author, {name: checkName + 'z'})
+        it('Should retrieve the existing model when one exists', function(done) {
+          Author.forge({}).fetch()
+          .then(function (author) {
+            var id = author.get('id');
+            helpers.findOrCreate(Author, author.attributes)
             .then(function (retrieved) {
-              var checkID;
-              for (var key in id[0]) {
-                checkID = id[0][key];
-              }
-              expect(retrieved.get('id')).to.be.above(checkID);
-              done();     
-              retrieved.destroy();   
+              expect(retrieved.get('id')).to.equal(id);
+              done();
             });
+          });
+        });
+
+        it('Should create a new model when there are no matches', function(done) {
+          db.knex('authors').max('name').then(function (name) {
+              var checkName;
+              for (var key in name[0]) {
+                checkName = name[0][key];
+              }
+              db.knex('authors').max('id').then(function (id) {
+              helpers.findOrCreate(Author, {name: checkName + 'z'})
+              .then(function (retrieved) {
+                var checkID;
+                for (var key in id[0]) {
+                  checkID = id[0][key];
+                }
+                expect(retrieved.get('id')).to.be.above(checkID);
+                done();     
+                retrieved.destroy();   
+              });
+            });
+          });
+        });
+      });
+      
+      describe('addBook', function () {
+        it('Should add a book to the database', function(done) {
+          helpers.addBook({name: 'Leo Tolstoy'}, {title: 'War and Peace'}, null, null,
+            function(book){
+              expect(typeof book.toJSON().id).to.equal('Number');
+            }, function (error) {
+              console.log(error);
+            });
+        });
+      });
+      
+      describe('getBooks', function () {
+        it('Should return books', function (done) {
+          helpers.getBooks(null, null, function(books) {
+            expect(Object.keys(books[0])).to.deep.equal(['id', 'title', 'author_id', 'amazon_id', 'publisher', 'pub_year']);
+            done();
+          }, function (error) {
+            console.log(error);
+          });
+        });
+        
+        it('Should limit number of books when limit is provided', function (done) {
+          helpers.getBooks(null, 4, function(books) {
+            expect(books.length).to.equal(4);;
+            done();
+          }, function (error) {
+            console.log(error);
           });
         });
       });
