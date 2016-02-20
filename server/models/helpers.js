@@ -35,9 +35,11 @@ var addBook = function (author, book, reaction, user, success, fail) {
       //posted a valid book
         var resData = (JSON.stringify({
           book: {
-            title: book.get('title')
+            title: book.get('title'),
+            id: book.get('id')
           },
           author: {
+            id: book.get('id'),
             name: author.get('name')
           }
         }));
@@ -53,13 +55,21 @@ var addBook = function (author, book, reaction, user, success, fail) {
     });  
 };
 
-var getBooks = function (success, fail) {
-  req.param('clock_id')
-}
+var getBooks = function (list, limit, success, fail) {
+  var books = models.Book.fetchAll()
+  .then(function (results) {
+    limit = limit || results.toJSON().length;
+    success(results.toJSON().slice(0,limit));
+  })
+  .catch(function (error) {
+    //fail(error);
+  });
+};
 
 module.exports = {
 
   findOrCreate: findOrCreate,
-  addBook: addBook
+  addBook: addBook,
+  getBooks: getBooks
 
 }
