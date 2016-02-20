@@ -62,10 +62,15 @@ nav {
 
 form.book {
   padding: 15px;
-  background-color: #5a475b;
-  border-radius: 5px; }
+  background-color: #5a475b; }
   form.book h3 {
     color: #29182a; }
+
+.collapsible {
+  border-color: #392b3a;
+  border-radius: 5px; }
+  .collapsible .collapsible-body {
+    border-color: #392b3a; }
 
 .greet {
   font-size: 2em;

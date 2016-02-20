@@ -1,6 +1,10 @@
 <div class="user-page">
   <p class="greet">Hello, {{name || 'you'}}</p>
 
+    <ul class="collapsible new-book" data-collapsible="accordian">
+    <li>
+      <div class="collapsible-header">Add Book</div>
+      <div class="collapsible-body">
       <form class="book z-depth-5" name="bookSubmission" ng-submit="addBook()">
         <div class="preloader-wrapper active right" ng-show="data.submitting">
           <div class="spinner-layer">
@@ -13,21 +17,18 @@
             </div>
           </div>
         </div>
-        <h3>Add a new book</h3>
-        <div class="row">
-        <div class="col s6">
-          <div class="input-field">
-            <label for="title">Title</label>
-            <input id="title" type="text" ng-model="user.bookName" required>
+          <div class="col s6">
+            <div class="input-field">
+              <label for="title">Title</label>
+              <input id="title" type="text" ng-model="user.bookName" required>
+            </div>
           </div>
+          <div class="col s6">
+            <div class="input-field">
+              <label for="author">Author</label>
+              <input id="author" class="input-field" type="text" ng-model="user.authorName" required>
+            </div>
         </div>
-        <div class="col s6">
-          <div class="input-field">
-            <label for="author">Author</label>
-            <input id="author" class="input-field" type="text" ng-model="user.authorName" required>
-          </div>
-        </div>
-          </div>
 
 
         <div id="reactions" class="card reactions center-align">
@@ -43,6 +44,8 @@
         
         <a class="std-btn btn" ng-disabled="bookSubmission.$invalid">Add Book</a>
       </form>
+      </li>
+      </ul>
 
   <div class="row">
     <h3>Your book list</h3>
@@ -53,4 +56,9 @@
       </div>
     </div>
   </div>
+
 </div>
+
+<script>
+  $('.collapsible').collapsible();
+</script>
