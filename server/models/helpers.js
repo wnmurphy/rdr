@@ -66,12 +66,31 @@ var getBooks = function (list, limit, success, fail) {
   });
 };
 
-
+var saveProfile = function (profile) {
+  new User({'amz_auth_id': profile.user_id})
+    .fetch()
+    .then(function (user) {
+      var userProfile = new User({
+        'amz_auth_id': profile.user_id,
+        'email': profile.email,
+        'name': profile.name
+      });
+      // sets the id if a user profile was found
+      if(user) {
+        userProfile.id = user.get('id');
+      }
+      
+      // inserts when new and updates if existing
+      userProfile.save();
+      
+    });
+};
 
 module.exports = {
 
   findOrCreate: findOrCreate,
   addBook: addBook,
-  getBooks: getBooks
+  getBooks: getBooks,
+  saveProfile: saveProfile,
 
 };
