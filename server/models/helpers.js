@@ -16,7 +16,7 @@ var findOrCreate = function (Model, attributes) {
       })
       .catch(function (error) {
         reject(error);
-      })
+      });
     })
     .catch(function (error) {
       reject(error);
@@ -27,6 +27,8 @@ var findOrCreate = function (Model, attributes) {
 };
 
 var addBook = function (author, book, reaction, user, success, fail) {
+  // TODO handle users reactions
+  
   findOrCreate(models.Author, author)
     .then(function (author) {
       book.author_id = author.get('id');
@@ -58,19 +60,29 @@ var addBook = function (author, book, reaction, user, success, fail) {
 var getBooks = function (list, limit, success, fail) {
   var books = models.Book.fetchAll()
   .then(function (results) {
-    limit = limit || results.toJSON().length;
-    success(results.toJSON().slice(0,limit));
+    results = results.toJSON();
+    limit = limit || results.length;
+    if(list === 'popular') {
+      results.sort(function (a, b) {
+        // returns 1 when a.popularity > b.popularity,
+        //        -1 when a.pouplarity < b.popularity,
+        //         0 when equal
+        return Math.sign(a.popularity() - b.popularity());
+      });
+    }
+
+    success(results.slice(0,limit));
   })
   .catch(function (error) {
-    //fail(error);
+    fail(error);
   });
 };
 
 var saveProfile = function (profile) {
-  new User({'amz_auth_id': profile.user_id})
+  new models.User({'amz_auth_id': profile.user_id})
     .fetch()
     .then(function (user) {
-      var userProfile = new User({
+      var userProfile = new models.User({
         'amz_auth_id': profile.user_id,
         'email': profile.email,
         'name': profile.name
@@ -86,11 +98,24 @@ var saveProfile = function (profile) {
     });
 };
 
+var getProfile = function (profile, success, fail) {
+  new models.User({'amz_auth_id': profile.user_id})
+    .fetch()
+    .then(function (user) {
+      if (user) {
+        success(user.books().toJSON());
+      } else {
+        throw 'no user found';
+      }
+    });
+};
+
 module.exports = {
 
   findOrCreate: findOrCreate,
   addBook: addBook,
   getBooks: getBooks,
   saveProfile: saveProfile,
+  getProfile: getProfile
 
 };

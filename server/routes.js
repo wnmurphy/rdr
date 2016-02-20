@@ -7,7 +7,7 @@ var Book = require(path.resolve('server/models/models')).Book;
 var routes = [
   {
     path: '/',
-    'get': function(req, res) {
+    get: function(req, res) {
       res.sendFile(public + 'client/index.html');
     }
   },
@@ -19,7 +19,7 @@ var routes = [
   },
   {
     path: '/users/books',
-    'post': function (req, res) {
+    post: function (req, res) {
       var author = req.body.author;
       var book = req.body.book; 
       var reaction = req.body.reaction;
@@ -35,15 +35,36 @@ var routes = [
             res.sendStatus(409);
           });
       }    
-    },
-    'get': function (req, res) {
+    }
+  },
+  {
+    path: '/books',
+    get: function (req, res) {
       var limit = req.param('limit');
       var list = req.param('list');
+    }
+  },
+  {
+    path: '/profile',
+    get: function (req, res) {
+      var profile = {};
+      var id = req.param('id');
+      if (id) {
+        profile.id;
+      } else {
+        profile.amz_auth_id = profile.user_id;
+      }
+      helpers.getProfile(profile, function (books) {
+        res.send(books);
+      }, function (error) {
+        console.log(error);
+        res.sendStatus(409);
+      });
     }
   }
 ];
 
-var grabProfile = function (req, res, next) {
+var grabProfile = function (req) {
   // TODO this needs to pull profile data out of request
   
   // temporarily return demo values in proper format
@@ -68,15 +89,19 @@ var grabProfile = function (req, res, next) {
   }
   // REMOVE LATER ^^^^^^^^^
   
-  helpers.saveProfile(profile);
+  return profile;
 }
 
+var storeProfile = function (req, res, next) {
+  helpers.saveProfile(grabProfile(req));
+  next();
+}
 
 module.exports = function (app, express) {
   app.use(express.static(public + '/client'));
   
   // stores profile not in db with each request
-  app.use(grabProfile);
+  app.use(storeProfile);
 
   routes.forEach(function (route){
     for (var key in route) {
