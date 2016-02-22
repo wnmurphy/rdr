@@ -21,7 +21,19 @@ angular.module('booklist.user', [])
     }
   };
 
-  $scope.addBook = function(){
+  $scope.initialize = function () {
+    Books.getBooks()
+    .then(function (resp) {
+      if (resp.data) {
+        $scope.books = $scope.books.concat(resp.data);
+      }
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+  };
+
+  $scope.addBook = function() {
 
 
     //TODO: check how to do error handling
@@ -34,10 +46,13 @@ angular.module('booklist.user', [])
       }
     })
     .catch(function(error){
-      console.log(error);
+      console.error(error);
       return;
     });
     //TODO: add the new book to the user's page
   };
+
+  $scope.initialize();
+
   //get books on signin
 }]);
