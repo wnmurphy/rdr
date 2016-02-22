@@ -25,30 +25,30 @@
             <div>
               <div class="input-field">
                 <label for="title">Title</label>
-                <input id="title" type="text" ng-model="user.bookName" required>
+                <input id="title" type="text" ng-model="bookTitle" required>
               </div>
             </div>
             <div>
               <div class="input-field">
                 <label for="author">Author</label>
-                <input id="author" class="input-field" type="text" ng-model="user.authorName" required>
+                <input id="author" class="input-field" type="text" ng-model="authorName" required>
               </div>
             </div>
 
             <div id="reactions" class="card reactions center-align">
               <div class="card-title">
-                Reaction(s)
+                Reaction
               </div>
               <div class="card-action">
-                <a class="std-btn btn">Love it</a>
-                <a class="std-btn btn">Like it</a>
-                <a class="std-btn btn">Decent</a>
-                <a class="std-btn btn">Dislike it</a>
-                <a class="std-btn btn">Hate it</a>
+                <a class="std-btn btn" ng-click="setReaction($event, 1)">Love it</a>
+                <a class="std-btn btn" ng-click="setReaction($event, 2)">Like it</a>
+                <a class="std-btn btn" ng-click="setReaction($event, 3)">Decent</a>
+                <a class="std-btn btn" ng-click="setReaction($event, 4)">Dislike it</a>
+                <a class="std-btn btn" ng-click="setReaction($event, 5)">Hate it</a>
               </div>
             </div>
             
-            <a class="std-btn btn" ng-disabled="bookSubmission.$invalid">Add Book</a>
+            <input class="std-btn btn" type="submit" ng-disabled="bookSubmission.$invalid" value="Add Book">
           </form>
         </div>
       </li>

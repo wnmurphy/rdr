@@ -14,7 +14,7 @@ body {
   background-color: #5a475b; }
   .std-btn:hover {
     background-color: #776378; }
-  .std-btn:active {
+  .std-btn:active, .reactions .btn.selected {
     background-color: #392b3a; }
   .std-btn[disabled=disabled] {
     background-color: #dfdfdf;

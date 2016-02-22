@@ -6,10 +6,21 @@ angular.module('booklist.user', [])
 
   $scope.bookTemplate = 'app/shared/book.entry.html';
 
+  $scope.bookTitle = '';
+  $scope.authorName = ''
+  $scope.reaction = 0;
+
+  $scope.setReaction = function ($event, reaction) {
+    var $target = $($event.currentTarget);
+    $('.reactions').find('.selected').removeClass('selected');
+    $target.addClass('selected');
+  };
+
   $scope.addBook = function(){
 
+    console.log($scope.reaction);
     //TODO: check how to do error handling
-    Books.postBook($scope.bookName, $scope.authorName, $scope.reaction)
+    Books.postBook($scope.bookTitle, $scope.authorName, $scope.reaction)
     .then(function(resp){
     })
     .catch(function(error){

@@ -103,6 +103,10 @@ nav {
     margin: 5px;
   }
 
+  .btn.selected {
+    @extend .std-btn:active;
+  }
+
 }
 
 form.book {
