@@ -12,12 +12,6 @@ var routes = [
     }
   },
   {
-    path: '*',
-    get: function (req, res) {
-      res.redirect('/');
-    }
-  },
-  {
     path: '/users/books',
     post: function (req, res) {
       var author = req.body.author;
@@ -61,7 +55,13 @@ var routes = [
         res.sendStatus(409);
       });
     }
-  }
+  },
+  {
+    path: '*',
+    get: function (req, res) {
+      res.redirect('/');
+    }
+  },
 ];
 
 var grabProfile = function (req) {
