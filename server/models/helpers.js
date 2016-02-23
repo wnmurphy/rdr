@@ -58,7 +58,7 @@ var addBook = function (author, book, reaction, user, success, fail) {
 };
 
 var getBooks = function (list, limit, success, fail) {
-  var books = models.Book.fetchAll()
+  var books = models.Book.fetchAll({withRelated: ['author']})
   .then(function (results) {
     results = results.toJSON();
     limit = limit || results.length;
@@ -70,7 +70,6 @@ var getBooks = function (list, limit, success, fail) {
         return Math.sign(a.popularity() - b.popularity());
       });
     }
-
     success(results.slice(0,limit));
   })
   .catch(function (error) {

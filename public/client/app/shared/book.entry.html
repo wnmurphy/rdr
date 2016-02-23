@@ -6,7 +6,7 @@
       </div>
       <span class="card-title title">{{ book.title }}</span>
       <div class="card-content">
-        <span class="author">Author: {{ book.authorName }}</span>
+        <span class="author">Author: {{ book.author.name }}</span>
       </div>
         <div class="reactions card-action center-align">
           <a href="#" ng-repeat"reaction in reactions" class="btn std-btn">{{reaction.verbiage}}</a>

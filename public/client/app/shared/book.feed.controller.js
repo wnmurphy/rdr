@@ -2,10 +2,14 @@ angular.module('booklist.feed', [])
 
 .controller('FeedController', ['$scope', 'Books', function($scope, Books){
   $scope.data = {};
+
+  $scope.bookTemplate = 'app/shared/book.entry.html';
+
   $scope.getBooks = function(){
     Books.getBooks()
     //TODO - check to make sure the resp format is correct after you connect to the server
     .then(function(resp){
+      console.log(resp);
       $scope.data.books = resp;
     })
     .catch(function(error){
