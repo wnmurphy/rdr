@@ -10,6 +10,9 @@ angular.module('booklist.user', [])
 
   $scope.bookTitle = '';
   $scope.authorName = '';
+  $scope.publicationYear;
+  $scope.amazonUrl = '';
+  $scope.publisher = '';
   $scope.reaction = 0;
 
   $scope.amazonResults = [];
@@ -46,8 +49,7 @@ angular.module('booklist.user', [])
       $scope.submitting = true;
       Books.queryAmazon({title: title, authorName: authorName})
       .then(function (results) {
-        if (!results.data[0].Error) {
-          console.log(results.data);
+        if (results.data[0] && !results.data[0].Error) {
           $scope.amazonResults = results.data;
         } else {
           $scope.amazonResults = [];
@@ -61,6 +63,19 @@ angular.module('booklist.user', [])
     } else {
       console.log('fail');
     }
+  };
+
+  $scope.selectAmazonResult = function (result) {
+    $scope.bookTitle = result.ItemAttributes[0].Title[0];
+    $scope.authorName = result.ItemAttributes[0].Author[0];
+    $scope.publicationYear = result.ItemAttributes[0].PublicationDate[0].split('-')[0];
+    $scope.publisher = result.ItemAttributes[0].Publisher[0];
+    $scope.amazonUrl = result.DetailPageURL[0];
+
+    $scope.amazonResults = [];
+
+    $('label[for="author"').addClass('active');
+    $('label[for="title"').addClass('active');
   };
 
   $scope.addBook = function() {

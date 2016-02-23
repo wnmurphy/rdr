@@ -61,6 +61,7 @@ var routes = [
         res.send(results);
       })
       .catch(function (error) {
+        console.log(JSON.stringify(error));
         res.send(error);
       });
     }
