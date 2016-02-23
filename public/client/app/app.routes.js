@@ -8,8 +8,7 @@ angular.module('booklist', [
   'angular-jwt',
   'ngRoute'
 ])
-.config(['$routeProvider', 'authProvider',function($routeProvider, authProvider) {
-  console.log('routing');
+.config(['$routeProvider', '$httpProvider', 'authProvider', 'jwtInterceptorProvider' ,function($routeProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '/app/shared/book.feed.html',
@@ -32,6 +31,12 @@ angular.module('booklist', [
       // callbackURL: '/profile',
       // loginUrl: '/login'
     });
+
+    jwtInterceptorProvider.tokenGetter = ['store', function (store) {
+      return store.get('token');
+    }];
+
+    $httpProvider.interceptors.push('jwtInterceptor');
 }])
   .run(function($rootScope, auth, $location, jwtHelper){
     auth.hookEvents();
