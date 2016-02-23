@@ -126,7 +126,10 @@ var grabProfile = function (req) {
 };
 
 var storeProfile = function (req, res, next) {
-  helpers.saveProfile(grabProfile(req));
+  var profile = grabProfile(req);
+  if (profile) {
+    helpers.saveProfile(grabProfile(req));
+  }
   next();
 };
 
