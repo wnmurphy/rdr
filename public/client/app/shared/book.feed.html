@@ -1,9 +1,7 @@
 <div id='BookFeed'>
   <h1>Book Feed</h1>
-  <div ng-repeat="book in data.books">
-    <div class="book-entry">
-      <div class="title">Book: {{book.title}}</div>
-      <div class="author">Author: {{book.authorName}}</div>
-    </div>
-  </div>
+  <ul>
+  <li ng-repeat="book in data.books | orderBy:book.id:true" ng-include="bookTemplate">
+        </li>
+  </ul>
 </div>
