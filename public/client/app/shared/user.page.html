@@ -9,7 +9,7 @@
         </div>
         <div class="collapsible-body">
           <form class="book z-depth-5" name="bookSubmission" ng-submit="addBook()">
-            <div class="preloader-wrapper active right" ng-show="data.submitting">
+            <div class="preloader-wrapper active right" ng-hide="!submitting">
               <div class="spinner-layer">
                 <div class="circle-clipper left">
                   <div class="circle"></div>
@@ -35,6 +35,11 @@
               </div>
             </div>
 
+            <a ng-click="checkAmazon()" class="btn std-btn amz-btn">Check Amazon</a>
+              <div class="amazon-results collection">
+              <a ng-click="selectAmazonResult(result)" ng-repeat="result in amazonResults" href="#/profile" class="collection-item">{{result.ItemAttributes[0].Title[0]}}{{result.ItemAttributes[0].Author[0] ? ', by ' + result.ItemAttributes[0].Author[0] : '' }}</a>
+            </div>
+
             <div id="reactions" class="card reactions center-align">
               <div class="card-title">
                 Reaction
@@ -58,7 +63,7 @@
   <div class="row">
     <h3>Your book list</h3>
     <ul>
-        <li ng-repeat="book in books" ng-include="bookTemplate">
+        <li ng-repeat="book in books | orderBy:book.id:true" ng-include="bookTemplate">
         </li>
         <div class="message card" ng-show="!books.length">
           <div class="card-content">
