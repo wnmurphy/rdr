@@ -5,11 +5,12 @@ var Author = require(path.resolve('server/models/models')).Author;
 var Book = require(path.resolve('server/models/models')).Book;
 var amazon = require('amazon-product-api');
 var url = require('url');
-var jwt = require('express-jwt');
+var expressjwt = require('express-jwt');
+var jwt = require('jsonwebtoken');
 
-var jwtCheck = jwt({
+var jwtCheck = expressjwt({
   secret: new Buffer(process.env.AUTH_SECRET, 'base64'),
-  audience: AUTH_ID
+  audience: process.env.AUTH_ID
 });
 
 // add routes you want to block here
@@ -111,9 +112,17 @@ var routes = [
 
 var grabProfile = function (req) {
   // TODO this needs to pull profile data out of request
+  var token = req.headers.authorization;
+  if (token === undefined) {
+    return null;
+  }
+  token = token.split(' ')[1];
+  var decoded = jwt.verify(token, process.env.AUTH_SECRET);
+  var id = decoded.sub;
 
-
-  return profile;
+  return {
+   'amz_auth_id': id
+  };
 };
 
 var storeProfile = function (req, res, next) {
@@ -128,7 +137,7 @@ module.exports = function (app, express) {
   app.use(storeProfile);
 
   // block unathorized access to authRoutes
-  authRouts.forEach(function (route){
+  authRoutes.forEach(function (route){
     app.use(route, jwtCheck);
   });
 
