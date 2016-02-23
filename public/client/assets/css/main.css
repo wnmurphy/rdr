@@ -80,6 +80,10 @@ form.book {
 .spinner-layer {
   border-color: white; }
 
+.amz-btn {
+  border: 1px solid white;
+  border-radius: 5px; }
+
 .collection.amazon-results {
   margin-top: 10px; }
 

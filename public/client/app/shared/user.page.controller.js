@@ -86,6 +86,7 @@ angular.module('booklist.user', [])
         var book = resp.book;
         book.authorName = resp.author.name;
         $scope.books.push(book);
+        $scope.clearBookInfo();
       }
     })
     .catch(function(error){
@@ -93,6 +94,16 @@ angular.module('booklist.user', [])
       return;
     });
     //TODO: add the new book to the user's page
+  };
+
+  $scope.clearBookInfo = function () {
+    $scope.bookTitle = '';
+    $scope.authorName = '';
+    $scope.publicationYear = '';
+    $scope.amazonUrl = '';
+    $scope.publisher = '';
+    $scope.reaction = 0;
+    $('.reactions').find('.selected').removeClass('selected');
   };
 
   $scope.initialize();
