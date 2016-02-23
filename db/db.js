@@ -25,8 +25,8 @@ var createUsers = function () {
       db.knex.schema.createTable('users', function (user) {
         user.increments('id').primary();
         user.string('amz_auth_id', 255).notNullable().index().unique();
-        user.string('email', 255).notNullable().unique();
-        user.string('name', 255).notNullable();
+        user.string('email', 255).unique();
+        user.string('name', 255);
       })
         .then(function(table) {
           console.log('created table users');
