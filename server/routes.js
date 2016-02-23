@@ -5,6 +5,17 @@ var Author = require(path.resolve('server/models/models')).Author;
 var Book = require(path.resolve('server/models/models')).Book;
 var amazon = require('amazon-product-api');
 var url = require('url');
+var jwt = require('express-jwt');
+
+var jwtCheck = jwt({
+  secret: new Buffer(process.env.AUTH_SECRET, 'base64'),
+  audience: AUTH_ID
+});
+
+// add routes you want to block here
+var authRoutes = [
+
+];
 
 var routes = [
   {
@@ -101,27 +112,6 @@ var routes = [
 var grabProfile = function (req) {
   // TODO this needs to pull profile data out of request
 
-  // temporarily return demo values in proper format
-  var profile = {
-    "email":"josh.riesenbach+demo@gmail.com",
-    "email_verified":false,
-    "clientID":"3y4I7YR2w0tbSitWGGA5aedYF8Apx4ts",
-    "username":"joshdemo",
-    "updated_at":"2016-02-20T03:09:35.414Z",
-    "picture":"https://s.gravatar.com/avatar/4fb89d4ef0d1cecf1fb0a4998b5cf0af?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fjo.png",
-    "user_id":"auth0|56c52f3d9e19260a767416ad",
-    "name":"josh.riesenbach+demo@gmail.com",
-    "nickname":"joshdemo",
-    "identities":[{
-      "user_id":"56c52f3d9e19260a767416ad",
-      "provider":"auth0",
-      "connection":"Username-Password-Authentication",
-      "isSocial":false}
-    ],
-    "created_at":"2016-02-18T02:41:01.867Z",
-    "global_client_id":"VrUBkWRzkkJXumJO6bmUNZQoHUscIOcs"
-  };
-  // REMOVE LATER ^^^^^^^^^
 
   return profile;
 };
@@ -136,6 +126,11 @@ module.exports = function (app, express) {
 
   // stores profile not in db with each request
   app.use(storeProfile);
+
+  // block unathorized access to authRoutes
+  authRouts.forEach(function (route){
+    app.use(route, jwtCheck);
+  });
 
   routes.forEach(function (route){
     for (var key in route) {
