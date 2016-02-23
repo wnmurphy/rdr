@@ -26,13 +26,13 @@ angular.module('booklist', [
     });
 
     authProvider.init({
-      domain: 'thebooklist',
+      domain: 'thebooklist.auth0.com',
       clientID: 'KVmjN4H2bQUdJspERpFnHhSRl8cA12b6',
       //TODO: check that this is the correct callback url
       // callbackURL: '/profile',
       // loginUrl: '/login'
     });
-    // .run(function($rootScope, auth, $location, jwtHelper){
-    //   auth.hookEvents();
-    // });
 }])
+  .run(function($rootScope, auth, $location, jwtHelper){
+    auth.hookEvents();
+  });
