@@ -38,6 +38,12 @@ var routes = [
     get: function (req, res) {
       var limit = req.param('limit');
       var list = req.param('list');
+      helpers.getBooks(list, limit, function (books) {
+        res.send(books);
+      }, function (error) {
+        console.error(error);
+        res.sendStatus(409);
+      });
     }
   },
   {
