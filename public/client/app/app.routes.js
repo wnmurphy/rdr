@@ -43,7 +43,7 @@ angular.module('booklist', [
 .run(['$rootScope', 'auth', 'store', '$location', 'jwtHelper', function($rootScope, auth, store, $location, jwtHelper){
   auth.hookEvents();
 
-  $rootScope.$on('$locationChangeStart', function () {
+  $rootScope.$on('$locationChangeStart', function (event, next, current) {
     var token = store.get('token');
     if (token) {
       if (!jwtHelper.isTokenExpired(token)) {
@@ -55,6 +55,8 @@ angular.module('booklist', [
         $rootScope.signedIn = false;
         $location.path('/');
       }
+    } else {
+      $location.path('/');
     }
   });
 }]);

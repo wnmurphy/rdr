@@ -19,6 +19,5 @@ angular.module('booklist.auth', [])
       auth.signout();
       store.remove('profile');
       store.remove('token');
-      $location.path('/#');
-    }
+    };
   }]);
