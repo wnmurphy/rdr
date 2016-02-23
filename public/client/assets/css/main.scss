@@ -136,6 +136,21 @@ form.book {
   border-color: white;
 }
 
+.collection.amazon-results {
+  margin-top: 10px;
+}
+
+.preloader-wrapper.ng-hide {
+  /* this is just another form of hiding an element */
+  display: block!important;
+  float: right;
+  opacity: 0;
+}
+
+.collection a.collection-item {
+  color: $lighter-color;
+}
+
 
 
 

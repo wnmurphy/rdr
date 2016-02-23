@@ -3,6 +3,8 @@ var public = path.resolve('public') + '/';
 var helpers = require(path.resolve('server/models/helpers'));
 var Author = require(path.resolve('server/models/models')).Author;
 var Book = require(path.resolve('server/models/models')).Book;
+var amazon = require('amazon-product-api');
+var url = require('url');
 
 var routes = [
   {
@@ -36,6 +38,31 @@ var routes = [
     get: function (req, res) {
       var limit = req.param('limit');
       var list = req.param('list');
+    }
+  },
+  {
+    path: '/amazon',
+    get: function (req, res) {
+      var url_parts = url.parse(req.url, true);
+      var query = url_parts.query;
+      console.log(query.title);
+      var client = amazon.createClient({
+        awsId: process.env.AWS_ACCESS_KEY_ID,
+        awsSecret: process.env.AWS_SECRET_KEY,
+        awsTag: process.env.AWS_ASSOCIATES_ID
+      });
+      client.itemSearch({
+        searchIndex: 'Books',
+        keywords: query.title,
+        author: query.authorName || ''
+      })
+      .then(function (results) {
+        console.log(results);
+        res.send(results);
+      })
+      .catch(function (error) {
+        res.send(error);
+      });
     }
   },
   {

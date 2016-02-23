@@ -4,11 +4,15 @@ angular.module('booklist.user', [])
   $scope.user = {};
   $scope.books = [];
 
+  $scope.submitting = false;
+
   $scope.bookTemplate = 'app/shared/book.entry.html';
 
   $scope.bookTitle = '';
-  $scope.authorName = ''
+  $scope.authorName = '';
   $scope.reaction = 0;
+
+  $scope.amazonResults = [];
 
   $scope.setReaction = function ($event, reaction) {
     var $target = $($event.currentTarget);
@@ -33,9 +37,33 @@ angular.module('booklist.user', [])
     });
   };
 
+  $scope.checkAmazon = function () {
+    $scope.bookTitle = $scope.bookTitle || '';
+    $scope.authorName = $scope.authorName || '';
+    var title = $scope.bookTitle.trim();
+    var authorName = $scope.authorName.trim();
+    if (title.length || authorName.length) {
+      $scope.submitting = true;
+      Books.queryAmazon({title: title, authorName: authorName})
+      .then(function (results) {
+        if (!results.data[0].Error) {
+          console.log(results.data);
+          $scope.amazonResults = results.data;
+        } else {
+          $scope.amazonResults = [];
+        }
+        $scope.submitting = false;
+        
+      })
+      .catch(function (error) {
+        $scope.submitting = false;
+      });
+    } else {
+      console.log('fail');
+    }
+  };
+
   $scope.addBook = function() {
-
-
     //TODO: check how to do error handling
     Books.postBook($scope.bookTitle, $scope.authorName, $scope.reaction)
     .then(function(resp){

@@ -9,7 +9,7 @@
         </div>
         <div class="collapsible-body">
           <form class="book z-depth-5" name="bookSubmission" ng-submit="addBook()">
-            <div class="preloader-wrapper active right" ng-show="data.submitting">
+            <div class="preloader-wrapper active right" ng-hide="!submitting">
               <div class="spinner-layer">
                 <div class="circle-clipper left">
                   <div class="circle"></div>
@@ -33,6 +33,11 @@
                 <label for="author">Author</label>
                 <input id="author" class="input-field" type="text" ng-model="authorName" required>
               </div>
+            </div>
+
+            <a ng-click="checkAmazon()" class="btn std-btn amz-btn">Check Amazon</a>
+              <div class="amazon-results collection">
+              <a ng-repeat="result in amazonResults" href="#/profile" class="collection-item">{{result.ItemAttributes[0].Title[0]}}</a>
             </div>
 
             <div id="reactions" class="card reactions center-align">
