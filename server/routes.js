@@ -17,20 +17,20 @@ var routes = [
     path: '/users/books',
     post: function (req, res) {
       var author = req.body.author;
-      var book = req.body.book; 
+      var book = req.body.book;
       var reaction = req.body.reaction;
       if (!author || !book) {
         res.sendStatus(409);
       } else {
-        helpers.addBook(author, book, reaction, null, 
+        helpers.addBook(author, book, reaction, null,
           function(data) {
             res.statusCode = 201;
             res.send(data);
           }, function(error) {
-            console.error(error)
+            console.error(error);
             res.sendStatus(409);
           });
-      }    
+      }
     }
   },
   {
@@ -72,7 +72,7 @@ var routes = [
       var profile = {};
       var id = req.param('id');
       if (id) {
-        profile.id;
+        profile.id = id;
       } else {
         profile.amz_auth_id = profile.user_id;
       }
@@ -94,7 +94,7 @@ var routes = [
 
 var grabProfile = function (req) {
   // TODO this needs to pull profile data out of request
-  
+
   // temporarily return demo values in proper format
   var profile = {
     "email":"josh.riesenbach+demo@gmail.com",
@@ -114,20 +114,20 @@ var grabProfile = function (req) {
     ],
     "created_at":"2016-02-18T02:41:01.867Z",
     "global_client_id":"VrUBkWRzkkJXumJO6bmUNZQoHUscIOcs"
-  }
+  };
   // REMOVE LATER ^^^^^^^^^
-  
+
   return profile;
-}
+};
 
 var storeProfile = function (req, res, next) {
   helpers.saveProfile(grabProfile(req));
   next();
-}
+};
 
 module.exports = function (app, express) {
   app.use(express.static(public + '/client'));
-  
+
   // stores profile not in db with each request
   app.use(storeProfile);
 
