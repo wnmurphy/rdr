@@ -92,7 +92,7 @@ var routes = [
       if (id) {
         profile.id = id;
       } else {
-        profile.amz_auth_id = profile.user_id;
+        profile = grabProfile(req);
       }
       helpers.getProfile(profile, function (books) {
         res.send(books);
