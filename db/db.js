@@ -76,30 +76,9 @@ var createBooks = function () {
       })
       .then( function (table) {
         console.log('created table books');
-        createReactions();
-      })
-      .catch( function (err) {
-        console.error(err);
-      });
-    } else {
-      createReactions();
-    }
-  });
-};
-  
-var createReactions = function () {
-  db.knex.schema.hasTable('reactions')
-  .then(function (exists) {
-    if (!exists) {
-      db.knex.schema.createTable('reactions', function (author) {
-        author.increments('id').primary();
-        author.string('verbiage', 255).unique();
-      })
-      .then (function (table) {
-        console.log('created table reactions');
         createBooksUsers();
       })
-      .catch (function (err) {
+      .catch( function (err) {
         console.error(err);
       });
     } else {
@@ -118,31 +97,10 @@ var createBooksUsers = function () {
         book_user.increments('id').primary();
         book_user.integer('book_id').unsigned().references('id').inTable('books').index().notNullable();
         book_user.integer('user_id').unsigned().references('id').inTable('users').index().notNullable();
+        book_user.integer('reaction').unsigned();
       })
       .then( function (table) {
         console.log('created table books_users');
-        createBooksUsersReactions();
-      })
-      .catch( function (err) {
-        console.error(err);
-      });
-    } else {
-      createBooksUsersReactions();
-    }
-  });
-};
-
-var createBooksUsersReactions = function () {
-  db.knex.schema.hasTable('books_users_reactions')
-  .then(function (exists) {
-    if (!exists) {
-      db.knex.schema.createTable('books_users_reactions', function (bur) {
-        bur.increments('id').primary();
-        bur.integer('reaction_id').unsigned().references('id').inTable('reactions').index().notNullable();
-        bur.integer('books_users_id').unsigned().references('id').inTable('books_users').index().notNullable();
-      })
-      .then( function (table) {
-        console.log('created table books_users_reactions');
       })
       .catch( function (err) {
         console.error(err);
