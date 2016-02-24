@@ -77,23 +77,31 @@ var getBooks = function (list, limit, success, fail) {
   });
 };
 
-var saveProfile = function (profile) {
-  new models.User({'amz_auth_id': profile.user_id})
-    .fetch()
+var saveProfile = function (profile, success, fail) {
+  console.log(profile);
+  //new models.User({'amz_auth_id': profile})
+    //.fetch()
+  findOrCreate(models.User, {amz_auth_id: profile})
     .then(function (user) {
-      var userProfile = new models.User({
+      console.log(JSON.stringify(arguments));
+      success(user);
+      /*var userProfile = new models.User({
         'amz_auth_id': profile.user_id,
         'email': profile.email,
         'name': profile.name
-      });
+      })
+
       // sets the id if a user profile was found
       if(user) {
         userProfile.id = user.get('id');
       }
       
       // inserts when new and updates if existing
-      userProfile.save();
+      userProfile.save();*/
       
+    })
+    .catch( function (error) {
+      fail(error);
     });
 };
 

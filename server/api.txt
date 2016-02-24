@@ -25,3 +25,7 @@ GET /profile
                if not, use JWT to send back logged-in user's profile
 
 
+POST /signin
+//save or update user information on the server
+
+

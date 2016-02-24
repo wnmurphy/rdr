@@ -5,10 +5,20 @@ angular.module('booklist.auth', [])
     $scope.login = function () {
       auth.signin({}, function (profile, token) {
         // Success callback
-        $rootScope.signedIn = true;
         store.set('profile', profile);
         store.set('token', token);
-        $location.path('/');
+        $http({
+          method: 'post',
+          url: '/signin'
+        })
+        .then(function (response) {
+          console.log(response);
+          $rootScope.signedIn = true;
+          $location.path('/');
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
       }, function (error) {
         console.log(error);
         return;
