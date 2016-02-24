@@ -29,10 +29,11 @@ angular.module('booklist.user', [])
   };
 
   $scope.initialize = function () {
-    Books.getBooks()
+    Books.getProfile()
     .then(function (resp) {
-      if (resp.data) {
-        $scope.books = $scope.books.concat(resp.data);
+      console.log(resp);
+      if (resp.books) {
+        $scope.books = $scope.books.concat(resp.books);
       }
     })
     .catch(function (error) {

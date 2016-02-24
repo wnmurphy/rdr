@@ -120,11 +120,20 @@ var saveProfile = function (profile, success, fail) {
 };
 
 var getProfile = function (profile, success, fail) {
-  new models.User({'amz_auth_id': profile.user_id})
-    .fetch()
+  var key = 'amz_auth_id';
+  var value = profile.amz_auth_id;
+  if (profile.user_id) {
+    key = 'id';
+    value = profile.user_id;
+  }
+  var attributes = {};
+  attributes[key] = value;
+  new models.User(attributes)
+    .fetch({withRelated: ['books']})
     .then(function (user) {
       if (user) {
-        success(user.books().toJSON());
+        console.log(JSON.stringify(user));
+        success(user);
       } else {
         throw 'no user found';
       }

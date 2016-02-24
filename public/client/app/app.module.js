@@ -14,6 +14,20 @@ angular.module('booklist.services', [])
      });
     };
 
+    var getProfile = function () {
+      return $http({
+        method: 'GET',
+        url: '/profile'
+      })
+      .then(function (resp) {
+        return resp.data;
+      })
+      .catch(function (error) {
+        console.error(error);
+        return error;
+      })
+    };
+
     var postBook = function (bookName, authorName, reaction){
      return $http({
        method: 'POST',
@@ -49,9 +63,10 @@ angular.module('booklist.services', [])
     };
 
     return {
-     getBooks: getBooks,
-     postBook: postBook,
-     queryAmazon: queryAmazon
+      getProfile: getProfile,
+      getBooks: getBooks,
+      postBook: postBook,
+      queryAmazon: queryAmazon
     };
   }])
   .run(['$rootScope', function ($rootScope){

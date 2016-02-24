@@ -10,6 +10,9 @@ var Book = db.Model.extend({
   },
   popularity: function () {
     return this.users().toJSON().length;
+  },
+  reads: function () {
+    return this.hasMany(Read, 'book_id');
   }
 });
 
@@ -24,16 +27,23 @@ var Reaction = db.Model.extend({
   tableName: 'reactions',
 });
 
-var User = db.Model.extend({
-  tableName: 'users',
+var Read = db.Model.extend({
+  tableName: 'books_users',
   books: function () {
-    return this.belongsToMany(Book, 'books_users', 'book_id', 'user_id');
+    return this.belongsTo(Book, 'book_id');
   }
 });
 
-var Read = db.Model.extend({
-  tableName: 'books_users',
+var User = db.Model.extend({
+  tableName: 'users',
+  books: function () {
+    return this.belongsToMany(Book, 'books_users', 'user_id', 'book_id');
+  },
+  reads: function () {
+    return this.hasMany(Read, 'user_id');
+  }
 });
+
 
 module.exports = {
   Book: Book,
