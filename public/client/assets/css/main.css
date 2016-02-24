@@ -21,6 +21,15 @@ body {
     color: #9f9f9f; }
 
 /** TRENDS PAGE **/
+.book-entry .card-image {
+  background-color: #776378; }
+  .book-entry .card-image img {
+    width: 65%;
+    margin: auto;
+    object-fit: cover;
+    height: 200px;
+    overflow: hidden; }
+
 .book-entry .card-content {
   line-height: 200%; }
 
@@ -37,7 +46,8 @@ body {
 
 .author {
   float: right;
-  font-style: italic; }
+  font-style: italic;
+  margin-bottom: 5px; }
 
 nav {
   background: linear-gradient(to right, #392b3a, #29182a); }

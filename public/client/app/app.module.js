@@ -78,5 +78,7 @@ angular.module('booklist.services', [])
       4: 'Like it',
       5: 'Love it'
     };
+
+    $rootScope.coversUrl = 'http://covers.openlibrary.org/b/isbn/';
       
   }]);

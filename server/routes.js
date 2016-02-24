@@ -88,9 +88,11 @@ var routes = [
       client.itemSearch({
         searchIndex: 'Books',
         keywords: query.title,
-        author: query.authorName || ''
+        author: query.authorName || '',
+        responseGroup: 'ItemAttributes,Images'
       })
       .then(function (results) {
+        console.log(results);
         res.send(results);
       })
       .catch(function (error) {
