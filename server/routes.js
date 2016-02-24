@@ -68,7 +68,7 @@ var routes = [
       var limit = req.param('limit');
       var list = req.param('list');
       helpers.getBooks(list, limit, function (books) {
-        res.send(books);
+        res.json(books);
       }, function (error) {
         console.error(error);
         res.sendStatus(409);
