@@ -28,11 +28,11 @@ angular.module('booklist.services', [])
       })
     };
 
-    var postBook = function (bookName, authorName, reaction){
+    var postBook = function (book, authorName, reaction){
      return $http({
        method: 'POST',
        url: '/users/books',
-       data: {book: {title: bookName}, author: {name: authorName}, reaction: reaction}
+       data: {book: book, author: {name: authorName}, reaction: reaction}
      })
      .then(function(resp) {
        return resp.data;
@@ -78,5 +78,5 @@ angular.module('booklist.services', [])
       4: 'Like it',
       5: 'Love it'
     };
-      
+          
   }]);

@@ -2,7 +2,7 @@
   <div class="col s12">
     <div class="card book-entry">
       <div class="card-image">
-        <img src="assets/img/antique-book.jpg">
+        <img ng-src="{{book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image}}">
       </div>
       <span class="card-title title">{{ book.title }}</span>
       <div class="card-content">

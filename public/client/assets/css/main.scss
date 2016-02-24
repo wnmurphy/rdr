@@ -44,6 +44,19 @@ body {
 /** TRENDS PAGE **/
 .book-entry {
 
+  .card-image {
+
+    background-color: $lightest-color;
+
+    img {
+      width: 65%;
+      margin: auto;
+      object-fit: cover;
+      height: 200px;
+      overflow: hidden;
+    }
+  }
+
   .card-content {
     line-height: 200%;
   }
@@ -70,6 +83,7 @@ body {
 .author {
   float: right;
   font-style: italic;
+  margin-bottom: 5px;
 }
 
 nav {

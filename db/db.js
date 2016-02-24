@@ -72,6 +72,12 @@ var createBooks = function () {
         book.integer('author_id').unsigned().references('id').inTable('authors').index().notNullable();
         book.string('amazon_id', 255).unique();
         book.string('publisher', 255);
+        book.string('ISBN', 255).unique();
+        book.string('high_res_image');
+        book.string('large_image');
+        book.string('medium_image');
+        book.string('small_image');
+        book.string('thumbnail_image');
         book.date('pub_year');
       })
       .then( function (table) {
