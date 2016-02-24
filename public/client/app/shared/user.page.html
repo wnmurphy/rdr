@@ -25,7 +25,7 @@
             <div>
               <div class="input-field">
                 <label for="title">Title</label>
-                <input id="title" type="text" ng-model="bookTitle" required>
+                <input ng-change="searchTimer()" id="title" type="text" ng-model="bookTitle" required>
               </div>
             </div>
             <div>
