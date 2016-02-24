@@ -1,23 +1,14 @@
-<div class="row">
-  <div class="col s12">
-    <div class="card book-entry">
-      <div class="card-image">
-        <img ng-src="{{book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image}}">
-      </div>
+<link rel="stylesheet" type="text/css" href="/assets/css/book.entry.css">
+<div class="row book-entry">
+  <div class="col s12 m5">
+        <img class="cover-image" ng-src="{{book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image}}">
+  </div>
+  <div class="col s12 m7 v-middle">
+    <div class="card book-info">
       <span class="card-title title">{{ book.title }}</span>
       <div class="card-content">
-        <span class="author">Author: {{ book.author.name }}</span>
-      </div>
-        <div class="reactions card-action center-align">
-          <a 
-            class="std-btn btn" 
-            ng-repeat="reaction in reactions" 
-            ng-click="setReaction($event, $index + 1)"
-            ng-class="{selected: $index + 1 === book.reaction}"
-          >
-            {{reactions[$index + 1]}}
-          </a>
-        </div>
+        <div>Author: {{ book.author.name }}</div>
+        <div>Rating: {{ book.reaction }} </div>
       </div>
     </div>
   </div>

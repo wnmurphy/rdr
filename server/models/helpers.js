@@ -151,7 +151,7 @@ var getProfile = function (profile, success, fail) {
           models.Book.collection().fetch({withRelated: 'author'})
           .then(function (books) {
             console.log(books);
-          }); 
+          });
           //success(books);
         });*/
       } else {
