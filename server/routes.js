@@ -15,7 +15,7 @@ var jwtCheck = expressjwt({
 
 // add routes you want to block here
 var authRoutes = [
-
+  '/signin'
 ];
 
 var routes = [
@@ -23,6 +23,17 @@ var routes = [
     path: '/',
     get: function(req, res) {
       res.sendFile(public + 'client/index.html');
+    }
+  },
+  {
+    path: '/signin',
+    post: function(req, res) {
+      helpers.saveProfile(req.user.sub, function (user) {
+        res.statusCode = 201;
+        res.send(user);
+      }, function (error) {
+        res.sendStatus(409);
+      }); 
     }
   },
   {
@@ -48,6 +59,7 @@ var routes = [
   {
     path: '/books',
     get: function (req, res) {
+      console.log(JSON.stringify(req.user));
       var limit = req.param('limit');
       var list = req.param('list');
       helpers.getBooks(list, limit, function (books) {
@@ -92,7 +104,7 @@ var routes = [
       if (id) {
         profile.id = id;
       } else {
-        profile = grabProfile(req);
+        profile.amz_auth_id = req.user.sub;
       }
       helpers.getProfile(profile, function (books) {
         res.send(books);
@@ -110,25 +122,10 @@ var routes = [
   },
 ];
 
-var grabProfile = function (req) {
-  // TODO this needs to pull profile data out of request
-  var token = req.headers.authorization;
-  if (token === undefined) {
-    return null;
-  }
-  token = token.split(' ')[1];
-  var decoded = jwt.verify(token, process.env.AUTH_SECRET);
-  var id = decoded.sub;
-
-  return {
-   'amz_auth_id': id
-  };
-};
 
 var storeProfile = function (req, res, next) {
-  var profile = grabProfile(req);
-  if (profile) {
-    helpers.saveProfile(grabProfile(req));
+  if (req.user && req.user.sub) {
+    helpers.saveProfile(req.user.sub); 
   }
   next();
 };
@@ -137,7 +134,7 @@ module.exports = function (app, express) {
   app.use(express.static(public + '/client'));
 
   // stores profile not in db with each request
-  app.use(storeProfile);
+  //app.use(storeProfile);
 
   // block unathorized access to authRoutes
   authRoutes.forEach(function (route){
