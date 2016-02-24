@@ -2,7 +2,7 @@ var Knex = require('knex');
 var Bookshelf = require('bookshelf');
 var env = require('node-env-file');
 
-if (env) {
+if ('.env') {
   env('.env');
 }
 
