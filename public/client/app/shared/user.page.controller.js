@@ -74,11 +74,10 @@ angular.module('booklist.user', [])
   var timer = null;
   //this function sets a timer on ngKeyup
   $scope.searchTimer = function () {
-    console.log(timer);
     if (timer) {
       clearTimeout(timer);
     }
-    timer = setTimeout($scope.checkAmazon, 600);
+    timer = setTimeout($scope.checkAmazon, 400);
   }
 
   $scope.selectAmazonResult = function (result) {
