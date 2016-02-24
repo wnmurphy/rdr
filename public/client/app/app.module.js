@@ -18,7 +18,7 @@ angular.module('booklist.services', [])
      return $http({
        method: 'POST',
        url: '/users/books',
-       data: {book: {title: bookName}, author: {name: authorName}, reaction:{id: reaction}}
+       data: {book: {title: bookName}, author: {name: authorName}, reaction: reaction}
      })
      .then(function(resp) {
        return resp.data;
@@ -45,7 +45,7 @@ angular.module('booklist.services', [])
       })
       .catch(function (error) {
         return error;
-      }); 
+      });
     };
 
     return {
