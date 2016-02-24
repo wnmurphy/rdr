@@ -76,7 +76,7 @@ var getBooks = function (list, limit, success, fail) {
   .avg('books_users.reaction as avgReaction')
   .from('books')
   .limit(limit)
-  .orderBy('reaction', 'desc')
+  .orderBy('avgReaction', 'desc')
   .innerJoin('books_users', 'books.id', 'books_users.book_id')
   .groupBy('books.id')
   .innerJoin('authors', 'books.author_id', 'authors.id')
