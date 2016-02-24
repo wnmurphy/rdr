@@ -2,8 +2,9 @@ var Knex = require('knex');
 var Bookshelf = require('bookshelf');
 var env = require('node-env-file');
 
-
-env('.env');
+if (env) {
+  env('.env');
+}
 
 var knex = Knex({
   client: 'mysql',
