@@ -132,6 +132,7 @@ angular.module('booklist.user', [])
       if (resp.book && resp.author) {
         var book = resp.book;
         book.author = {};
+        book.ISBN = $scope.ISBN;
         book.author.name = resp.author.name;
         book.reaction = $scope.reaction;
         book.high_res_image = $scope.high_res_image;
@@ -158,6 +159,7 @@ angular.module('booklist.user', [])
     $scope.publisher = '';
     $scope.reaction = 0;
     $scope.high_res_image = '';
+    $scope.ISBN = '';
     $scope.large_image = '';
     $scope.medium_image = '';
     $scope.small_image = '';
