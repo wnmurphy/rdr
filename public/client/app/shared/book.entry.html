@@ -8,7 +8,19 @@
       <span class="card-title title">{{ book.title }}</span>
       <div class="card-content">
         <div>Author: {{ book.author.name }}</div>
-        <div>Rating: {{ book.reaction }} </div>
+        <div>Rating: {{ book.avgReaction }} </div>
+      </div>
+      <div ng-if="reactable">
+        <div class="reactions card-action center-align">
+          <a
+            class="std-btn btn"
+            ng-repeat="reaction in reactions"
+            ng-click="setReaction($event, $index + 1)"
+            ng-class="{selected: $index + 1 === book.reaction}"
+          >
+            {{reactions[$index + 1]}}
+          </a>
+        </div>
       </div>
     </div>
   </div>
