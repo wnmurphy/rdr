@@ -33,7 +33,7 @@ var routes = [
         res.send(user);
       }, function (error) {
         res.sendStatus(409);
-      }); 
+      });
     }
   },
   {
@@ -42,10 +42,13 @@ var routes = [
       var author = req.body.author;
       var book = req.body.book;
       var reaction = req.body.reaction;
+      var user = {
+        amz_auth_id: req.user.sub
+      };
       if (!author || !book) {
         res.sendStatus(409);
       } else {
-        helpers.addBook(author, book, reaction, null,
+        helpers.addBook(author, book, reaction, user,
           function(data) {
             res.statusCode = 201;
             res.send(data);
@@ -122,19 +125,9 @@ var routes = [
   },
 ];
 
-
-var storeProfile = function (req, res, next) {
-  if (req.user && req.user.sub) {
-    helpers.saveProfile(req.user.sub); 
-  }
-  next();
-};
-
 module.exports = function (app, express) {
   app.use(express.static(public + '/client'));
 
-  // stores profile not in db with each request
-  //app.use(storeProfile);
 
   // block unathorized access to authRoutes
   authRoutes.forEach(function (route){
