@@ -45,11 +45,7 @@
                 Reaction
               </div>
               <div class="card-action">
-                <a class="std-btn btn" ng-click="setReaction($event, 1)">Love it</a>
-                <a class="std-btn btn" ng-click="setReaction($event, 2)">Like it</a>
-                <a class="std-btn btn" ng-click="setReaction($event, 3)">Decent</a>
-                <a class="std-btn btn" ng-click="setReaction($event, 4)">Dislike it</a>
-                <a class="std-btn btn" ng-click="setReaction($event, 5)">Hate it</a>
+                <a class="std-btn btn" ng-repeat="reaction in reactions" ng-click="setReaction($event, $index + 1)">{{reactions[$index + 1]}}</a>
               </div>
             </div>
             
@@ -67,7 +63,7 @@
         </li>
         <div class="message card" ng-show="!books.length">
           <div class="card-content">
-          Start adding books above!
+            Start adding books above!
           </div>
         </div>
     </ul>

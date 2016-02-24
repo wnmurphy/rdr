@@ -120,11 +120,40 @@ var saveProfile = function (profile, success, fail) {
 };
 
 var getProfile = function (profile, success, fail) {
-  new models.User({'amz_auth_id': profile.user_id})
-    .fetch()
+  var key = 'amz_auth_id';
+  var value = profile.amz_auth_id;
+  if (profile.user_id) {
+    key = 'id';
+    value = profile.user_id;
+  }
+  var attributes = {};
+  attributes[key] = value;
+  findOrCreate(models.User, attributes)
+    //.fetch({withRelated: ['books']})
     .then(function (user) {
       if (user) {
-        success(user.books().toJSON());
+        db.knex('books_users').where('user_id', user.get('id'))
+        .innerJoin('books', 'books_users.book_id', 'books.id')
+        .innerJoin('authors', 'books.author_id', 'authors.id')
+            .then(function (books) {
+              books.forEach(function (book) {
+                var authorName = book.name;
+                delete book.name;
+                book.author = {};
+                book.author.name = authorName;
+              })
+              success({books: books});
+            })
+
+        /*models.Read.forge({user_id: user.get('id')}).fetchAll()
+        .then(function (reads) {
+          console.log(reads);
+          models.Book.collection().fetch({withRelated: 'author'})
+          .then(function (books) {
+            console.log(books);
+          }); 
+          //success(books);
+        });*/
       } else {
         throw 'no user found';
       }

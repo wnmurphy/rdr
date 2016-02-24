@@ -16,7 +16,8 @@ var jwtCheck = expressjwt({
 // add routes you want to block here
 var authRoutes = [
   '/signin',
-  '/users/books'
+  '/users/books',
+  '/profile'
 ];
 
 var routes = [
@@ -79,7 +80,6 @@ var routes = [
     get: function (req, res) {
       var url_parts = url.parse(req.url, true);
       var query = url_parts.query;
-      console.log(query.title);
       var client = amazon.createClient({
         awsId: process.env.AWS_ACCESS_KEY_ID,
         awsSecret: process.env.AWS_SECRET_KEY,
@@ -91,7 +91,6 @@ var routes = [
         author: query.authorName || ''
       })
       .then(function (results) {
-        console.log(results);
         res.send(results);
       })
       .catch(function (error) {
@@ -111,7 +110,8 @@ var routes = [
         profile.amz_auth_id = req.user.sub;
       }
       helpers.getProfile(profile, function (books) {
-        res.send(books);
+        console.log(books);
+        res.json(books);
       }, function (error) {
         console.log(error);
         res.sendStatus(409);
