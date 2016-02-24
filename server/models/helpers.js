@@ -128,12 +128,32 @@ var getProfile = function (profile, success, fail) {
   }
   var attributes = {};
   attributes[key] = value;
-  new models.User(attributes)
-    .fetch({withRelated: ['books']})
+  findOrCreate(models.User, attributes)
+    //.fetch({withRelated: ['books']})
     .then(function (user) {
       if (user) {
-        console.log(JSON.stringify(user));
-        success(user);
+        db.knex('books_users').where('user_id', user.get('id'))
+        .innerJoin('books', 'books_users.book_id', 'books.id')
+        .innerJoin('authors', 'books.author_id', 'authors.id')
+            .then(function (books) {
+              books.forEach(function (book) {
+                var authorName = book.name;
+                delete book.name;
+                book.author = {};
+                book.author.name = authorName;
+              })
+              success({books: books});
+            })
+
+        /*models.Read.forge({user_id: user.get('id')}).fetchAll()
+        .then(function (reads) {
+          console.log(reads);
+          models.Book.collection().fetch({withRelated: 'author'})
+          .then(function (books) {
+            console.log(books);
+          }); 
+          //success(books);
+        });*/
       } else {
         throw 'no user found';
       }

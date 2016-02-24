@@ -80,7 +80,6 @@ var routes = [
     get: function (req, res) {
       var url_parts = url.parse(req.url, true);
       var query = url_parts.query;
-      console.log(query.title);
       var client = amazon.createClient({
         awsId: process.env.AWS_ACCESS_KEY_ID,
         awsSecret: process.env.AWS_SECRET_KEY,
@@ -92,7 +91,6 @@ var routes = [
         author: query.authorName || ''
       })
       .then(function (results) {
-        console.log(results);
         res.send(results);
       })
       .catch(function (error) {

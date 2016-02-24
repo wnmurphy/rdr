@@ -31,7 +31,6 @@ angular.module('booklist.user', [])
   $scope.initialize = function () {
     Books.getProfile()
     .then(function (resp) {
-      console.log(resp);
       if (resp.books) {
         $scope.books = $scope.books.concat(resp.books);
       }
@@ -85,7 +84,9 @@ angular.module('booklist.user', [])
     .then(function(resp){
       if (resp.book && resp.author) {
         var book = resp.book;
-        book.authorName = resp.author.name;
+        book.author = {};
+        book.author.name = resp.author.name;
+        book.reaction = $scope.reaction;
         $scope.books.push(book);
         $scope.clearBookInfo();
       }
