@@ -1,6 +1,6 @@
 angular.module('booklist.services', [])
 
-  .factory('Books', ['$http', function($http){
+  .factory('Books', ['$http', function ($http){
     var getBooks = function(){
      return $http({
        method: 'GET',
@@ -52,7 +52,16 @@ angular.module('booklist.services', [])
      getBooks: getBooks,
      postBook: postBook,
      queryAmazon: queryAmazon
-    }
-  }
-  ]
-);
+    };
+  }])
+  .run(['$rootScope', function ($rootScope){
+
+    $rootScope.reactions = {
+      1: 'Hate it',
+      2: 'Dislike it',
+      3: 'Decent',
+      4: 'Like it',
+      5: 'Love it'
+    };
+      
+  }]);
