@@ -3,7 +3,7 @@ var Bookshelf = require('bookshelf');
 var env = require('node-env-file');
 var fs = require('fs');
 
-if (fs.accessSync('../.env')) {
+if (fs.accessSync('.env')) {
   env('.env');
 }
 
