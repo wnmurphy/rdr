@@ -71,6 +71,16 @@ angular.module('booklist.user', [])
     }
   };
 
+  var timer = null;
+  //this function sets a timer on ngKeyup
+  $scope.searchTimer = function () {
+    console.log(timer);
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout($scope.checkAmazon, 600);
+  }
+
   $scope.selectAmazonResult = function (result) {
     $scope.bookTitle = result.ItemAttributes[0].Title[0];
     $scope.authorName = result.ItemAttributes[0].Author[0];
