@@ -1,8 +1,9 @@
 var Knex = require('knex');
 var Bookshelf = require('bookshelf');
 var env = require('node-env-file');
+var fs = require('fs');
 
-if ('.env') {
+if (fs.accessSync('../.env')) {
   env('.env');
 }
 
