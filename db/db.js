@@ -3,7 +3,7 @@ var Bookshelf = require('bookshelf');
 var env = require('node-env-file');
 var fs = require('fs');
 
-if (fs.accessSync('.env')) {
+if (process.env.NODE_ENV !== 'production') {
   env('.env');
 }
 
