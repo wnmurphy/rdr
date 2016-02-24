@@ -1,6 +1,6 @@
 angular.module('booklist.user', [])
 
-.controller('UserController', ['$scope', 'Books','$rootScope', function($scope, Books, $rootScope){
+.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', function($scope, Books, $rootScope, $timeout){
   $scope.user = {};
   $scope.books = [];
 
@@ -70,6 +70,13 @@ angular.module('booklist.user', [])
       console.log('fail');
     }
   };
+
+  var timer;
+  //this function sets a timer on ngKeyup
+  $scope.searchTimer = function () {
+    $timeout.cancel(timer);
+    timer = $timeout($scope.checkAmazon, 400);
+  }
 
   $scope.selectAmazonResult = function (result) {
     $scope.bookTitle = result.ItemAttributes[0].Title[0];

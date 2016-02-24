@@ -25,17 +25,16 @@
             <div>
               <div class="input-field">
                 <label for="title">Title</label>
-                <input id="title" type="text" ng-model="bookTitle" required>
+                <input ng-change="searchTimer()" id="title" type="text" ng-model="bookTitle" required>
               </div>
             </div>
             <div>
               <div class="input-field">
                 <label for="author">Author</label>
-                <input id="author" class="input-field" type="text" ng-model="authorName" required>
+                <input ng-change="searchTimer()" id="author" class="input-field" type="text" ng-model="authorName" required>
               </div>
             </div>
 
-            <a ng-click="checkAmazon()" class="btn std-btn amz-btn">Check Amazon</a>
               <div class="amazon-results collection">
               <a ng-click="selectAmazonResult(result)" ng-repeat="result in amazonResults" href="#/profile" class="collection-item">{{result.ItemAttributes[0].Title[0]}}{{result.ItemAttributes[0].Author[0] ? ', by ' + result.ItemAttributes[0].Author[0] : '' }}</a>
             </div>
@@ -72,6 +71,6 @@
     $('.collapsible').collapsible();
   </script>
 
-</div
+</div>
 
 
