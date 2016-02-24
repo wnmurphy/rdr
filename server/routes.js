@@ -15,7 +15,8 @@ var jwtCheck = expressjwt({
 
 // add routes you want to block here
 var authRoutes = [
-  '/signin'
+  '/signin',
+  '/users/books'
 ];
 
 var routes = [

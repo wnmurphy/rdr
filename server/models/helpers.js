@@ -28,25 +28,39 @@ var findOrCreate = function (Model, attributes) {
 
 var addBook = function (author, book, reaction, user, success, fail) {
   // TODO handle users reactions
-  
+
   findOrCreate(models.Author, author)
     .then(function (author) {
       book.author_id = author.get('id');
       findOrCreate(models.Book, book)
       .then(function (book) {
-      //posted a valid book
-        var resData = (JSON.stringify({
-          book: {
-            title: book.get('title'),
-            id: book.get('id')
-          },
-          author: {
-            id: book.get('id'),
-            name: author.get('name')
-          }
-        }));
-        
-        success(resData);
+        models.User.forge(user)
+          .fetch()
+          .then( function (user) {
+            findOrCreate(models.Read, {
+              user_id: user.get('id'),
+              book_id: book.get('id')
+            })
+            .then( function (read) {
+              read.set('reaction', reaction);
+              read.save()
+                .then(function () {
+                  var resData = (JSON.stringify({
+                    book: {
+                      title: book.get('title'),
+                      id: book.get('id')
+                    },
+                    author: {
+                      id: book.get('id'),
+                      name: author.get('name')
+                    },
+                    reaction: read.get('reaction')
+                  }));
+                  success(resData);
+                });
+            });
+          });
+
       })
       .catch(function (error) {
         fail(error);
@@ -54,7 +68,7 @@ var addBook = function (author, book, reaction, user, success, fail) {
     })
     .catch(function (error) {
       fail(error);
-    });  
+    });
 };
 
 var getBooks = function (list, limit, success, fail) {
@@ -95,10 +109,10 @@ var saveProfile = function (profile, success, fail) {
       if(user) {
         userProfile.id = user.get('id');
       }
-      
+
       // inserts when new and updates if existing
       userProfile.save();*/
-      
+
     })
     .catch( function (error) {
       fail(error);
