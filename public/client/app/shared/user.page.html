@@ -35,7 +35,6 @@
               </div>
             </div>
 
-            <a ng-click="checkAmazon()" class="btn std-btn amz-btn">Check Amazon</a>
               <div class="amazon-results collection">
               <a ng-click="selectAmazonResult(result)" ng-repeat="result in amazonResults" href="#/profile" class="collection-item">{{result.ItemAttributes[0].Title[0]}}{{result.ItemAttributes[0].Author[0] ? ', by ' + result.ItemAttributes[0].Author[0] : '' }}</a>
             </div>
@@ -72,6 +71,6 @@
     $('.collapsible').collapsible();
   </script>
 
-</div
+</div>
 
 
