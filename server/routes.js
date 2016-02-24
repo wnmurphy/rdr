@@ -92,7 +92,6 @@ var routes = [
         responseGroup: 'ItemAttributes,Images'
       })
       .then(function (results) {
-        console.log(results);
         res.send(results);
       })
       .catch(function (error) {
@@ -112,7 +111,6 @@ var routes = [
         profile.amz_auth_id = req.user.sub;
       }
       helpers.getProfile(profile, function (books) {
-        console.log(books);
         res.json(books);
       }, function (error) {
         console.log(error);

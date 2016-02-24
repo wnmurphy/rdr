@@ -99,20 +99,6 @@ var saveProfile = function (profile, success, fail) {
     .then(function (user) {
       console.log(JSON.stringify(arguments));
       success(user);
-      /*var userProfile = new models.User({
-        'amz_auth_id': profile.user_id,
-        'email': profile.email,
-        'name': profile.name
-      })
-
-      // sets the id if a user profile was found
-      if(user) {
-        userProfile.id = user.get('id');
-      }
-
-      // inserts when new and updates if existing
-      userProfile.save();*/
-
     })
     .catch( function (error) {
       fail(error);
@@ -129,31 +115,26 @@ var getProfile = function (profile, success, fail) {
   var attributes = {};
   attributes[key] = value;
   findOrCreate(models.User, attributes)
-    //.fetch({withRelated: ['books']})
     .then(function (user) {
       if (user) {
-        db.knex('books_users').where('user_id', user.get('id'))
-        .innerJoin('books', 'books_users.book_id', 'books.id')
-        .innerJoin('authors', 'books.author_id', 'authors.id')
-          .then(function (books) {
-            books.forEach(function (book) {
-              var authorName = book.name;
-              delete book.name;
-              book.author = {};
-              book.author.name = authorName;
+        db.knex.select('books.*', 'authors.name')
+          .avg('books_users.reaction as avgReaction')
+          .from('books')
+          .orderBy('avgReaction', 'asc')
+          .innerJoin('books_users', 'books.id', 'books_users.book_id')
+          .where('books_users.user_id', user.get('id'))
+          .select(db.knex.raw('ANY_VALUE(books_users.reaction) as reaction'))
+          .groupBy('books.id')
+          .innerJoin('authors', 'books.author_id', 'authors.id')
+            .then(function (books) {
+              books.forEach(function (book) {
+                var authorName = book.name;
+                delete book.name;
+                book.author = {};
+                book.author.name = authorName;
+              })
+              success({books: books});
             })
-            success({books: books});
-          })
-
-        /*models.Read.forge({user_id: user.get('id')}).fetchAll()
-        .then(function (reads) {
-          console.log(reads);
-          models.Book.collection().fetch({withRelated: 'author'})
-          .then(function (books) {
-            console.log(books);
-          });
-          //success(books);
-        });*/
       } else {
         throw 'no user found';
       }
