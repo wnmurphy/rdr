@@ -13,6 +13,7 @@ angular.module('booklist.user', [])
   $scope.publicationYear;
   $scope.amazonUrl = '';
   $scope.publisher = '';
+  $scope.ISBN = '';
   $scope.reaction = 0;
 
   $scope.amazonResults = [];
@@ -49,6 +50,7 @@ angular.module('booklist.user', [])
       $scope.submitting = true;
       Books.queryAmazon({title: title, authorName: authorName})
       .then(function (results) {
+        console.log(results);
         if (results.data[0] && !results.data[0].Error) {
           $scope.amazonResults = results.data;
         } else {
@@ -71,6 +73,7 @@ angular.module('booklist.user', [])
     $scope.publicationYear = result.ItemAttributes[0].PublicationDate[0].split('-')[0];
     $scope.publisher = result.ItemAttributes[0].Publisher[0];
     $scope.amazonUrl = result.DetailPageURL[0];
+    $scope.ISBN = result.ItemAttributes[0].ISBN[0];
 
     $scope.amazonResults = [];
 
@@ -80,7 +83,11 @@ angular.module('booklist.user', [])
 
   $scope.addBook = function() {
     //TODO: check how to do error handling
-    Books.postBook($scope.bookTitle, $scope.authorName, $scope.reaction)
+    Books.postBook({
+      title: $scope.bookTitle,
+      ISBN: $scope.ISBN,
+      publisher: $scope.publisher
+    }, $scope.authorName, $scope.reaction)
     .then(function(resp){
       if (resp.book && resp.author) {
         var book = resp.book;
