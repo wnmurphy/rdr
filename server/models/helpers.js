@@ -70,25 +70,25 @@ var addBook = function (author, book, reaction, user, success, fail) {
       fail(error);
     });
 };
-
+//this function returns books in descending order of average reaction
 var getBooks = function (list, limit, success, fail) {
-  var books = models.Book.fetchAll({withRelated: ['author']})
-  .then(function (results) {
-    results = results.toJSON();
-    limit = limit || results.length;
-    if(list === 'popular') {
-      results.sort(function (a, b) {
-        // returns 1 when a.popularity > b.popularity,
-        //        -1 when a.pouplarity < b.popularity,
-        //         0 when equal
-        return Math.sign(a.popularity() - b.popularity());
-      });
-    }
-    success(results.slice(0,limit));
-  })
-  .catch(function (error) {
-    fail(error);
-  });
+  db.knex.select('books.*', 'authors.name')
+  .avg('books_users.reaction as avgReaction')
+  .from('books')
+  .limit(limit)
+  .orderBy('reaction', 'desc')
+  .innerJoin('books_users', 'books.id', 'books_users.book_id')
+  .groupBy('books.id')
+  .innerJoin('authors', 'books.author_id', 'authors.id')
+    .then(function (books) {
+      books.forEach(function (book) {
+        var authorName = book.name;
+        delete book.name;
+        book.author = {};
+        book.author.name = authorName;
+      })
+      success(books);
+    })
 };
 
 var saveProfile = function (profile, success, fail) {
@@ -135,15 +135,15 @@ var getProfile = function (profile, success, fail) {
         db.knex('books_users').where('user_id', user.get('id'))
         .innerJoin('books', 'books_users.book_id', 'books.id')
         .innerJoin('authors', 'books.author_id', 'authors.id')
-            .then(function (books) {
-              books.forEach(function (book) {
-                var authorName = book.name;
-                delete book.name;
-                book.author = {};
-                book.author.name = authorName;
-              })
-              success({books: books});
+          .then(function (books) {
+            books.forEach(function (book) {
+              var authorName = book.name;
+              delete book.name;
+              book.author = {};
+              book.author.name = authorName;
             })
+            success({books: books});
+          })
 
         /*models.Read.forge({user_id: user.get('id')}).fetchAll()
         .then(function (reads) {
