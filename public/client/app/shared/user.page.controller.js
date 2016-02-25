@@ -96,14 +96,22 @@ angular.module('booklist.user', [])
   }
 
   $scope.selectAmazonResult = function (result) {
-    $scope.bookTitle = result.ItemAttributes[0].Title[0];
-    $scope.authorName = result.ItemAttributes[0].Author[0];
-    $scope.publicationYear = result.ItemAttributes[0].PublicationDate[0].split('-')[0];
+    if (result.ItemAttributes[0].Title) {
+      $scope.bookTitle = result.ItemAttributes[0].Title[0];
+    }
+    if (result.ItemAttributes[0].Author) {
+      $scope.authorName = result.ItemAttributes[0].Author[0];
+    }
+    if (result.ItemAttributes[0].PublicationDate) {
+      $scope.publicationYear = result.ItemAttributes[0].PublicationDate[0].split('-')[0]; 
+    }
     if (result.ItemAttributes[0].Publisher) {
       $scope.publisher = result.ItemAttributes[0].Publisher[0];
     }
-    $scope.amazonUrl = result.DetailPageURL[0];
-    if (result.ItemAttributes[0].ISBN.length) {
+    if (result.DetailPageURL) {
+      $scope.amazonUrl = result.DetailPageURL[0];
+    }
+    if (result.ItemAttributes[0].ISBN) {
       $scope.ISBN = result.ItemAttributes[0].ISBN[0];
     }
 
