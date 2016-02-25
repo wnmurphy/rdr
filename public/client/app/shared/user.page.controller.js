@@ -153,7 +153,8 @@ angular.module('booklist.user', [])
       large_image: $scope.large_image,
       medium_image: $scope.medium_image,
       small_image: $scope.small_image,
-      thumbnail_image: $scope.thumbnail_image
+      thumbnail_image: $scope.thumbnail_image,
+      amazon_url: $scope.amazon_url
     }, $scope.authorName, $scope.reaction)
     .then(function(resp){
       if (resp.book && resp.author) {
@@ -168,6 +169,7 @@ angular.module('booklist.user', [])
         book.medium_image = $scope.medium_image;
         book.small_image = $scope.small_image;
         book.thumbnail_image = $scope.thumbnail_image;
+        book.amazon_url = $scope.amazon_url;
         $scope.books.push(book);
         $scope.clearBookInfo();
       }
