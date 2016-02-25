@@ -62,7 +62,7 @@
           <div class="row">
             <h3>Your book list</h3>
             <ul>
-                <li ng-repeat="book in books | orderBy:book.id:true" ng-include="bookTemplate">
+                <li ng-repeat="book in books | orderBy:book.id:true | filter: filterReactions" ng-include="bookTemplate">
                 </li>
                 <div class="message card" ng-show="!books.length">
                   <div class="card-content">
@@ -83,7 +83,7 @@
           <div class="row">
             <h3>Your book list</h3>
             <ul>
-                <li ng-repeat="book in books | orderBy:book.id:true | filter: { reaction: 0 }"" ng-include="bookTemplate">
+                <li ng-repeat="book in books | orderBy:book.id:true | filter: { reaction: 0 }" ng-include="bookTemplate">
                 </li>
                 <div class="message card" ng-show="!books.length">
                   <div class="card-content">
