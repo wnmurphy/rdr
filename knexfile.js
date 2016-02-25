@@ -1,7 +1,9 @@
 var env = require('node-env-file');
 var path = require('path');
 
-env(path.resolve('.env'));
+if (process.env.NODE_ENV !== 'production') {
+  env(path.resolve('.env'));
+}
 
 module.exports = {
   development: {
