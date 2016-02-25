@@ -86,7 +86,9 @@ angular.module('booklist.user', [])
       $scope.publisher = result.ItemAttributes[0].Publisher[0];
     }
     $scope.amazonUrl = result.DetailPageURL[0];
-    $scope.ISBN = result.ItemAttributes[0].ISBN[0];
+    if (result.ItemAttributes[0].ISBN.length) {
+      $scope.ISBN = result.ItemAttributes[0].ISBN[0];
+    }
 
     var imageSet = result.ImageSets[0].ImageSet[0];
     for (var i = 0; i < result.ImageSets[0].ImageSet.length; i++) {
