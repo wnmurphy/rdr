@@ -39,18 +39,25 @@
               <a ng-click="selectAmazonResult(result)" ng-repeat="result in amazonResults" href="#/profile" class="collection-item">{{result.ItemAttributes[0].Title[0]}}{{result.ItemAttributes[0].Author[0] ? ', by ' + result.ItemAttributes[0].Author[0] : '' }}</a>
             </div>
 
-            <div class="card center-align">
+            <!-- <div class="card center-align">
               <div class="card-action">
                 <a class="std-btn btn" ng-click="hasRead = true">I Have Read This Book</a>
-                <a class="std-btn btn" ng-click="hasRead = false">I Want To Read This Book</a>
+                <a class="std-btn btn" ng-click="hasRead = false" ng-click="setReaction($event, 0)">I Want To Read This Book</a>
               </div>
-            </div>
+            </div> -->
 
-            <div id="reactions" ng-show="hasRead" class="card reactions center-align">
-              <div class="card-title">
-                Reaction
+            <div id="reactions" class="card reactions center-align">
+                <div class="card-action">
+                  <a class="std-btn btn" ng-click="hasRead = true">I Have Read This Book</a>
+                  <a class="std-btn btn" ng-click="hasRead = false" ng-click="setReaction($event, 0)">I Want To Read This Book</a>
               </div>
-              <div class="card-action">
+              <!-- <div class="card-title">
+                Reaction
+              </div> -->
+              <div class="card-action" ng-show="hasRead">
+                <div class="card-title">
+                  Reaction
+                </div>
                 <a class="std-btn btn" ng-repeat="reaction in reactions" ng-click="setReaction($event, $index + 1)">{{reactions[$index + 1]}}</a>
               </div>
             </div>
