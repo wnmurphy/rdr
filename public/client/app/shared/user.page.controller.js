@@ -14,7 +14,7 @@ angular.module('booklist.user', [])
   $scope.amz_url = '';
   $scope.publisher = '';
   $scope.ISBN = '';
-  $scope.reaction = 0;
+  $scope.reaction = -1;
   $scope.high_res_image = '';
   $scope.medium_image = '';
   $scope.small_image = '';
@@ -23,6 +23,11 @@ angular.module('booklist.user', [])
   $scope.amazonResults = [];
 
   $scope.hasRead = false;
+
+  $scope.addToReadingList = function () {
+    $scope.hasRead = false
+    $scope.reaction = 0;
+  }
 
   $scope.setReaction = function ($event, reaction) {
     var $target = $($event.currentTarget);
