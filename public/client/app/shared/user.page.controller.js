@@ -103,7 +103,7 @@ angular.module('booklist.user', [])
       $scope.publisher = result.ItemAttributes[0].Publisher[0];
     }
     // convert url to affiliate id taged link
-    $scope.amazonUrl = result.DetailPageURL[0].split('%')[0] + "?camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20";
+    $scope.amz_url = result.DetailPageURL[0].split('%')[0] + "?camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20";
     if (result.ItemAttributes[0].ISBN.length) {
       $scope.ISBN = result.ItemAttributes[0].ISBN[0];
     }
