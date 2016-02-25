@@ -11,7 +11,7 @@ angular.module('booklist.user', [])
   $scope.bookTitle = '';
   $scope.authorName = '';
   $scope.publicationYear;
-  $scope.amazonUrl = '';
+  $scope.amz_url = '';
   $scope.publisher = '';
   $scope.ISBN = '';
   $scope.reaction = 0;
@@ -103,13 +103,14 @@ angular.module('booklist.user', [])
       $scope.authorName = result.ItemAttributes[0].Author[0];
     }
     if (result.ItemAttributes[0].PublicationDate) {
-      $scope.publicationYear = result.ItemAttributes[0].PublicationDate[0].split('-')[0]; 
+      $scope.publicationYear = result.ItemAttributes[0].PublicationDate[0].split('-')[0];
     }
     if (result.ItemAttributes[0].Publisher) {
       $scope.publisher = result.ItemAttributes[0].Publisher[0];
     }
     if (result.DetailPageURL) {
-      $scope.amazonUrl = result.DetailPageURL[0];
+      // convert url to affiliate id taged link
+      $scope.amz_url = result.DetailPageURL[0].split('%')[0] + "?camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20";
     }
     if (result.ItemAttributes[0].ISBN) {
       $scope.ISBN = result.ItemAttributes[0].ISBN[0];
@@ -160,7 +161,8 @@ angular.module('booklist.user', [])
       large_image: $scope.large_image,
       medium_image: $scope.medium_image,
       small_image: $scope.small_image,
-      thumbnail_image: $scope.thumbnail_image
+      thumbnail_image: $scope.thumbnail_image,
+      amz_url: $scope.amz_url
     }, $scope.authorName, $scope.reaction)
     .then(function(resp){
       if (resp.book && resp.author) {
@@ -175,6 +177,7 @@ angular.module('booklist.user', [])
         book.medium_image = $scope.medium_image;
         book.small_image = $scope.small_image;
         book.thumbnail_image = $scope.thumbnail_image;
+        book.amz_rul = $scope.amz_url;
         $scope.books.push(book);
         $scope.clearBookInfo();
       }
@@ -190,7 +193,7 @@ angular.module('booklist.user', [])
     $scope.bookTitle = '';
     $scope.authorName = '';
     $scope.publicationYear = '';
-    $scope.amazonUrl = '';
+    $scope.amz_url = '';
     $scope.publisher = '';
     $scope.reaction = 0;
     $scope.high_res_image = '';
