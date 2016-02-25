@@ -6,6 +6,19 @@
   display: block;
 }
 
+.blank-cover {
+  position: relative;
+}
+
+.blank-cover-title {
+  position: absolute;
+  top: calc(50vh * .3);
+  width: 100%;
+  text-align: center;
+  font-size: 2vh;
+  color: #ffd232;
+}
+
 .book-info {
   padding: 20px;
 }

@@ -1,7 +1,13 @@
 <link rel="stylesheet" type="text/css" href="/assets/css/book.entry.css">
 <div class="row book-entry">
   <div class="col s12 m5">
-        <img class="cover-image" ng-src="{{book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image}}">
+    <img class="cover-image" ng-if="book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image" ng-src="{{book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image}}">
+    <div ng-if="!book.high_res_image && !book.large_image && !book.medium_image && !book.small_image && !book.thumbnail_image" class='blank-cover'>
+      <img class="cover-image" src="http://lh5.ggpht.com/-MEkIz1Bld0c/T_4oRfvREPI/AAAAAAAAA8k/wZHwb6kUPlw/s9000/blank%2Bbook%2Bcover.jpg">
+      <div class="blank-cover-title">
+        {{ book.title }}
+      </div>
+    </div>
   </div>
   <div class="col s12 m7 v-middle">
     <div class="card book-info">
