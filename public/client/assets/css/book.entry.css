@@ -43,17 +43,20 @@
   padding: 20px;
 }
 
+.book-info .card-content {
+  padding-bottom: 0px;
+}
+
+.book-info .card-action {
+  padding-top: 5px;
+}
+
 .thumb {
   display: none;
 }
 
-.current-reaction {
-  align: center;
-  font-weight: bold;
-}
-
-.reactions {
-  padding-bottom: 0px;
+.slider-key {
+  margin-top: -10px;
 }
 
 input[type=range]::-webkit-slider-thumb {
