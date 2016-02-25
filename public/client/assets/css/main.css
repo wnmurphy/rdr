@@ -21,14 +21,11 @@ body {
     color: #9f9f9f; }
 
 /** TRENDS PAGE **/
-.book-entry .card-image {
-  background-color: #776378; }
-  .book-entry .card-image img {
-    width: 65%;
-    margin: auto;
-    object-fit: cover;
-    height: 200px;
-    overflow: hidden; }
+.book-entry .cover-image {
+  overflow: hidden;
+  background-color: #776378;
+  max-height: 100%;
+  max-width: 100%; }
 
 .book-entry .card-content {
   line-height: 200%; }
