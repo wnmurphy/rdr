@@ -38,11 +38,11 @@
           <form action="#" class="reaction-form">
             <div class="range-field">
               <input type="range" step="25" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)"/><span class="thumb"></span>
-              <div class="left">{{ reactions[1] }}</div>
+              <div class="left" ng-class="{ 'current-reaction': (book.reactionSlider === 0) }">{{ reactions[1] }}</div>
               &nbsp
               <span class="current-reaction" ng-if="book.reactionSlider > 0 && book.reactionSlider < 100">{{ reactions[book.reactionSlider/25 + 1] }}</span>
               &nbsp
-              <div class="right">{{ reactions[5] }}</div>
+              <div class="right" ng-class="{ 'current-reaction': (book.reactionSlider === 100) }">{{ reactions[5] }}</div>
             </div>
           </from>
         </div>
