@@ -66,15 +66,22 @@ input[type=range] {
 
 .range-field {
   height: 34px;
+  margin-top: 10px;
 }
-
-.tick {
+.slider-value-key, .tick {
   position: absolute !important;
+  z-index: 1;
+}
+.tick {
   top: 12px;
   border: 1.5px solid #6e3f87;
   height: 5px;
   width: 0px;
-  z-index: 1;
+}
+
+.slider-value-key {
+  top: -10px;
+  font-size: .8em;
 }
 
 
