@@ -1,9 +1,42 @@
+
 .cover-image {
   border-radius: 5px;
   max-height: 50vh;
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+.blank-cover {
+  position: relative;
+}
+
+.blank-cover-title {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: calc(50vh * .35);
+  width: 100%;
+  color: #ffd232;
+}
+
+.cover-title, .cover-author {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  font-family: 'IM Fell English', 'Papyrus', serif;
+  font-style: italic;
+}
+
+.cover-title {
+  font-size: 3vh;
+
+}
+
+.cover-author {
+  padding-top: 2vh;
+  font-size: 2vh;
 }
 
 .book-info {
@@ -20,5 +53,8 @@
 @media (max-width: 750px) {
   .book-entry {
       margin-bottom: 40px;
+  }
+  .blank-cover-title {
+    padding: 0px 35%;
   }
 }
