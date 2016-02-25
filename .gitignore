@@ -9,3 +9,6 @@ dist/
 
 .floo
 .flooignore
+
+.mysql*
+.my.cnf*
