@@ -43,6 +43,9 @@ body {
 /** TRENDS PAGE **/
 .book-entry {
 
+  padding: 3%;
+  border-bottom: 1px $lightest-color solid;
+
   .cover-image {
     overflow: hidden;
     background-color: $lightest-color;

@@ -21,25 +21,24 @@ body {
     color: #9f9f9f; }
 
 /** TRENDS PAGE **/
-.book-entry .cover-image {
-  overflow: hidden;
-  background-color: #776378;
-  max-height: 100%;
-  max-width: 100%; }
-
-.book-entry .card-content {
-  line-height: 200%; }
-
-.book-entry .card-title {
-  margin-left: 5px; }
-
-.book-entry .card-action {
-  width: 100%;
-  margin: auto;
-  margin-top: 10px; }
-
-.book-entry img {
-  border-radius: 4px; }
+.book-entry {
+  padding: 3%;
+  border-bottom: 1px #776378 solid; }
+  .book-entry .cover-image {
+    overflow: hidden;
+    background-color: #776378;
+    max-height: 100%;
+    max-width: 100%; }
+  .book-entry .card-content {
+    line-height: 200%; }
+  .book-entry .card-title {
+    margin-left: 5px; }
+  .book-entry .card-action {
+    width: 100%;
+    margin: auto;
+    margin-top: 10px; }
+  .book-entry img {
+    border-radius: 4px; }
 
 .author {
   float: right;
