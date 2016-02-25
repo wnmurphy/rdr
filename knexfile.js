@@ -18,5 +18,9 @@ module.exports = {
     seeds: {
       directory: './seeds/dev'
     }
+  },
+  production: {
+    client: 'mysql',
+    connection: process.env.CLEARDB_DATABASE_URL
   }
 };
