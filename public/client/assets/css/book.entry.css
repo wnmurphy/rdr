@@ -92,17 +92,19 @@ input[type=range]::-webkit-slider-thumb {
   z-index: 10;
 }
 
-.book-entry-mob {
-  display: flex;
-  align-items: center;
+@media (min-width: 600px) {
+  .book-entry {
+    display: flex;
+    align-items: center;
+  }
 }
 
-.book-entry-mob {
-  margin-bottom: 40px;
-}
 
-
-@media all (max-width: 750px) {
+@media (max-width: 600px) {
+  .book-entry {
+    display: inline-grid;;
+    margin-bottom: 40px;
+  }
   .blank-cover-title {
     padding: 0px 35%;
   }
