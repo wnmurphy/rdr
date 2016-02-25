@@ -205,6 +205,10 @@ angular.module('booklist.user', [])
     $('.reactions').find('.selected').removeClass('selected');
   };
 
+  $scope.filterReactions = function (element) {
+    return element.reaction > 0;
+  }
+
   $scope.initialize();
 
   //get books on signin
