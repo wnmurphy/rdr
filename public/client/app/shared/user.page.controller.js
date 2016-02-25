@@ -33,11 +33,28 @@ angular.module('booklist.user', [])
     }
   };
 
+  $scope.updateReaction = function (book) {
+    book.reaction = book.reactionSlider/25 + 1;
+    Books.postBook({
+      title: book.title,
+      ISBN: book.ISBN,
+      publisher: book.publisher,
+      high_res_image: book.high_res_image,
+      large_image: book.large_image,
+      medium_image: book.medium_image,
+      small_image: book.small_image,
+      thumbnail_image: book.thumbnail_image
+    }, book.author.name, book.reaction);
+  };
+
   $scope.initialize = function () {
     Books.getProfile()
     .then(function (resp) {
       if (resp.books) {
         $scope.books = $scope.books.concat(resp.books);
+        $scope.books.forEach(function (book) {
+          book.reactionSlider = (book.reaction - 1) * 25;
+        });
       }
     })
     .catch(function (error) {
@@ -61,7 +78,7 @@ angular.module('booklist.user', [])
           $scope.amazonResults = [];
         }
         $scope.submitting = false;
-        
+
       })
       .catch(function (error) {
         $scope.submitting = false;
@@ -144,6 +161,7 @@ angular.module('booklist.user', [])
         book.ISBN = $scope.ISBN;
         book.author.name = resp.author.name;
         book.reaction = $scope.reaction;
+        book.reactionSlider = (book.reaction - 1) * 25;
         book.high_res_image = $scope.high_res_image;
         book.large_image = $scope.large_image;
         book.medium_image = $scope.medium_image;
