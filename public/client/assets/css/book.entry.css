@@ -92,16 +92,17 @@ input[type=range]::-webkit-slider-thumb {
   z-index: 10;
 }
 
-@media (min-width: 750px) {
+@media (min-width: 600px) {
   .book-entry {
     display: flex;
     align-items: center;
   }
 }
 
-@media (max-width: 750px) {
+
+@media (max-width: 600px) {
   .book-entry {
-      margin-bottom: 40px;
+    margin-bottom: 40px;
   }
   .blank-cover-title {
     padding: 0px 35%;
