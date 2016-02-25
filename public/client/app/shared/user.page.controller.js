@@ -22,6 +22,8 @@ angular.module('booklist.user', [])
 
   $scope.amazonResults = [];
 
+  $scope.hasRead = false;
+
   $scope.setReaction = function ($event, reaction) {
     var $target = $($event.currentTarget);
     $('.reactions').find('.selected').removeClass('selected');
@@ -152,7 +154,6 @@ angular.module('booklist.user', [])
   };
 
   $scope.addBook = function() {
-    //TODO: check how to do error handling
     Books.postBook({
       title: $scope.bookTitle,
       ISBN: $scope.ISBN,
