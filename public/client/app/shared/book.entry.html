@@ -27,22 +27,26 @@
       <div class="card-content">
         <div>Author: {{ book.author.name }}</div>
         <div>Rating: {{ book.avgReaction }} </div>
-        <a href="http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ" class="right">
+        <a href="http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ" class="right" ng-if="book.reaction === undefined">
           <img src="https://images-na.ssl-images-amazon.com/images/G/01/associates/remote-buy-box/buy5._V192207739_.gif" />
         </a>
       </div>
-      <div ng-if="reactable">
-        <div class="reactions card-action center-align">
-          <a
-            class="std-btn btn"
-            ng-repeat="reaction in reactions"
-            ng-click="setReaction($event, $index + 1)"
-            ng-class="{selected: $index + 1 === book.reaction}"
-          >
-            {{reactions[$index + 1]}}
-          </a>
+
+        <div class="reactions card-action center-align" ng-if="book.reaction !== undefined">
+          <!-- uses a different step as opposed to min/max due to when angular sets value -->
+          <!-- step is 25 and value is set to the 0-100 equivalent of 1-5 -->
+          <form action="#" class="reaction-form">
+            <div class="range-field">
+              <input type="range" step="25" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)"/><span class="thumb"></span>
+              <div class="left" ng-class="{ 'current-reaction': (book.reactionSlider === 0) }">{{ reactions[1] }}</div>
+              &nbsp
+              <span class="current-reaction" ng-if="book.reactionSlider > 0 && book.reactionSlider < 100">{{ reactions[book.reactionSlider/25 + 1] }}</span>
+              &nbsp
+              <div class="right" ng-class="{ 'current-reaction': (book.reactionSlider === 100) }">{{ reactions[5] }}</div>
+            </div>
+          </from>
         </div>
-      </div>
+
     </div>
   </div>
 </div>
