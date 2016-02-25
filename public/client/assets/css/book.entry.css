@@ -57,7 +57,7 @@
 }
 
 input[type=range]::-webkit-slider-thumb {
-  background-color: #c30000;
+  background-color: #6e3f87;
 }
 
 @media (min-width: 750px) {
