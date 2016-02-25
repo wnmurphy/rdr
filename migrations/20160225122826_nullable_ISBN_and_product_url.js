@@ -5,7 +5,8 @@ exports.up = function(knex, Promise) {
 
   return knex.schema.table('books', function (books) {
     books.string('amz_url');
-    books.dropIndex('ISBN', 'ISBN');
+    books.dropIndex('ISBN', 'books_isbn_unique');
+    books.index('ISBN');
   });
 
 };
@@ -13,6 +14,7 @@ exports.up = function(knex, Promise) {
 exports.down = function(knex, Promise) {
   return knex.schema.table('books', function (books) {
     books.dropColumn('amz_url');
-    books.index('ISBN', 'ISBN');
+    books.index('ISBN', 'books_isbn_unique');
+    books.dropIndex('ISBN');
   });
 };
