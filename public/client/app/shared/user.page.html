@@ -35,36 +35,65 @@
               </div>
             </div>
 
-              <div class="amazon-results collection">
+            <div class="amazon-results collection">
               <a ng-click="selectAmazonResult(result)" ng-repeat="result in amazonResults" href="#/profile" class="collection-item">{{result.ItemAttributes[0].Title[0]}}{{result.ItemAttributes[0].Author[0] ? ', by ' + result.ItemAttributes[0].Author[0] : '' }}</a>
             </div>
 
             <div id="reactions" class="card reactions center-align">
-              <div class="card-title">
-                Reaction
+                <div class="card-action">
+                  <a class="std-btn btn" ng-click="hasRead = true">I Have Read This Book</a>
+                  <a class="std-btn btn" ng-click="addToReadingList()" ng-click="setReaction($event, 0)">I Want To Read This Book</a>
               </div>
-              <div class="card-action">
+              <div class="card-action" ng-show="hasRead">
+                <div class="card-title">
+                  Reaction
+                </div>
                 <a class="std-btn btn" ng-repeat="reaction in reactions" ng-click="setReaction($event, $index + 1)">{{reactions[$index + 1]}}</a>
               </div>
             </div>
-            
-            <input class="std-btn btn" type="submit" ng-disabled="bookSubmission.$invalid || !reaction" value="Add Book">
+
+            <input class="std-btn btn" type="submit" ng-disabled="bookSubmission.$invalid || !(reaction > -1)" value="Add Book">
           </form>
         </div>
       </li>
-    </ul>
-  </div>
-
-  <div class="row">
-    <h3>Your book list</h3>
-    <ul>
-        <li ng-repeat="book in books | orderBy:book.id:true" ng-include="bookTemplate">
-        </li>
-        <div class="message card" ng-show="!books.length">
-          <div class="card-content">
-            Start adding books above!
+      <li>
+        <div class="collapsible-header">
+          <i class="material-icons">library_books</i>
+          Your Book List
+        </div>
+        <div class="collapsible-body">
+          <div class="row">
+            <ul>
+                <li ng-repeat="book in books | orderBy:book.id:true | filter: filterReactions" ng-include="bookTemplate">
+                </li>
+                <div class="message card" ng-show="!books.length">
+                  <div class="card-content">
+                    Start adding books above!
+                  </div>
+                </div>
+            </ul>
           </div>
         </div>
+      </li>
+      <li>
+        <div class="collapsible-header">
+          <i class="material-icons">library_books</i>
+          To Read List
+        </div>
+        <div class="collapsible-body">
+          <div class="row">
+            <ul>
+                <li ng-repeat="book in books | orderBy:book.id:true | filter: { reaction: 0 }" ng-include="bookTemplate">
+                </li>
+                <div class="message card" ng-show="!books.length">
+                  <div class="card-content">
+                    Start adding books above!
+                  </div>
+                </div>
+            </ul>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
   <script>
@@ -72,5 +101,3 @@
   </script>
 
 </div>
-
-

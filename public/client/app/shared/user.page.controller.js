@@ -14,13 +14,20 @@ angular.module('booklist.user', [])
   $scope.amz_url = '';
   $scope.publisher = '';
   $scope.ISBN = '';
-  $scope.reaction = 0;
+  $scope.reaction = -1;
   $scope.high_res_image = '';
   $scope.medium_image = '';
   $scope.small_image = '';
   $scope.thumbnail_image = '';
 
   $scope.amazonResults = [];
+
+  $scope.hasRead = false;
+
+  $scope.addToReadingList = function () {
+    $scope.hasRead = false
+    $scope.reaction = 0;
+  }
 
   $scope.setReaction = function ($event, reaction) {
     var $target = $($event.currentTarget);
@@ -152,7 +159,6 @@ angular.module('booklist.user', [])
   };
 
   $scope.addBook = function() {
-    //TODO: check how to do error handling
     Books.postBook({
       title: $scope.bookTitle,
       ISBN: $scope.ISBN,
@@ -204,6 +210,10 @@ angular.module('booklist.user', [])
     $scope.thumbnail_image = '';
     $('.reactions').find('.selected').removeClass('selected');
   };
+
+  $scope.filterReactions = function (element) {
+    return element.reaction > 0;
+  }
 
   $scope.initialize();
 
