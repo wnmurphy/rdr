@@ -27,7 +27,7 @@ body {
   .book-entry .cover-image {
     overflow: hidden;
     background-color: #776378;
-    max-height: 100%;
+    max-height: 50vh;
     max-width: 100%; }
   .book-entry .card-content {
     line-height: 200%; }
