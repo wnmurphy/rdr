@@ -43,21 +43,44 @@
   padding: 20px;
 }
 
+.book-info .card-content {
+  padding-bottom: 0px;
+}
+
+.book-info .card-action {
+  padding-top: 5px;
+}
+
 .thumb {
   display: none;
 }
 
-.current-reaction {
-  align: center;
-  font-weight: bold;
+.slider-key {
+  margin-top: -10px;
 }
 
-.reactions {
-  padding-bottom: 0px;
+input[type=range] {
+  z-index: 5;
+  border: 0px;
 }
+
+.range-field {
+  height: 34px;
+}
+
+.tick {
+  position: absolute !important;
+  top: 12px;
+  border: 1.5px solid #6e3f87;
+  height: 5px;
+  width: 0px;
+  z-index: 1;
+}
+
 
 input[type=range]::-webkit-slider-thumb {
   background-color: #6e3f87;
+  z-index: 10;
 }
 
 @media (min-width: 750px) {
