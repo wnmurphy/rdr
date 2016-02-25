@@ -102,7 +102,6 @@ input[type=range]::-webkit-slider-thumb {
 
 @media (max-width: 600px) {
   .book-entry {
-    display: inline-grid;;
     margin-bottom: 40px;
   }
   .blank-cover-title {
