@@ -43,6 +43,23 @@
   padding: 20px;
 }
 
+.thumb {
+  display: none;
+}
+
+.current-reaction {
+  align: center;
+  font-weight: bold;
+}
+
+.reactions {
+  padding-bottom: 0px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  background-color: #c30000;
+}
+
 @media (min-width: 750px) {
   .book-entry {
     display: flex;
