@@ -1,6 +1,9 @@
 <div id='BookFeed'>
   <h1>Book Feed</h1>
-  <input type="text" ng-model="search" placeholder="Search for book or author">
+  <div class="input-field">
+  <label for="search">Search for book or author</label>
+    <input type="text" ng-model="search">    
+  </div>
   <ul>
   <li ng-repeat="book in data.books | filter:search" ng-include="bookTemplate">
         </li>
