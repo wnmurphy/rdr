@@ -21,6 +21,10 @@
   color: #ffd232;
 }
 
+.amazon-link {
+  margin-right: -25px;
+}
+
 .cover-title, .cover-author {
   display: flex;
   align-self: center;
@@ -43,12 +47,9 @@
   padding: 20px;
 }
 
-.book-info .card-content {
-  padding-bottom: 0px;
-}
-
 .book-info .card-action {
   padding-top: 5px;
+  margin-bottom: -20px;
 }
 
 .thumb {
@@ -68,6 +69,7 @@ input[type=range] {
   height: 34px;
   margin-top: 10px;
 }
+
 .slider-value-key, .tick {
   position: absolute !important;
   z-index: 1;
