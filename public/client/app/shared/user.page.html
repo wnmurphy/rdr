@@ -63,7 +63,6 @@
         </div>
         <div class="collapsible-body">
           <div class="row">
-            <h3>Your book list</h3>
             <ul>
                 <li ng-repeat="book in books | orderBy:book.id:true | filter: filterReactions" ng-include="bookTemplate">
                 </li>
@@ -82,9 +81,7 @@
           To Read List
         </div>
         <div class="collapsible-body">
-          <h1>Your To Read List</h1>
           <div class="row">
-            <h3>Your book list</h3>
             <ul>
                 <li ng-repeat="book in books | orderBy:book.id:true | filter: { reaction: 0 }" ng-include="bookTemplate">
                 </li>
