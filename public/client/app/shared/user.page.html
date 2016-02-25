@@ -47,15 +47,57 @@
                 <a class="std-btn btn" ng-repeat="reaction in reactions" ng-click="setReaction($event, $index + 1)">{{reactions[$index + 1]}}</a>
               </div>
             </div>
-            
+
             <input class="std-btn btn" type="submit" ng-disabled="bookSubmission.$invalid || !reaction" value="Add Book">
           </form>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">
+          <i class="material-icons">library_books</i>
+          Your Book List
+        </div>
+        <div class="collapsible-body">
+          <h1>Your Books</h1>
+          <div class="row">
+            <h3>Your book list</h3>
+            <ul>
+                <li ng-repeat="book in books | orderBy:book.id:true" ng-include="bookTemplate">
+                </li>
+                <div class="message card" ng-show="!books.length">
+                  <div class="card-content">
+                    Start adding books above!
+                  </div>
+                </div>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">
+          <i class="material-icons">library_books</i>
+          To Read List
+        </div>
+        <div class="collapsible-body">
+          <h1>Your To Read List</h1>
+          <div class="row">
+            <h3>Your book list</h3>
+            <ul>
+                <li ng-repeat="book in books | orderBy:book.id:true" ng-include="bookTemplate">
+                </li>
+                <div class="message card" ng-show="!books.length">
+                  <div class="card-content">
+                    Start adding books above!
+                  </div>
+                </div>
+            </ul>
+          </div>
         </div>
       </li>
     </ul>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <h3>Your book list</h3>
     <ul>
         <li ng-repeat="book in books | orderBy:book.id:true" ng-include="bookTemplate">
@@ -66,11 +108,9 @@
           </div>
         </div>
     </ul>
-  </div>
+  </div> -->
   <script>
     $('.collapsible').collapsible();
   </script>
 
 </div>
-
-
