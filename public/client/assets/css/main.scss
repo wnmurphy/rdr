@@ -127,6 +127,13 @@ form.book {
   background-color: $lighter-color;
 }
 
+.book-collection {
+  max-height: 75vh;
+  overflow: auto;
+  background-color: $lightest-color;
+  border-radius: 5px;
+}
+
 .tabs .tab a {
   color: $darker-color;
   outline-color: $darker-color;

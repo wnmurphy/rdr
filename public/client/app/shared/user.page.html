@@ -60,11 +60,11 @@
   </div>
   <div class="row">
     <ul class="tabs">
-      <li class="tab"><a href="#book-list">Your Book List</a></li>
-      <li class="tab"><a href="#to-read">To Read List</a></li>
+      <li class="tab"><a href="#book-list" ng-click="scrollToTop($event)">Your Book List</a></li>
+      <li class="tab"><a href="#to-read" ng-click="scrollToTop($event)">To Read List</a></li>
     </ul>
-    <div id="book-list" class="book-collection">
-      <ul>
+    <div id="book-list">
+      <ul class="book-collection">
         <li ng-repeat="book in books | orderBy:book.id:true | filter: filterReactions" ng-include="bookTemplate">
         </li>
         <div class="message card" ng-show="!books.length">
@@ -74,8 +74,8 @@
         </div>
       </ul>
     </div>
-    <div id="to-read" class="book-collection">
-      <ul>
+    <div id="to-read">
+      <ul class="book-collection">
         <li ng-repeat="book in books | orderBy:book.id:true | filter: { reaction: 0 }" ng-include="bookTemplate">
         </li>
         <div class="message card" ng-show="!books.length">

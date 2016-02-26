@@ -40,6 +40,15 @@ angular.module('booklist.user', [])
     }
   };
 
+  $scope.scrollToTop = function (e) {
+    $target = $(e.target);
+    if ($target.hasClass('active')) {
+      $('.book-collection:not([display="none"])').animate({
+        scrollTop: 0
+      }, '500', 'swing');
+    }
+  };
+
   $scope.updateReaction = function (book) {
     book.reaction = book.reactionSlider/25 + 1;
     Books.postBook({
