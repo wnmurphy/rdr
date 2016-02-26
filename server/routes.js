@@ -17,7 +17,8 @@ var jwtCheck = expressjwt({
 var authRoutes = [
   '/signin',
   '/users/books',
-  '/profile'
+  '/profile',
+  '/books/signedin'
 ];
 
 var routes = [
@@ -64,10 +65,23 @@ var routes = [
   {
     path: '/books',
     get: function (req, res) {
-      console.log(JSON.stringify(req.user));
       var limit = req.param('limit');
       var list = req.param('list');
       helpers.getBooks(list, limit, function (books) {
+        res.json(books);
+      }, function (error) {
+        console.error(error);
+        res.sendStatus(409);
+      });
+    }
+  },
+  {
+    path: '/books/signedin',
+    get: function (req, res) {
+      var limit = req.param('limit');
+      var list = req.param('list');
+      var user = { amz_auth_id: req.user.sub };
+      helpers.getBooksSignedIn(list, limit, user, function (books) {
         res.json(books);
       }, function (error) {
         console.error(error);
