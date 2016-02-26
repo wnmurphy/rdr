@@ -72,6 +72,18 @@ form.book {
   form.book h3 {
     color: #29182a; }
 
+.tabs .tab a {
+  color: #29182a;
+  outline-color: #29182a; }
+  .tabs .tab a:hover {
+    color: #776378;
+    outline-color: #776378; }
+
+.tabs .indicator {
+  background-color: #250e26;
+  padding: 1px;
+  border: 1px solid white; }
+
 .collapsible {
   border-color: #392b3a;
   border-radius: 5px; }

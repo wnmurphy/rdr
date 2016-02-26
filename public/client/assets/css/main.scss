@@ -125,7 +125,22 @@ form.book {
   }
   padding: 15px;
   background-color: $lighter-color;
+}
 
+.tabs .tab a {
+  color: $darker-color;
+  outline-color: $darker-color;
+
+  &:hover {
+    color: $lightest-color;
+    outline-color: $lightest-color;
+  }
+}
+
+.tabs .indicator {
+  background-color: $darkest-color;
+  padding: 1px;
+  border: 1px solid white;
 }
 
 .collapsible {
