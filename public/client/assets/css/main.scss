@@ -217,7 +217,8 @@ form.book {
 
 .book-collection {
   max-height: 75vh;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: $lightest-color;
   margin: 0px;
 }
