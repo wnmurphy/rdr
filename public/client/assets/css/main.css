@@ -72,6 +72,12 @@ form.book {
   form.book h3 {
     color: #29182a; }
 
+.book-collection {
+  max-height: 75vh;
+  overflow: auto;
+  background-color: #776378;
+  border-radius: 5px; }
+
 .tabs .tab a {
   color: #29182a;
   outline-color: #29182a; }
