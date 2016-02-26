@@ -68,8 +68,12 @@ body {
   top: 10px;
 
   img {
-    width: 10%;
-    height: calc( * (56/116));
+    width: 9vw;
+    max-width: 109.500px;
+    min-width: calc(116px * 2/3);
+    height: calc(9vw * (56/116));
+    max-height: 52.862px;
+    min-height: calc(56px * 2/3);;
   }
 
   &:hover {
@@ -88,10 +92,15 @@ body {
   position: relative;
   top: -13px;
 
+  width: 9vw;
+  max-width: 109.500px;
+  min-width: calc(116px * 2/3);
+  height: calc(9vw * (56/116));
+  max-height: 52.862px;
+  min-height: calc(56px * 2/3);;
+
   background-color: rgb(230,231,232);
-  width: 116px;
-  height: 54px;
-  border-radius: 8px;
+  border-radius: 1em;
   box-shadow: 0px !important;
   color: black;
   font-size: 16px;
