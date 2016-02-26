@@ -1,9 +1,4 @@
 /** COLORS **/
-/*rgba( 57, 43, 58,1);*/
-/*rgba(119, 99,120,1);*/
-/*rgba( 90, 71, 91,1);*/
-/*rgba( 41, 24, 42,1);*/
-/*rgba( 37, 14, 38,1);*/
 *, *:after, *:before {
   font-family: 'Railway', sans-serif;
   font-weight: 100; }
@@ -15,10 +10,20 @@ h1, h2, h3, h4, h5, h6 {
 body {
   background: linear-gradient(to right, #407F7F, #226666); }
 
+.collapsible-header {
+  color: #000; }
+  .collapsible-header i {
+    color: #4F628E; }
+
+.collapsible-header:hover {
+  color: #787878; }
+  .collapsible-header:hover i {
+    color: #8797bd; }
+
 .std-btn {
   background-color: #407F7F; }
   .std-btn:hover {
-    background-color: #669999; }
+    background-color: #4F628E; }
   .std-btn:active, .reactions .btn.selected {
     background-color: #2E4272; }
   .std-btn[disabled=disabled] {
@@ -26,18 +31,46 @@ body {
     color: #9f9f9f; }
 
 .amz-btn {
-  width: 116px;
-  height: 56px;
-  background-image: url("/assets/img/amz_logo.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat; }
+  position: relative;
+  top: 10px; }
+  .amz-btn img {
+    width: 9vw;
+    max-width: 109.500px;
+    min-width: calc(116px * 2/3);
+    height: calc(9vw * (56/116));
+    max-height: 52.862px;
+    min-height: calc(56px * 2/3); }
   .amz-btn:hover {
     opacity: 0.7; }
   .amz-btn:active {
     opacity: 0.4; }
 
+.read-btn {
+  display: inline-block;
+  position: relative;
+  top: -13px;
+  width: 9vw;
+  max-width: 109.500px;
+  min-width: calc(116px * 2/3);
+  height: calc(9vw * (56/116));
+  max-height: 52.862px;
+  min-height: calc(56px * 2/3);
+  background-color: #e6e7e8;
+  border-radius: 1em;
+  box-shadow: 0px !important;
+  color: black;
+  font-size: 16px;
+  padding-top: calc(56px/2 - 1em);
+  text-align: center; }
+  .read-btn:hover {
+    background-color: #e6e7e8;
+    opacity: 0.7; }
+  .read-btn:active {
+    background-color: #e6e7e8;
+    opacity: 0.4; }
+
 .book-info .card-content {
-  padding-bottom: 55px; }
+  padding-bottom: 0px; }
 
 /** TRENDS PAGE **/
 .book-entry {
@@ -76,8 +109,11 @@ nav {
   box-shadow: 0 1px 0 0 #226666; }
 
 .input-field input[type=text] {
-  border-bottom: 1px solid #669999;
+  border-bottom: 1px solid #407F7F;
   box-shadow: 0 1px 0 0 #669999; }
+
+.feed {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
 
 .reactions .card-title {
   margin-left: 5px; }
@@ -87,7 +123,7 @@ nav {
 
 form.book {
   padding: 15px;
-  background-color: #407F7F; }
+  background-color: #669999; }
   form.book h3 {
     color: #0D4D4D; }
 
@@ -95,17 +131,22 @@ form.book {
   max-height: 75vh;
   overflow: auto;
   background-color: #669999;
-  border-radius: 5px; }
+  margin: 0px; }
+
+.new-book {
+  margin-bottom: 0px; }
 
 .tabs .tab a {
   color: #0D4D4D;
   outline-color: #0D4D4D; }
+  .tabs .tab a.active {
+    color: #2E4272; }
   .tabs .tab a:hover {
-    color: #669999;
-    outline-color: #669999; }
+    color: #4F628E;
+    outline-color: #4F628E; }
 
 .tabs .indicator {
-  background-color: #003333;
+  background-color: #2E4272;
   padding: 1px;
   border: 1px solid white; }
 
@@ -117,7 +158,7 @@ form.book {
 
 .greet {
   font-size: 2em;
-  color: #003333;
+  color: #122042;
   font-weight: 100; }
 
 .spinner-layer {
@@ -149,6 +190,8 @@ form.book {
 input[type=range]::-webkit-slider-thumb {
   background-color: #2E4272;
   z-index: 10; }
+  input[type=range]::-webkit-slider-thumb:hover, input[type=range]::-webkit-slider-thumb:active {
+    background-color: #4F628E; }
 
 .cover-image {
   border-radius: 5px;
