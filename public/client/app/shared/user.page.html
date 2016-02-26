@@ -36,7 +36,13 @@
             </div>
 
             <div class="amazon-results collection">
-              <a ng-click="selectAmazonResult(result)" ng-repeat="result in amazonResults" href="#/profile" class="collection-item">{{result.ItemAttributes[0].Title[0]}}{{result.ItemAttributes[0].Author[0] ? ', by ' + result.ItemAttributes[0].Author[0] : '' }}</a>
+              <div class="collection-item" ng-repeat="result in amazonResults">
+                <a class="row" amazon-thumbnail ng-click="selectAmazonResult(result)" href="#/profile" class="result-link">
+                  <div class="col s10 result-container">
+                  {{result.ItemAttributes[0].Title[0]}}{{result.ItemAttributes[0].Author[0] ? ', by ' + result.ItemAttributes[0].Author[0] : '' }}
+                  </div>
+                </a>
+              </div>
             </div>
 
             <div id="reactions" class="card reactions center-align">
@@ -58,7 +64,7 @@
       </li>
     </ul>
   </div>
-  <div class="row">
+  <div class="row feed">
     <ul class="tabs">
       <li class="tab"><a href="#book-list" ng-click="scrollToTop($event)">Your Book List</a></li>
       <li class="tab"><a href="#to-read" ng-click="scrollToTop($event)">To Read List</a></li>

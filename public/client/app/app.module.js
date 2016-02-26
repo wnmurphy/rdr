@@ -83,4 +83,31 @@ angular.module('booklist.services', [])
 
     $rootScope.blankCovers = ['/assets/img/black_cover.png', '/assets/img/red_cover.jpg'];
 
-  }]);
+  }])
+  .directive('amazonThumbnail', function () {
+    return {
+      restrict: 'A',
+      link: function ($scope, element, attrs) {
+        var imageSet;
+        $scope.result.ImageSets[0].ImageSet.forEach(function (checkSet, index) {
+          if (checkSet.$ === 'primary' || !imageSet && index === $scope.result.ImageSets[0].ImageSet.length - 1) {
+            imageSet = checkSet;
+          }
+        });
+
+        if (imageSet) {
+          var imageUrl;
+          if (imageSet.MediumImage) {
+            imageUrl = imageSet.MediumImage[0].URL[0];
+          }
+          if (!imageUrl && imageSet.SmallImage) {
+            imageUrl = imageSet.SmallImage[0].URL[0];
+          }
+          if (!imageUrl && imageSet.ThumbnailImage) {
+            imageUrl = imageSet.ThumbnailImage[0].URL[0];
+          }
+          $(element).append('<img class="col s2 result-thumb" src="' + imageUrl + '"></img>');
+        }
+      }
+    };
+  });
