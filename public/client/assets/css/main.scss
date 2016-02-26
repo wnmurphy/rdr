@@ -1,10 +1,21 @@
 
 /** COLORS **/
-$primary-color: rgba( 57, 43, 58,1);
-$lightest-color: rgba(119, 99,120,1);
-$lighter-color: rgba( 90, 71, 91,1);
-$darker-color: rgba( 41, 24, 42,1);
-$darkest-color: rgba( 37, 14, 38,1);
+$primary-color: #226666;
+/*rgba( 57, 43, 58,1);*/
+$lightest-color: #669999;
+/*rgba(119, 99,120,1);*/
+$lighter-color: #407F7F;
+/*rgba( 90, 71, 91,1);*/
+$darker-color: #0D4D4D;
+/*rgba( 41, 24, 42,1);*/
+$darkest-color: #003333;
+
+$accent-color: #2E4272;
+
+$accent-light: #4F628E;
+
+$accent-dark: #162955;
+/*rgba( 37, 14, 38,1);*/
 
 
 *, *:after, *:before {
@@ -30,7 +41,7 @@ body {
   }
 
   &:active {
-    background-color: $primary-color;
+    background-color: $accent-color;
   }
 
   &[disabled=disabled] {
@@ -105,7 +116,7 @@ body {
 }
 
 nav {
-  background: linear-gradient(to right, $primary-color, $darker-color);
+  background: linear-gradient(to right, $accent-color, $accent-dark);
 }
 
 /** PROFILE **/
@@ -205,3 +216,116 @@ form.book {
 .collection a.collection-item {
   color: $lighter-color;
 }
+
+/* SLIDER */
+.tick {
+  top: 12px;
+  border: 1.5px solid $accent-light;
+  height: 5px;
+  width: 0px;
+}
+
+.slider-value-key {
+  top: -10px;
+  font-size: .8em;
+}
+
+
+input[type=range]::-webkit-slider-thumb {
+  background-color: $accent-color;
+  z-index: 10;
+}
+
+
+.cover-image {
+  border-radius: 5px;
+  max-height: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.blank-cover {
+  position: relative;
+}
+
+.blank-cover-title {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: calc(50vh * .30);
+  width: 100%;
+  color: #ffd232;
+}
+
+.amazon-link {
+  margin-right: -25px;
+}
+
+.cover-title, .cover-author {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  font-family: 'IM Fell English', 'Papyrus', serif;
+  font-style: italic;
+}
+
+.cover-title {
+  font-size: 3vh;
+
+}
+
+.cover-author {
+  padding-top: 2vh;
+  font-size: 2vh;
+}
+
+.book-info {
+  padding: 20px;
+}
+
+.book-info .card-action {
+  padding-top: 5px;
+  margin-bottom: -20px;
+}
+
+.thumb {
+  display: none;
+}
+
+.slider-key {
+  margin-top: -10px;
+}
+
+input[type=range] {
+  z-index: 5;
+  border: 0px;
+}
+
+.range-field {
+  height: 34px;
+  margin-top: 10px;
+}
+
+.slider-value-key, .tick {
+  position: absolute !important;
+  z-index: 1;
+}
+
+@media (min-width: 600px) {
+  .book-entry {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .book-entry {
+    margin-bottom: 40px;
+  }
+  .blank-cover-title {
+    padding: 0px 35%;
+  }
+}
+
