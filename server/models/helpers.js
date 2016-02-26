@@ -73,6 +73,7 @@ var addBook = function (author, book, reaction, user, success, fail) {
 //this function returns books in descending order of average reaction
 var getBooks = function (list, limit, success, fail) {
   db.knex.select('books.*', 'authors.name')
+  .where('books_users.reaction', '>', 0)
   .avg('books_users.reaction as avgReaction')
   .from('books')
   .limit(limit)
