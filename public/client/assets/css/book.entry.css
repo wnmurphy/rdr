@@ -1,4 +1,4 @@
-
+/*
 .cover-image {
   border-radius: 5px;
   max-height: 50vh;
@@ -74,23 +74,6 @@ input[type=range] {
   position: absolute !important;
   z-index: 1;
 }
-.tick {
-  top: 12px;
-  border: 1.5px solid #6e3f87;
-  height: 5px;
-  width: 0px;
-}
-
-.slider-value-key {
-  top: -10px;
-  font-size: .8em;
-}
-
-
-input[type=range]::-webkit-slider-thumb {
-  background-color: #6e3f87;
-  z-index: 10;
-}
 
 @media (min-width: 600px) {
   .book-entry {
@@ -107,3 +90,4 @@ input[type=range]::-webkit-slider-thumb {
     padding: 0px 35%;
   }
 }
+*/
