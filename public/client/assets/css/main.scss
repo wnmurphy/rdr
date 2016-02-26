@@ -39,6 +39,28 @@ body {
   }
 }
 
+.amz-btn {
+
+  width: 116px;
+  height: 56px;
+  background-image: url("/assets/img/amz_logo.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+
+}
+
+.book-info .card-content {
+  padding-bottom: 55px;
+}
+
 
 /** TRENDS PAGE **/
 .book-entry {
@@ -161,10 +183,6 @@ form.book {
   border-color: white;
 }
 
-.amz-btn {
-  border: 1px solid white;
-  border-radius: 5px;
-}
 
 .collection.amazon-results {
   margin-top: 10px;
