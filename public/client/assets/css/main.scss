@@ -1,21 +1,16 @@
 
 /** COLORS **/
 $primary-color: #226666;
-/*rgba( 57, 43, 58,1);*/
 $lightest-color: #669999;
-/*rgba(119, 99,120,1);*/
 $lighter-color: #407F7F;
-/*rgba( 90, 71, 91,1);*/
 $darker-color: #0D4D4D;
-/*rgba( 41, 24, 42,1);*/
 $darkest-color: #003333;
 
 $accent-color: #2E4272;
-
 $accent-light: #4F628E;
-
+$accent-lightest: #8797bd;
 $accent-dark: #162955;
-/*rgba( 37, 14, 38,1);*/
+$accent-darkest: #122042;
 
 
 *, *:after, *:before {
@@ -32,6 +27,13 @@ body {
   background: linear-gradient(to right, $lighter-color, $primary-color);
 }
 
+i {
+  color: $accent-light;
+}
+
+.collapsible-header:hover i{
+  color: $accent-lightest;
+}
 .std-btn {
 
   background-color: $lighter-color;
@@ -131,7 +133,7 @@ nav {
 }
 
 .input-field input[type=text] {
-  border-bottom: 1px solid $lightest-color;
+  border-bottom: 1px solid $lighter-color;
   box-shadow: 0 1px 0 0 $lightest-color;
 }
 
@@ -157,16 +159,20 @@ form.book {
     color: $darker-color;
   }
   padding: 15px;
-  background-color: $lighter-color;
+  background-color: $lightest-color;
 }
 
 .book-collection {
   max-height: 75vh;
   overflow: auto;
   background-color: $lightest-color;
-  border-radius: 5px;
+  border-radius: 0px 0px 5px 5px;
+  margin-top: 0px;
 }
 
+.new-book {
+  margin-bottom: 0px;
+}
 .tabs .tab a {
   color: $darker-color;
   outline-color: $darker-color;
@@ -193,7 +199,7 @@ form.book {
 
 .greet {
   font-size: 2em;
-  color: $darkest-color;
+  color: $accent-darkest;
   font-weight: 100;
 }
 
@@ -328,4 +334,3 @@ input[type=range] {
     padding: 0px 35%;
   }
 }
-
