@@ -81,6 +81,8 @@ var getBooks = function (list, limit, success, fail) {
   .innerJoin('books_users', 'books.id', 'books_users.book_id')
   .groupBy('books.id')
   .innerJoin('authors', 'books.author_id', 'authors.id')
+  // TODO: left join
+  // .leftJoin()
     .then(function (books) {
       books.forEach(function (book) {
         var authorName = book.name;
@@ -119,6 +121,7 @@ var getProfile = function (profile, success, fail) {
     .then(function (user) {
       if (user) {
         db.knex.select('books.*', 'authors.name')
+        // TODO: add a correct community avg here
           .avg('books_users.reaction as avgReaction')
           .from('books')
           .orderBy('id', 'asc')
