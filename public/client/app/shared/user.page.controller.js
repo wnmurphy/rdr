@@ -199,6 +199,7 @@ angular.module('booklist.user', [])
         book.amz_rul = $scope.amz_url;
         $scope.clearBookInfo();
         $scope.resetProfile();
+        Materialize.toast('Book added!', 1750);
       }
     })
     .catch(function(error){
