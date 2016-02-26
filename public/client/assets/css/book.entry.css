@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  top: calc(50vh * .35);
+  top: calc(50vh * .30);
   width: 100%;
   color: #ffd232;
 }
@@ -98,7 +98,6 @@ input[type=range]::-webkit-slider-thumb {
     align-items: center;
   }
 }
-
 
 @media (max-width: 600px) {
   .book-entry {
