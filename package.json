@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "nodemon server/server.js",
-    "postinstall": "grunt build"
+    "start": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
