@@ -97,6 +97,7 @@ angular.module('booklist.user', [])
         } else {
           $scope.amazonResults = [];
         }
+        $('.amazon-results').scrollTop(0);
         $scope.submitting = false;
 
       })
@@ -169,6 +170,9 @@ angular.module('booklist.user', [])
 
     $('label[for="author"').addClass('active');
     $('label[for="title"').addClass('active');
+    $('body').animate({
+      scrollTop: $('.greet').offset().top
+    }).duration(1750);
   };
 
   $scope.addBook = function() {

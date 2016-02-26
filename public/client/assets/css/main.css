@@ -164,8 +164,17 @@ form.book {
 .spinner-layer {
   border-color: white; }
 
-.collection.amazon-results {
+.amazon-results {
   margin-top: 10px; }
+
+.amazon-result {
+  height: 17vh; }
+  .amazon-result:hover {
+    background-color: #E5E5EA; }
+
+.result-thumb {
+  object-fit: contain;
+  max-height: 100%; }
 
 .preloader-wrapper.ng-hide {
   /* this is just another form of hiding an element */

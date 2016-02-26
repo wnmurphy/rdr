@@ -12,6 +12,8 @@ $accent-lightest: #8797bd;
 $accent-dark: #162955;
 $accent-darkest: #122042;
 
+$gray-color: #E5E5EA;
+
 
 *, *:after, *:before {
   font-family: 'Railway', sans-serif;
@@ -264,8 +266,22 @@ form.book {
 }
 
 
-.collection.amazon-results {
+.amazon-results {
   margin-top: 10px;
+}
+
+.amazon-result {
+
+  height: 17vh;
+
+  &:hover {
+    background-color: $gray-color;
+  }
+}
+
+.result-thumb {
+  object-fit: contain;
+  max-height: 100%;
 }
 
 .preloader-wrapper.ng-hide {
@@ -278,6 +294,8 @@ form.book {
 .collection .collection-item a {
   color: $lighter-color;
 }
+
+
 
 /* SLIDER */
 .tick {
