@@ -10,35 +10,38 @@ h1, h2, h3, h4, h5, h6 {
 body {
   background: linear-gradient(to right, #407F7F, #226666); }
 
-i {
-  color: #4F628E; }
+.collapsible-header {
+  color: #000; }
+  .collapsible-header i {
+    color: #4F628E; }
 
-.collapsible-header:hover i {
-  color: #8797bd; }
+.collapsible-header:hover {
+  color: #787878; }
+  .collapsible-header:hover i {
+    color: #8797bd; }
 
 .std-btn {
   background-color: #407F7F; }
   .std-btn:hover {
-    background-color: #669999; }
+    background-color: #4F628E; }
   .std-btn:active, .reactions .btn.selected {
     background-color: #2E4272; }
   .std-btn[disabled=disabled] {
     background-color: #dfdfdf;
     color: #9f9f9f; }
 
-.amz-btn {
+.amz-btn img {
   width: 116px;
-  height: 56px;
-  background-image: url("/assets/img/amz_logo.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat; }
-  .amz-btn:hover {
-    opacity: 0.7; }
-  .amz-btn:active {
-    opacity: 0.4; }
+  height: 56px; }
+
+.amz-btn:hover {
+  opacity: 0.7; }
+
+.amz-btn:active {
+  opacity: 0.4; }
 
 .book-info .card-content {
-  padding-bottom: 55px; }
+  padding-bottom: 0px; }
 
 /** TRENDS PAGE **/
 .book-entry {
@@ -105,12 +108,14 @@ form.book {
 .tabs .tab a {
   color: #0D4D4D;
   outline-color: #0D4D4D; }
+  .tabs .tab a.active {
+    color: #2E4272; }
   .tabs .tab a:hover {
-    color: #669999;
-    outline-color: #669999; }
+    color: #4F628E;
+    outline-color: #4F628E; }
 
 .tabs .indicator {
-  background-color: #003333;
+  background-color: #2E4272;
   padding: 1px;
   border: 1px solid white; }
 
@@ -154,6 +159,8 @@ form.book {
 input[type=range]::-webkit-slider-thumb {
   background-color: #2E4272;
   z-index: 10; }
+  input[type=range]::-webkit-slider-thumb:hover, input[type=range]::-webkit-slider-thumb:active {
+    background-color: #4F628E; }
 
 .cover-image {
   border-radius: 5px;

@@ -28,8 +28,8 @@
         <div>Author: {{ book.author.name }}</div>
         <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
         <div>Community opinion: {{ reactions[(Math.round(book.avgReaction))] }} ({{ book.avgReaction }}/5)</div>
-        <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn left" ng-if="book.reaction === undefined">
-          <!--<img src="https://images-na.ssl-images-amazon.com/images/G/01/associates/remote-buy-box/buy5._V192207739_.gif" />-->
+        <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn" ng-if="book.reaction === undefined">
+          <img src="/assets/img/amz_logo.png" />
         </a>
       </div>
 
