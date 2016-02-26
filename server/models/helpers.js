@@ -120,7 +120,7 @@ var getProfile = function (profile, success, fail) {
         db.knex.select('books.*', 'authors.name')
           .avg('books_users.reaction as avgReaction')
           .from('books')
-          .orderBy('avgReaction', 'asc')
+          .orderBy('id', 'asc')
           .innerJoin('books_users', 'books.id', 'books_users.book_id')
           .where('books_users.user_id', user.get('id'))
           .select('books_users.reaction as reaction')

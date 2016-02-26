@@ -64,10 +64,14 @@ angular.module('booklist.user', [])
   };
 
   $scope.initialize = function () {
+    $scope.resetProfile();
+  };
+
+  $scope.resetProfile = function () {
     Books.getProfile()
     .then(function (resp) {
       if (resp.books) {
-        $scope.books = $scope.books.concat(resp.books);
+        $scope.books = resp.books;
         $scope.books.forEach(function (book) {
           book.reactionSlider = (book.reaction - 1) * 25;
         });
@@ -76,7 +80,7 @@ angular.module('booklist.user', [])
     .catch(function (error) {
       console.error(error);
     });
-  };
+  }
 
   $scope.checkAmazon = function () {
     $scope.bookTitle = $scope.bookTitle || '';
@@ -193,8 +197,9 @@ angular.module('booklist.user', [])
         book.small_image = $scope.small_image;
         book.thumbnail_image = $scope.thumbnail_image;
         book.amz_rul = $scope.amz_url;
-        $scope.books.push(book);
         $scope.clearBookInfo();
+        $scope.resetProfile();
+        Materialize.toast('Book added!', 1750);
       }
     })
     .catch(function(error){
