@@ -4,7 +4,7 @@
   <div class="col s12 m5">
     <img class="cover-image" ng-if="book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image" ng-src="{{book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image}}">
     <div ng-if="!book.high_res_image && !book.large_image && !book.medium_image && !book.small_image && !book.thumbnail_image" class='blank-cover'>
-      <img class="cover-image" src="http://www.sipublisher.com/wp-content/uploads/2014/04/6a00d8341c5e0053ef0192aa7c0a50970d.jpg">
+      <img class="cover-image" ng-src="{{ blankCovers[Math.round(Math.random())] }}">
       <script>
         $('img.cover-image').on('load', function () {
           $('.cover-title').css('width', ($('img.cover-image').width() * 0.5));

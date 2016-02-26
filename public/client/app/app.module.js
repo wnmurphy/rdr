@@ -81,4 +81,6 @@ angular.module('booklist.services', [])
 
     $rootScope.Math = window.Math;
 
+    $rootScope.blankCovers = ['/assets/img/black_cover.png', '/assets/img/red_cover.jpg'];
+
   }]);
