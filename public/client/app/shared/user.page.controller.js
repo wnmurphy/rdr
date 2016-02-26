@@ -25,7 +25,7 @@ angular.module('booklist.user', [])
   $scope.hasRead = false;
 
   $scope.addToReadingList = function () {
-    $scope.hasRead = false
+    $scope.hasRead = false;
     $scope.reaction = 0;
   }
 
