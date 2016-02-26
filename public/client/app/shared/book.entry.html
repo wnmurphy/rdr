@@ -28,10 +28,12 @@
         <div>Author: {{ book.author.name }}</div>
         <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
         <div>Community opinion: {{ reactions[(Math.round(book.avgReaction))] }} ({{ book.avgReaction }}/5)</div>
-        <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn left" ng-if="book.reaction === undefined">
-          <!--<img src="https://images-na.ssl-images-amazon.com/images/G/01/associates/remote-buy-box/buy5._V192207739_.gif" />-->
+        <a class="btn read-btn" ng-hide="!signedIn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name)" ng-if="book.reaction === undefined">Add </a>
+        <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn" ng-if="!book.reaction">
+          <img src="/assets/img/amz_logo.png" />
         </a>
       </div>
+
 
         <div class="reactions card-action center-align" ng-if="book.reaction">
           <!-- uses a different step as opposed to min/max due to when angular sets value -->
