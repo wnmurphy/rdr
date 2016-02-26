@@ -173,7 +173,7 @@ form.book {
   float: right;
   opacity: 0; }
 
-.collection a.collection-item {
+.collection .collection-item a {
   color: #407F7F; }
 
 /* SLIDER */
