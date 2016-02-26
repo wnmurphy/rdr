@@ -81,8 +81,6 @@ var getBooks = function (list, limit, success, fail) {
   .innerJoin('books_users', 'books.id', 'books_users.book_id')
   .groupBy('books.id')
   .innerJoin('authors', 'books.author_id', 'authors.id')
-  // TODO: left join
-  // .leftJoin()
     .then(function (books) {
       books.forEach(function (book) {
         var authorName = book.name;
@@ -92,6 +90,32 @@ var getBooks = function (list, limit, success, fail) {
       })
       success(books);
     })
+};
+
+var getBooksSignedIn = function (list, limit, user, success, fail) {
+  findOrCreate(models.User, user)
+    .then(function (user) {
+      db.knex.select('books.*', 'authors.name')
+      .where('books_users.reaction', '>', 0)
+      .avg('books_users.reaction as avgReaction')
+      .from('books')
+      .limit(limit)
+      .orderBy('avgReaction', 'desc')
+      .innerJoin('books_users', 'books.id', 'books_users.book_id')
+      .select('books_users.reaction as reaction')
+      .where('books_users.user_id', user.get('id'))
+      .groupBy('books.id')
+      .innerJoin('authors', 'books.author_id', 'authors.id')
+      .then(function (books) {
+        books.forEach(function (book) {
+          var authorName = book.name;
+          delete book.name;
+          book.author = {};
+          book.author.name = authorName;
+        })
+        success(books);
+      })
+    });
 };
 
 var saveProfile = function (profile, success, fail) {
@@ -150,6 +174,7 @@ module.exports = {
   findOrCreate: findOrCreate,
   addBook: addBook,
   getBooks: getBooks,
+  getBooksSignedIn: getBooksSignedIn,
   saveProfile: saveProfile,
   getProfile: getProfile
 
