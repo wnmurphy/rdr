@@ -65,6 +65,14 @@ angular.module('booklist.user', [])
 
   $scope.initialize = function () {
     $scope.resetProfile();
+    $('.add-book').on('click', function (e) {
+      var $target = $(e.target);
+      if (!$target.hasClass('active')) {
+        setTimeout(function () {
+          $('#title').focus();
+        }, 250);
+      }
+    });
   };
 
   $scope.resetProfile = function () {
