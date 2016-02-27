@@ -177,11 +177,12 @@ angular.module('booklist.user', [])
 
     $scope.amazonResults = [];
 
-    $('label[for="author"').addClass('active');
-    $('label[for="title"').addClass('active');
+    $('label[for="author"]').addClass('active');
+    $('label[for="title"]').addClass('active');
     $('body').animate({
-      scrollTop: $('.greet').offset().top
-    }).duration(1750);
+      scrollTop: $('.greet').offset().top,
+      duration: 1750
+    });
   };
 
   $scope.addBook = function() {
@@ -241,6 +242,7 @@ angular.module('booklist.user', [])
     $scope.small_image = '';
     $scope.thumbnail_image = '';
   };
+
 
   $scope.filterReactions = function (element) {
     return element.reaction > 0;
