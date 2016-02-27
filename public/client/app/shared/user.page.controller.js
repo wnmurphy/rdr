@@ -180,11 +180,12 @@ angular.module('booklist.user', [])
 
     $scope.amazonResults = [];
 
-    $('label[for="author"').addClass('active');
-    $('label[for="title"').addClass('active');
+    $('label[for="author"]').addClass('active');
+    $('label[for="title"]').addClass('active');
     $('body').animate({
-      scrollTop: $('.greet').offset().top
-    }).duration(1750);
+      scrollTop: $('.greet').offset().top,
+      duration: 1750
+    });
   };
 
   $scope.addBook = function() {
@@ -228,18 +229,24 @@ angular.module('booklist.user', [])
   $scope.clearBookInfo = function () {
     $scope.bookTitle = '';
     $scope.authorName = '';
+    $scope.reaction = undefined;
+    $scope.clearAmazonInfo();
+    $('.reactions').find('.selected').removeClass('selected');
+  };
+
+  $scope.clearAmazonInfo = function () {
+    console.log('clearing');
     $scope.publicationYear = '';
     $scope.amz_url = '';
     $scope.publisher = '';
-    $scope.reaction = 0;
     $scope.high_res_image = '';
     $scope.ISBN = '';
     $scope.large_image = '';
     $scope.medium_image = '';
     $scope.small_image = '';
     $scope.thumbnail_image = '';
-    $('.reactions').find('.selected').removeClass('selected');
   };
+
 
   $scope.filterReactions = function (element) {
     return element.reaction > 0;
