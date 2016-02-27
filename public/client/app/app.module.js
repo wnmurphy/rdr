@@ -81,7 +81,7 @@ angular.module('booklist.services', [])
 
     $rootScope.Math = window.Math;
 
-    $rootScope.blankCovers = ['/assets/img/black_cover.png', '/assets/img/red_cover.jpg'];
+    $rootScope.blankCovers = ['/assets/img/black_cover_small.jpg', '/assets/img/red_cover_small.jpg'];
 
   }])
   .directive('amazonThumbnail', function () {
