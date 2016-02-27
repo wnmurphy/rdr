@@ -9,9 +9,8 @@ angular.module('booklist.feed', [])
     Books.getBooks()
     //TODO - check to make sure the resp format is correct after you connect to the server
     .then(function(resp){
-      console.log(resp);
       $scope.data.books = resp;
-      books.forEach(function (book) {
+      $scope.data.books.forEach(function (book) {
         if (book.reaction) {
           book.reactionSlider = (book.reaction - 1) * 25;
         }
