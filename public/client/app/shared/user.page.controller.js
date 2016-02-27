@@ -226,15 +226,16 @@ angular.module('booklist.user', [])
   $scope.clearBookInfo = function () {
     $scope.bookTitle = '';
     $scope.authorName = '';
+    $scope.reaction = undefined;
     $scope.clearAmazonInfo();
     $('.reactions').find('.selected').removeClass('selected');
   };
 
   $scope.clearAmazonInfo = function () {
+    console.log('clearing');
     $scope.publicationYear = '';
     $scope.amz_url = '';
     $scope.publisher = '';
-    $scope.reaction = 0;
     $scope.high_res_image = '';
     $scope.ISBN = '';
     $scope.large_image = '';
