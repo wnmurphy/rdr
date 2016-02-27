@@ -103,9 +103,6 @@ angular.module('booklist.services', [])
       restrict: 'A',
       link: function ($scope, element, attrs) {
         var imageSet;
-        if (!$scope.result.ImageSets) {
-          return;
-        }
         $scope.result.ImageSets[0].ImageSet.forEach(function (checkSet, index) {
           if (checkSet.$ === 'primary' || !imageSet && index === $scope.result.ImageSets[0].ImageSet.length - 1) {
             imageSet = checkSet;
