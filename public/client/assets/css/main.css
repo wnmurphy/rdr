@@ -10,6 +10,9 @@ h1, h2, h3, h4, h5, h6 {
 body {
   background: linear-gradient(to right, #407F7F, #226666); }
 
+footer {
+  background: linear-gradient(to right, #2E4272, #162955); }
+
 .collapsible-header {
   color: #000; }
   .collapsible-header i {
@@ -305,6 +308,9 @@ input[type=range] {
 .slider-value-key, .tick {
   position: absolute !important;
   z-index: 1; }
+
+.copyright {
+  background: linear-gradient(to right, #2E4272, #162955); }
 
 @media (min-width: 600px) {
   .book-entry {

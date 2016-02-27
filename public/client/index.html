@@ -32,7 +32,7 @@
 
 </head>
 <body ng-app="booklist">
-  <div class="navbar-fixed">
+  <div class="navbar-fixed" name="top">
     <nav>
       <div class="nav-wrapper">
         <div class="container">
@@ -54,5 +54,32 @@
     </div>
 
   </div>
+
+  <footer class="page-footer white-text">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5>Bookn</h5>
+          <p>A book list app for book lovers. <br/>
+          Designed with care for those who desire simplicty. For the true readers. For those who want book lists, not a confusing, bloated app with a million features. For you.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5>Links</h5>
+          <ul>
+            <li><a class="white-text" href="#/about">About</a></li>
+            <li ng-show="signedIn"><a class="white-text" href="#/profile">My Profile</a></li>
+            <li><a class="white-text" href="/#" ng-controller="AuthController" ng-hide="signedIn" ng-click="login()">Login</a></li>
+            <li><a class="white-text" href="/#" ng-controller="AuthController" ng-hide="!signedIn" ng-click="logout()">Logout</a></li>
+            <li><a class="white-text" href="#/privacy">Privacy Url</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright copyright">
+      <div class="container">
+      © 2016 Team T-Rex
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
