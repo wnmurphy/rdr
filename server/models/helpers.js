@@ -102,20 +102,55 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
       .limit(limit)
       .orderBy('avgReaction', 'desc')
       .innerJoin('books_users', 'books.id', 'books_users.book_id')
-      // .whereNot('books_users.user_id', user.get('id'))
+      .whereNot('books_users.user_id', user.get('id'))
       .groupBy('books.id')
       .innerJoin('authors', 'books.author_id', 'authors.id')
-      // .leftJoin('', 'books_users.user_id', user.get('id'))
       .then(function (books) {
         // TODO: return users books
-        books.forEach(function (book) {
-          var authorName = book.name;
-          delete book.name;
-          book.author = {};
-          book.author.name = authorName;
-        })
-        success(books);
-      })
+        // var idsArray = books.map(function (book) {
+        //   return book.id;
+        // })
+        db.knex.select('books.*', 'authors.name')
+        // .where('books_users.reaction', '>', 0)
+        .avg('books_users.reaction as avgReaction')
+        .from('books')
+        // .whereNotIn()
+        .limit(limit)
+        .orderBy('avgReaction', 'desc')
+        .innerJoin('books_users', 'books.id', 'books_users.book_id')
+        .where('books_users.user_id', user.get('id'))
+        .select('books_users.reaction as reaction')
+        .groupBy('books.id')
+        .innerJoin('authors', 'books.author_id', 'authors.id')
+          .then(function (userBooks) {
+            // books = books.map(function (book) {
+            //
+            // })
+            var uniqueBooks = [];
+            books.forEach(function (book) {
+              var unique = true;
+              userBooks.forEach(function (userBook) {
+                if (book.id === userBook.id) {
+                  console.log('***********', book);
+                  console.log('(##############)', userBook);
+                  unique = false;
+                }
+              });
+              if (unique) {
+                uniqueBooks.push(book);
+              }
+            });
+            books = uniqueBooks.concat(userBooks);
+            books.forEach(function (book) {
+              var authorName = book.name;
+              delete book.name;
+              book.author = {};
+              book.author.name = authorName;
+            });
+          // console.log(books);
+          success(books);
+        });
+      });
     });
 };
 
