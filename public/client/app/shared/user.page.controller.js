@@ -71,7 +71,8 @@ angular.module('booklist.user', [])
     $scope.resetProfile();
     $('.add-book').on('click', function (e) {
       var $target = $(e.target);
-      if (!$target.hasClass('active')) {
+      if (!$target.hasClass('active') && 
+        !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         setTimeout(function () {
           $('#title').focus();
         }, 250);
