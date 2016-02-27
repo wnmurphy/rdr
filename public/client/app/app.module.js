@@ -90,7 +90,7 @@ angular.module('booklist.services', [])
     $rootScope.hash = function (string, codes) {
       var code = string.charCodeAt(Math.floor(string.length/2));
       code = code - Math.floor(code/10) * 10;
-      code = code.toString(3);
+      code = code.toString(codes);
       code = parseInt(code.charAt(code.length - 1));
       return code;
     }
