@@ -11,6 +11,11 @@ angular.module('booklist.feed', [])
     .then(function(resp){
       console.log(resp);
       $scope.data.books = resp;
+      books.forEach(function (book) {
+        if (book.reaction) {
+          book.reactionSlider = (book.reaction - 1) * 25;
+        }
+      });
     })
     .catch(function(error){
       console.log(error);
