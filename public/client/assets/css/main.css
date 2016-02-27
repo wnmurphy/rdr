@@ -37,9 +37,12 @@ body {
   padding-top: 5px; }
 
 .amz-btn {
-  display: inline-block;
+  display: inline;
   float: right;
-  margin-right: 10px; }
+  margin-right: 10px;
+  height: calc(9vw * (56/116));
+  max-height: 52.862px;
+  min-height: calc(56px * 2/3); }
   .amz-btn img {
     width: 9vw;
     max-width: 109.500px;
