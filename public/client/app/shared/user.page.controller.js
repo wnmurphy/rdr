@@ -1,9 +1,12 @@
 angular.module('booklist.user', [])
 
-.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', '$location', function($scope, Books, $rootScope, $timeout, $location){
+.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', '$location', 'auth', function($scope, Books, $rootScope, $timeout, $location, auth){
   $scope.user = {};
   $scope.books = [];
   $scope.path = $location.path();
+
+  $scope.auth = auth;
+  $scope.firstName = $scope.auth.profile.name.split(' ')[0];
 
   $scope.submitting = false;
 
