@@ -4,8 +4,8 @@ var db = require(path.resolve('db/db.js'));
 exports.up = function(knex, Promise) {
 
   return knex.schema.table('books', function (books) {
-    books.string('amz_url');
-    books.dropIndex('ISBN', 'books_isbn_unique');
+    // books.string('amz_url');
+    // books.dropIndex('ISBN', 'books_isbn_unique');
     books.index('ISBN');
   });
 

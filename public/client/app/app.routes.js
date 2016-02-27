@@ -19,6 +19,9 @@ angular.module('booklist', [
       controller: 'UserController',
       requiresLogin: true
     })
+    .when('/about', {
+      templateUrl: '/app/components/about.html'
+    })
     .otherwise({
       templateUrl: '/app/shared/book.feed.html',
       controller: 'FeedController'
