@@ -34,6 +34,7 @@ angular.module('booklist.feed', [])
       thumbnail_image: thumbNail,
       amz_url: amzURL
     }, authorName, 0);
+    Materialize.toast('Added to your reading list!', 1750);
   };
 
   //TODO - see if there is a better way to preload the books
