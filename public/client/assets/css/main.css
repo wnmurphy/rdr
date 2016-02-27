@@ -30,9 +30,16 @@ body {
     background-color: #dfdfdf;
     color: #9f9f9f; }
 
+.action-buttons {
+  height: calc(9vw * (56/116));
+  max-height: 52.862px;
+  min-height: calc(56px * 2/3);
+  padding-top: 5px; }
+
 .amz-btn {
-  position: relative;
-  top: 10px; }
+  display: inline-block;
+  float: right;
+  margin-right: 10px; }
   .amz-btn img {
     width: 9vw;
     max-width: 109.500px;
@@ -46,22 +53,22 @@ body {
     opacity: 0.4; }
 
 .read-btn {
-  display: inline-block;
-  position: relative;
-  top: -13px;
+  display: inline-flex;
+  padding-top: 1px;
+  margin-left: 10px;
+  cursor: pointer;
   width: 9vw;
   max-width: 109.500px;
   min-width: calc(116px * 2/3);
-  height: calc(9vw * (56/116));
-  max-height: 52.862px;
-  min-height: calc(56px * 2/3);
+  height: calc(9vw * (55/116));
+  max-height: 52px;
+  min-height: calc(55px * 2/3);
   background-color: #e6e7e8;
-  border-radius: 1em;
-  box-shadow: 0px !important;
+  border-radius: .4em;
   color: black;
-  font-size: 16px;
-  padding-top: calc(56px/2 - 1em);
-  text-align: center; }
+  font-size: 1em;
+  align-items: center;
+  justify-content: center; }
   .read-btn:hover {
     background-color: #e6e7e8;
     opacity: 0.7; }
@@ -115,6 +122,9 @@ nav {
 .feed {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
 
+.avg-rating {
+  font-size: 0.8em; }
+
 .reactions .card-title {
   margin-left: 5px; }
 
@@ -137,10 +147,13 @@ form.book {
 .new-book {
   margin-bottom: 0px; }
 
+.tabs {
+  border-bottom: 1px solid #669999; }
+
 .tabs .tab a {
   color: #0D4D4D;
   outline-color: #0D4D4D; }
-  .tabs .tab a.active {
+  .tabs .tab a:active {
     color: #2E4272; }
   .tabs .tab a:hover {
     color: #4F628E;
@@ -148,8 +161,7 @@ form.book {
 
 .tabs .indicator {
   background-color: #2E4272;
-  padding: 1px;
-  border: 1px solid white; }
+  padding: 1px; }
 
 .collapsible {
   border-color: #226666;

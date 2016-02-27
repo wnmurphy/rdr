@@ -63,11 +63,18 @@ body {
   }
 }
 
+.action-buttons {
+  height: calc(9vw * (56/116));
+  max-height: 52.862px;
+  min-height: calc(56px * 2/3);;
+  padding-top: 5px;
+}
+
 .amz-btn {
 
-  position: relative;
-
-  top: 10px;
+  display: inline-block;
+  float: right;
+  margin-right: 10px;
 
   img {
     width: 9vw;
@@ -90,24 +97,26 @@ body {
 
 .read-btn {
 
-  display: inline-block;
-  position: relative;
-  top: -13px;
+  display: inline-flex;
+  padding-top: 1px;
+  margin-left: 10px;
+
+  cursor: pointer;
+
 
   width: 9vw;
   max-width: 109.500px;
   min-width: calc(116px * 2/3);
-  height: calc(9vw * (56/116));
-  max-height: 52.862px;
-  min-height: calc(56px * 2/3);;
+  height: calc(9vw * (55/116));
+  max-height: 52px;
+  min-height: calc(55px * 2/3);;
 
   background-color: rgb(230,231,232);
-  border-radius: 1em;
-  box-shadow: 0px !important;
+  border-radius: .4em;
   color: black;
-  font-size: 16px;
-  padding-top: calc(56px/2 - 1em);
-  text-align: center;
+  font-size: 1em;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background-color: rgb(230,231,232)	;
     opacity: 0.7;
@@ -191,6 +200,10 @@ nav {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
+.avg-rating {
+  font-size: 0.8em;
+}
+
 .reactions {
 
   .card-title {
@@ -227,11 +240,15 @@ form.book {
   margin-bottom: 0px;
 }
 
+.tabs {
+  border-bottom: 1px solid $lightest-color;
+}
+
 .tabs .tab a {
   color: $darker-color;
   outline-color: $darker-color;
 
-  &.active {
+  &:active {
     color: $accent-color;
   }
 
@@ -245,7 +262,6 @@ form.book {
 .tabs .indicator {
   background-color: $accent-color;
   padding: 1px;
-  border: 1px solid white;
 }
 
 .collapsible {
