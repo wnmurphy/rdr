@@ -312,6 +312,9 @@ input[type=range] {
 .copyright {
   background: linear-gradient(to right, #2E4272, #162955); }
 
+.hr-ribbon {
+  width: 10%; }
+
 @media (min-width: 600px) {
   .book-entry {
     display: flex;
