@@ -22,7 +22,7 @@ angular.module('booklist.feed', [])
     });
   };
 
-  $scope.addToReadList = function (bookTitle, bookISBN, publisher, highResImage, largeImage, mediumImage, smallResImage, thumbNail, amzURL, authorName) {
+  $scope.addToReadList = function (bookTitle, bookISBN, publisher, highResImage, largeImage, mediumImage, smallResImage, thumbNail, amzURL, authorName, book) {
     Books.postBook({
       title: bookTitle,
       ISBN: bookISBN,
@@ -34,6 +34,8 @@ angular.module('booklist.feed', [])
       thumbnail_image: thumbNail,
       amz_url: amzURL
     }, authorName, 0);
+    book.reaction = 0;
+
     Materialize.toast('Added to your reading list!', 1750);
   };
 
