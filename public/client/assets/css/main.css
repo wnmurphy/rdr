@@ -145,7 +145,8 @@ form.book {
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #669999;
-  margin: 0px; }
+  margin: 0px;
+  -webkit-overflow-scrolling: touch; }
 
 .new-book {
   margin-bottom: 0px; }

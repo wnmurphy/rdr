@@ -237,6 +237,7 @@ form.book {
   overflow-x: hidden;
   background-color: $lightest-color;
   margin: 0px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .new-book {
