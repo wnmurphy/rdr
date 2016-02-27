@@ -228,17 +228,21 @@ angular.module('booklist.user', [])
   $scope.clearBookInfo = function () {
     $scope.bookTitle = '';
     $scope.authorName = '';
+    $scope.reaction = undefined;
+    $scope.clearAmazonInfo();
+    $('.reactions').find('.selected').removeClass('selected');
+  };
+
+  $scope.clearAmazonInfo = function () {
     $scope.publicationYear = '';
     $scope.amz_url = '';
     $scope.publisher = '';
-    $scope.reaction = 0;
     $scope.high_res_image = '';
     $scope.ISBN = '';
     $scope.large_image = '';
     $scope.medium_image = '';
     $scope.small_image = '';
     $scope.thumbnail_image = '';
-    $('.reactions').find('.selected').removeClass('selected');
   };
 
   $scope.filterReactions = function (element) {
