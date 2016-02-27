@@ -86,6 +86,15 @@ angular.module('booklist.services', [])
 
     $rootScope.Math = window.Math;
 
+// takes in a string and returns a code that between 0 and codes - 1
+    $rootScope.hash = function (string, codes) {
+      var code = string.charCodeAt(Math.floor(string.length/2));
+      code = code - Math.floor(code/10) * 10;
+      code = code.toString(3);
+      code = parseInt(code.charAt(code.length - 1));
+      return code;
+    }
+
     $rootScope.blankCovers = ['/assets/img/black_cover_small.jpg', '/assets/img/red_cover_small.jpg'];
 
   }])
