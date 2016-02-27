@@ -6,7 +6,8 @@ angular.module('booklist', [
   'auth0',
   'angular-storage',
   'angular-jwt',
-  'ngRoute'
+  'ngRoute',
+  'ngTouch'
 ])
 .config(['$routeProvider', '$httpProvider', 'authProvider', 'jwtInterceptorProvider', function($routeProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
   $routeProvider

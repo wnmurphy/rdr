@@ -48,7 +48,7 @@
               <div class="slider-value-key" style="left: 49.2%">3</div>
               <div class="slider-value-key" style="left: 72.1%">4</div>
               <div class="slider-value-key" style="left: 97.2%">5</div>
-              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)"/>
+              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)" ng-touchend="updateReaction(book)"/>
               <!-- adds ticks as they cannot be displayed with materialze -->
               <div class="tick" style="left: 1.5%"></div>
               <div class="tick" style="left: 26%"></div>
