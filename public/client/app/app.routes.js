@@ -23,6 +23,9 @@ angular.module('booklist', [
     .when('/about', {
       templateUrl: '/app/components/about.html'
     })
+    .when('/privacy', {
+      templateUrl: '/app/components/privacy.html'
+    })
     .otherwise({
       templateUrl: '/app/shared/book.feed.html',
       controller: 'FeedController'
