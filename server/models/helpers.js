@@ -102,11 +102,12 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
       .limit(limit)
       .orderBy('avgReaction', 'desc')
       .innerJoin('books_users', 'books.id', 'books_users.book_id')
-      .select('books_users.reaction as reaction')
-      .where('books_users.user_id', user.get('id'))
+      .whereNot('books_users.user_id', user.get('id'))
       .groupBy('books.id')
       .innerJoin('authors', 'books.author_id', 'authors.id')
+      // .leftJoin('book_users', 'books_users.user_id', user.get('id'))
       .then(function (books) {
+        // TODO: return users books
         books.forEach(function (book) {
           var authorName = book.name;
           delete book.name;
