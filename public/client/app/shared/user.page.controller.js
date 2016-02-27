@@ -225,6 +225,11 @@ angular.module('booklist.user', [])
   $scope.clearBookInfo = function () {
     $scope.bookTitle = '';
     $scope.authorName = '';
+    $scope.clearAmazonInfo();
+    $('.reactions').find('.selected').removeClass('selected');
+  };
+
+  $scope.clearAmazonInfo = function () {
     $scope.publicationYear = '';
     $scope.amz_url = '';
     $scope.publisher = '';
@@ -235,7 +240,6 @@ angular.module('booklist.user', [])
     $scope.medium_image = '';
     $scope.small_image = '';
     $scope.thumbnail_image = '';
-    $('.reactions').find('.selected').removeClass('selected');
   };
 
   $scope.filterReactions = function (element) {
