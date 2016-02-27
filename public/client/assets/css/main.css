@@ -79,6 +79,11 @@ body {
     background-color: #e6e7e8;
     opacity: 0.4; }
 
+.be-first {
+  color: #226666; }
+  .be-first:hover {
+    color: #2E4272; }
+
 .book-info .card-content {
   padding-bottom: 0px; }
 

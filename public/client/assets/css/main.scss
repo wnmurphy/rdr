@@ -132,6 +132,14 @@ body {
   }
 }
 
+.be-first {
+  color: $primary-color;
+
+  &:hover {
+    color: $accent-color;
+  }
+}
+
 .book-info .card-content {
   padding-bottom: 0px;
 }
