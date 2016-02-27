@@ -1,8 +1,9 @@
 angular.module('booklist.user', [])
 
-.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', function($scope, Books, $rootScope, $timeout){
+.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', '$location', function($scope, Books, $rootScope, $timeout, $location){
   $scope.user = {};
   $scope.books = [];
+  $scope.path = $location.path();
 
   $scope.submitting = false;
 
