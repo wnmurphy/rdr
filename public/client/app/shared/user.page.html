@@ -24,11 +24,11 @@
             </div>
               <div class="input-field">
                 <label for="title">Title</label>
-                <input ng-change="searchTimer()" id="title" type="text" ng-model="bookTitle" required>
+                <input ng-change="searchTimer(); clearAmazonInfo()" id="title" type="text" ng-model="bookTitle" required>
               </div>
               <div class="input-field">
                 <label for="author">Author</label>
-                <input ng-change="searchTimer()" id="author" class="input-field" type="text" ng-model="authorName" required>
+                <input ng-change="searchTimer(); clearAmazonInfo()" id="author" class="input-field" type="text" ng-model="authorName" required>
               </div>
             <div class="amazon-results collection z-depth-1">
               <div class="collection-item amazon-result" ng-repeat="result in amazonResults">
