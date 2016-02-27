@@ -31,9 +31,9 @@ angular.module('booklist.user', [])
 
   $scope.setReaction = function ($event, reaction) {
     var $target = $($event.currentTarget);
-    $('.reactions').find('.selected').removeClass('selected');
+    $('.reaction-buttons').find('.selected').removeClass('selected');
     if ($scope.reaction === reaction) {
-      $scope.reaction = 0;
+      $scope.reaction = undefined;
     } else {
       $target.addClass('selected');
       $scope.reaction = reaction;
