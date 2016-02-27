@@ -163,6 +163,13 @@ form.book {
   background-color: #2E4272;
   padding: 1px; }
 
+.tab-divider {
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  left: calc(50%-1.5px);
+  background-color: #669999; }
+
 .collapsible {
   border-color: #226666;
   border-radius: 5px; }
