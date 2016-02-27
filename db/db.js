@@ -81,6 +81,7 @@ var createBooks = function () {
         book.string('small_image');
         book.string('thumbnail_image');
         book.date('pub_year');
+        book.string('amz_url', 255);
       })
       .then( function (table) {
         console.log('created table books');
