@@ -264,6 +264,14 @@ form.book {
   padding: 1px;
 }
 
+.tab-divider {
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  left: calc(50%-1.5px);
+  background-color: $lightest-color;
+}
+
 .collapsible {
   border-color: $primary-color;
   border-radius: 5px;
