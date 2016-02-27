@@ -106,15 +106,9 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
       .groupBy('books.id')
       .innerJoin('authors', 'books.author_id', 'authors.id')
       .then(function (books) {
-        // TODO: return users books
-        // var idsArray = books.map(function (book) {
-        //   return book.id;
-        // })
         db.knex.select('books.*', 'authors.name')
-        // .where('books_users.reaction', '>', 0)
         .avg('books_users.reaction as avgReaction')
         .from('books')
-        // .whereNotIn()
         .limit(limit)
         .orderBy('avgReaction', 'desc')
         .innerJoin('books_users', 'books.id', 'books_users.book_id')
@@ -123,9 +117,6 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
         .groupBy('books.id')
         .innerJoin('authors', 'books.author_id', 'authors.id')
           .then(function (userBooks) {
-            // books = books.map(function (book) {
-            //
-            // })
             var uniqueBooks = [];
             books.forEach(function (book) {
               var unique = true;
@@ -147,7 +138,6 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
               book.author = {};
               book.author.name = authorName;
             });
-          // console.log(books);
           success(books);
         });
       });
