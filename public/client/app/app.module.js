@@ -1,10 +1,15 @@
 angular.module('booklist.services', [])
 
-  .factory('Books', ['$http', function ($http){
+  .factory('Books', ['$http', '$rootScope', function ($http, $rootScope){
+    // TODO: Make sure that this runs after the user signs in
     var getBooks = function(){
+     var apiURL = '/books';
+     if ($rootScope.signedIn) {
+       apiURL = '/books/signedin';
+     }
      return $http({
        method: 'GET',
-       url: '/books'
+       url: apiURL
      })
      .then(function(resp){
        return resp.data;

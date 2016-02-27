@@ -3,8 +3,8 @@ angular.module('booklist', [
   'booklist.feed',
   'booklist.user',
   'booklist.auth',
-  'auth0', 
-  'angular-storage', 
+  'auth0',
+  'angular-storage',
   'angular-jwt',
   'ngRoute'
 ])
