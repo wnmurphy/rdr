@@ -12,6 +12,8 @@ $accent-lightest: #8797bd;
 $accent-dark: #162955;
 $accent-darkest: #122042;
 
+$gray-color: #E5E5EA;
+
 
 *, *:after, *:before {
   font-family: 'Railway', sans-serif;
@@ -228,7 +230,8 @@ form.book {
 
 .book-collection {
   max-height: 75vh;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: $lightest-color;
   margin: 0px;
 }
@@ -280,8 +283,31 @@ form.book {
 }
 
 
-.collection.amazon-results {
+.amazon-results {
   margin-top: 10px;
+}
+
+.col.result-container {
+  padding: 16px;
+}
+
+.collection-item.amazon-result {
+  padding: 0px;
+  height: 120px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+
+  &:hover {
+    background-color: $gray-color;
+  }
+}
+
+.result-thumb {
+  object-fit: contain;
+  height: 120px;
+  margin-right: 0px;
 }
 
 .preloader-wrapper.ng-hide {
@@ -291,9 +317,11 @@ form.book {
   opacity: 0;
 }
 
-.collection a.collection-item {
+.collection .collection-item a {
   color: $lighter-color;
 }
+
+
 
 /* SLIDER */
 .tick {

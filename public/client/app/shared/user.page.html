@@ -3,7 +3,7 @@
     <p class="greet">Hello, {{name || 'you'}}</p>
     <ul class="collapsible new-book" data-collapsible="accordian">
       <li>
-        <div class="collapsible-header">
+        <div class="collapsible-header add-book">
           <i class="material-icons">library_books</i>
           Add Book
         </div>
@@ -35,8 +35,8 @@
               </div>
             </div>
 
-            <div class="amazon-results collection">
-              <div class="collection-item" ng-repeat="result in amazonResults">
+            <div class="amazon-results collection z-depth-1">
+              <div class="collection-item amazon-result" ng-repeat="result in amazonResults">
                 <a class="row" amazon-thumbnail ng-click="selectAmazonResult(result)" href="#/profile" class="result-link">
                   <div class="col s10 result-container">
                   {{result.ItemAttributes[0].Title[0]}}{{result.ItemAttributes[0].Author[0] ? ', by ' + result.ItemAttributes[0].Author[0] : '' }}
