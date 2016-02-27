@@ -231,12 +231,18 @@ nav {
 
 }
 
+.spinner {
+  position: absolute;
+  left: calc(100% - 48px - 15px)
+}
+
 form.book {
   h3 {
     color: $darker-color;
   }
   padding: 15px;
   background-color: $lightest-color;
+  position: relative;
 }
 
 .book-collection {

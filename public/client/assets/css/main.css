@@ -139,9 +139,14 @@ nav {
 .reactions .btn {
   margin: 5px; }
 
+.spinner {
+  position: absolute;
+  left: calc(100% - 48px - 15px); }
+
 form.book {
   padding: 15px;
-  background-color: #669999; }
+  background-color: #669999;
+  position: relative; }
   form.book h3 {
     color: #0D4D4D; }
 

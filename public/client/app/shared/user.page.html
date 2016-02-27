@@ -9,7 +9,7 @@
         </div>
         <div class="collapsible-body">
           <form class="book z-depth-5" name="bookSubmission" ng-submit="addBook()">
-            <div class="preloader-wrapper active right" ng-hide="!submitting">
+            <div class="preloader-wrapper active spinner" ng-hide="!submitting">
               <div class="spinner-layer">
                 <div class="circle-clipper left">
                   <div class="circle"></div>
@@ -22,19 +22,14 @@
                 </div>
               </div>
             </div>
-            <div>
               <div class="input-field">
                 <label for="title">Title</label>
                 <input ng-change="searchTimer()" id="title" type="text" ng-model="bookTitle" required>
               </div>
-            </div>
-            <div>
               <div class="input-field">
                 <label for="author">Author</label>
                 <input ng-change="searchTimer()" id="author" class="input-field" type="text" ng-model="authorName" required>
               </div>
-            </div>
-
             <div class="amazon-results collection z-depth-1">
               <div class="collection-item amazon-result" ng-repeat="result in amazonResults">
                 <a class="row" amazon-thumbnail ng-click="selectAmazonResult(result)" href="#/profile" class="result-link">
