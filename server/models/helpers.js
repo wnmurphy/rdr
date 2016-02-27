@@ -107,10 +107,8 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
       .innerJoin('authors', 'books.author_id', 'authors.id')
       .then(function (books) {
         db.knex.select('books.*', 'authors.name')
-        .avg('books_users.reaction as avgReaction')
         .from('books')
         .limit(limit)
-        .orderBy('avgReaction', 'desc')
         .innerJoin('books_users', 'books.id', 'books_users.book_id')
         .where('books_users.user_id', user.get('id'))
         .select('books_users.reaction as reaction')
@@ -122,9 +120,8 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
               var unique = true;
               userBooks.forEach(function (userBook) {
                 if (book.id === userBook.id) {
-                  console.log('***********', book);
-                  console.log('(##############)', userBook);
                   unique = false;
+                  userBook.avgReaction = book.avgReaction;
                 }
               });
               if (unique) {
@@ -137,6 +134,9 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
               delete book.name;
               book.author = {};
               book.author.name = authorName;
+              if (!book.avgReaction && book.reaction > 0) {
+                book.avgReaction = book.reaction;
+              }
             });
           success(books);
         });
@@ -146,8 +146,6 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
 
 var saveProfile = function (profile, success, fail) {
   console.log(profile);
-  //new models.User({'amz_auth_id': profile})
-    //.fetch()
   findOrCreate(models.User, {amz_auth_id: profile})
     .then(function (user) {
       console.log(JSON.stringify(arguments));
