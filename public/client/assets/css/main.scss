@@ -29,6 +29,10 @@ body {
   background: linear-gradient(to right, $lighter-color, $primary-color);
 }
 
+footer {
+  background: linear-gradient(to right, $accent-color, $accent-dark);
+}
+
 .collapsible-header {
   color: #000;
 
@@ -449,6 +453,10 @@ input[type=range] {
 .slider-value-key, .tick {
   position: absolute !important;
   z-index: 1;
+}
+
+.copyright {
+  background: linear-gradient(to right, $accent-color, $accent-dark);
 }
 
 @media (min-width: 600px) {
