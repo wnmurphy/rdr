@@ -31,6 +31,7 @@ mysql> use booklist;
 
 - Node >= 0.10.41 (tested only on 0.10.41, 0.12.7, and 5.5.0) 
 - MySQL 5.5.x (higher versions known to be incompatible)
+ - If you are running MySQL > 5.5.x, we recommend using `homebrew` to uninstall your current version and install the correct one. Run `brew uninstall mysql`, and then `brew install homebrew/versions/mysql55`. If the `mysql` command no longer works from the command line, you may have to reference your new version via `/usr/local/opt/mysql55/bin/mysql` (and you can create an alias for that path). 
 
 
 ## Development
