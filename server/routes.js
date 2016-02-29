@@ -13,7 +13,7 @@ var jwtCheck = expressjwt({
   audience: process.env.AUTH_ID
 });
 
-// add routes you want to block here
+// Routes to require authorization
 var authRoutes = [
   '/signin',
   '/users/books',
@@ -89,6 +89,7 @@ var routes = [
       });
     }
   },
+  // From amazon-product-api
   {
     path: '/amazon',
     get: function (req, res) {
