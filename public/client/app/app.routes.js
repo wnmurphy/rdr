@@ -62,8 +62,6 @@ angular.module('booklist', [
         $rootScope.signedIn = false;
         $location.path('/');
       }
-    } else {
-      $location.path('/');
     }
   });
 }]);
