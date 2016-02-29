@@ -82,6 +82,11 @@ footer {
     background-color: #e6e7e8;
     opacity: 0.4; }
 
+.search {
+  background-color: white;
+  height: 5em;
+  padding: .5em 20px 5px 20px; }
+
 .be-first {
   color: #226666; }
   .be-first:hover {
