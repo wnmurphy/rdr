@@ -270,7 +270,6 @@ input[type=range]::-webkit-slider-thumb {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  top: calc(50vh * .30);
   width: 100%;
   color: #ffd232;
   -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.63));
