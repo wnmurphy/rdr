@@ -27,7 +27,6 @@ var findOrCreate = function (Model, attributes) {
 };
 
 var addBook = function (author, book, reaction, user, success, fail) {
-  // TODO handle users reactions
 
   findOrCreate(models.Author, author)
     .then(function (author) {
@@ -70,7 +69,8 @@ var addBook = function (author, book, reaction, user, success, fail) {
       fail(error);
     });
 };
-//this function returns books in descending order of average reaction
+
+// Returns books in descending order of average reaction
 var getBooks = function (list, limit, success, fail) {
   db.knex.select('books.*', 'authors.name')
   .where('books_users.reaction', '>', 0)
@@ -87,11 +87,14 @@ var getBooks = function (list, limit, success, fail) {
         delete book.name;
         book.author = {};
         book.author.name = authorName;
-      })
+      });
       success(books);
     })
+    .catch(fail);
 };
 
+// Returns all books that have been read
+// Includes user's reaction if user's reaction exists
 var getBooksSignedIn = function (list, limit, user, success, fail) {
   findOrCreate(models.User, user)
     .then(function (user) {
@@ -121,6 +124,8 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
               userBooks.forEach(function (userBook) {
                 if (book.id === userBook.id) {
                   unique = false;
+                  // Stores avgReaction to userBook becasue
+                  // avgReaction not saved when usersBooks lookup occurs
                   userBook.avgReaction = book.avgReaction;
                 }
               });
@@ -134,6 +139,7 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
               delete book.name;
               book.author = {};
               book.author.name = authorName;
+              // Stores user reaction as avgReaction if there is no avgReaction
               if (!book.avgReaction && book.reaction > 0) {
                 book.avgReaction = book.reaction;
               }
@@ -145,10 +151,8 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
 };
 
 var saveProfile = function (profile, success, fail) {
-  console.log(profile);
   findOrCreate(models.User, {amz_auth_id: profile})
     .then(function (user) {
-      console.log(JSON.stringify(arguments));
       success(user);
     })
     .catch( function (error) {
@@ -156,6 +160,7 @@ var saveProfile = function (profile, success, fail) {
     });
 };
 
+// Returns profile information and all books belonging to that profile
 var getProfile = function (profile, success, fail) {
   var key = 'amz_auth_id';
   var value = profile.amz_auth_id;
@@ -169,7 +174,6 @@ var getProfile = function (profile, success, fail) {
     .then(function (user) {
       if (user) {
         db.knex.select('books.*', 'authors.name')
-        // TODO: add a correct community avg here
           .avg('books_users.reaction as avgReaction')
           .from('books')
           .orderBy('id', 'asc')
@@ -184,9 +188,9 @@ var getProfile = function (profile, success, fail) {
                 delete book.name;
                 book.author = {};
                 book.author.name = authorName;
-              })
+              });
               success({books: books});
-            })
+            });
       } else {
         throw 'no user found';
       }
