@@ -140,9 +140,13 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
               book.author = {};
               book.author.name = authorName;
               // Stores user reaction as avgReaction if there is no avgReaction
-              if (!book.avgReaction && book.reaction > 0) {
+              if (!book.avgReaction) {
                 book.avgReaction = book.reaction;
               }
+            });
+            // Sorts by avgReaction in descending order
+            books.sort(function (a, b) {
+              return b.avgReaction - a.avgReaction;
             });
           success(books);
         });
