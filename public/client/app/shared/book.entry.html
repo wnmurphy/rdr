@@ -6,14 +6,24 @@
     <div ng-if="!book.high_res_image && !book.large_image && !book.medium_image && !book.small_image && !book.thumbnail_image" class='blank-cover'>
       <img class="cover-image" ng-src="{{ blankCovers[hash(book.title, blankCovers.length)] }}">
       <script>
-        $('img.cover-image').on('load', function () {
-          $('.cover-title').css('width', ($('img.cover-image').width() * 0.5));
-          $('.cover-author').css('width', ($('img.cover-image').width() * 0.5));
-        });
-        $(window).resize(function () {
-          $('.cover-title').css('width', ($('img.cover-image').width() * 0.5));
-          $('.cover-author').css('width', ($('img.cover-image').width() * 0.5));
-        });
+        var blankCoverSizing = function () {
+          var coverWidth = $('img.cover-image').width();
+          var coverHeight = $('img.cover-image').height();
+          $('.cover-title').css({
+            'width': coverWidth * 0.7,
+            'font-size': coverWidth * 0.075
+          });
+          $('.blank-cover-title').css({
+            top: coverHeight * 0.27
+          });
+          $('.cover-author').css({
+            'width': coverWidth * 0.7,
+            'font-size': coverWidth * 0.05
+          });
+        }
+
+        $('img.cover-image').on('load', blankCoverSizing);
+        $(window).resize(blankCoverSizing);
       </script>
       <div class="blank-cover-title">
         <div class="cover-title">{{ book.title }}</div>
