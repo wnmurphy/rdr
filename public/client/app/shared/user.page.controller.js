@@ -14,11 +14,11 @@ angular.module('booklist.user', [])
 
   $scope.bookTitle = '';
   $scope.authorName = '';
-  $scope.publicationYear;
+  $scope.publicationYear = undefined;
   $scope.amz_url = '';
   $scope.publisher = '';
   $scope.ISBN = '';
-  $scope.reaction = -1;
+  $scope.reaction = undefined;
   $scope.high_res_image = '';
   $scope.medium_image = '';
   $scope.small_image = '';
@@ -26,12 +26,9 @@ angular.module('booklist.user', [])
 
   $scope.amazonResults = [];
 
-  $scope.hasRead = false;
-
   $scope.addToReadingList = function () {
-    $scope.hasRead = false;
     $scope.reaction = 0;
-  }
+  };
 
   $scope.setReaction = function ($event, reaction) {
     var $target = $($event.currentTarget);
@@ -71,7 +68,7 @@ angular.module('booklist.user', [])
     $scope.resetProfile();
     $('.add-book').on('click', function (e) {
       var $target = $(e.target);
-      if (!$target.hasClass('active') && 
+      if (!$target.hasClass('active') &&
         !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         setTimeout(function () {
           $('#title').focus();
