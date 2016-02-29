@@ -118,8 +118,10 @@ describe('', function() {
           });
         });
         
+        //You must have at least 4 books in your local version of application for this test to pass
         it('Should limit number of books when limit is provided', function (done) {
           helpers.getBooks(null, 4, function(books) {
+            console.log(books);
             expect(books.length).to.equal(4);
             done();
           }, function (error) {
@@ -137,7 +139,7 @@ describe('', function() {
           done();
         });
       });
-      it('Should return 201 and valid objects when a new book is posted', function(done) {
+      it('Should return 401 when trying to post a book while not signed in', function(done) {
 
         var options = {
           'method': 'POST',
@@ -153,10 +155,9 @@ describe('', function() {
           }
         };
         request(options, function (err, res, body) {
-          console.log(res.statusCode, res.body.book);
-          expect(res.statusCode).to.equal(201);
-          expect(res.body.book).to.be.an('object');
-          expect(res.body.author).to.be.an('object');
+          expect(res.statusCode).to.equal(401);
+          expect(res.body.book).to.equal(undefined);
+          expect(res.body.author).to.equal(undefined);
           done();
         });
       });
