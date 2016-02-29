@@ -2,16 +2,16 @@ angular.module('booklist.feed', [])
 
 .controller('FeedController', ['$scope', 'Books', function($scope, Books){
   $scope.data = {};
-
   $scope.bookTemplate = 'app/shared/book.entry.html';
 
   $scope.getBooks = function(){
     Books.getBooks()
-    //TODO - check to make sure the resp format is correct after you connect to the server
     .then(function(resp){
       $scope.data.books = resp;
       $scope.data.books.forEach(function (book) {
+        // Adds reactionSlider variable to books with a user reaction to position thumb on slider properly
         if (book.reaction) {
+          // Scaled at 0-100 to assure thumb position is not affected by load order
           book.reactionSlider = (book.reaction - 1) * 25;
         }
       });
@@ -34,11 +34,13 @@ angular.module('booklist.feed', [])
       thumbnail_image: thumbNail,
       amz_url: amzURL
     }, authorName, 0);
+
+    // User reaction of 0 indicates user has not read book, and book should be in to-read list
     book.reaction = 0;
 
+    // Adds pop up message 'Added to...' when book addToReadList called
     Materialize.toast('Added to your reading list!', 1750);
   };
 
-  //TODO - see if there is a better way to preload the books
   $scope.getBooks();
 }]);

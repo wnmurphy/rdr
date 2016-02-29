@@ -42,10 +42,10 @@
 
             <div id="reactions" class="card reactions center-align">
                 <div class="card-action">
-                  <a class="std-btn btn" ng-click="hasRead = true; reaction = undefined;" ng-class="{selected: hasRead}">I Have Read This Book</a>
+                  <a class="std-btn btn" ng-click="hasRead = true; reaction = undefined;" ng-class="{selected: hasRead && reaction !== 0}">I Have Read This Book</a>
                   <a class="std-btn btn" ng-click="addToReadingList()" ng-click="setReaction($event, 0)" ng-class="{selected: reaction === 0}">I Want To Read This Book</a>
               </div>
-              <div class="card-action" ng-show="hasRead">
+              <div class="card-action" ng-show="hasRead && reaction !== 0">
                 <div class="card-title">
                   Reaction
                 </div>
