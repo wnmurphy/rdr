@@ -3,6 +3,7 @@ var Bookshelf = require('bookshelf');
 var env = require('node-env-file');
 var fs = require('fs');
 
+// Reads in .env variables if available
 if (process.env.NODE_ENV !== 'production') {
   env('.env');
 }
@@ -19,6 +20,9 @@ var knex = Knex({
 });
 
 var db = Bookshelf(knex);
+
+// Each table creation fuction is calls the next.
+// This ensures they are created in sequence.
 
 var createUsers = function () {
   db.knex.schema.hasTable('users')
@@ -63,7 +67,7 @@ var createAuthors = function () {
     }
   });
 };
-  
+
 var createBooks = function () {
   db.knex.schema.hasTable('books')
   .then(function (exists) {
@@ -98,7 +102,7 @@ var createBooks = function () {
 
 /*** JOIN TABLES ***/
 
-var createBooksUsers = function () { 
+var createBooksUsers = function () {
   db.knex.schema.hasTable('books_users')
   .then(function (exists) {
     if (!exists) {
@@ -118,7 +122,7 @@ var createBooksUsers = function () {
   });
 };
 
+// Calls first table creation in chain
 createUsers();
-  
 
 module.exports = db;

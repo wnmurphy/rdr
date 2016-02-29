@@ -3,11 +3,13 @@
   <div class="search">
     <div class="input-field">
       <label for="search" class="active">Search for book or author</label>
+      <!-- Placeholder forces label to be postioned above input instead of in input -->
       <input type="text" placeholder=" " ng-model="search" id="search">
     </div>
   </div>
   <ul class="book-collection">
-  <li ng-repeat="book in data.books | filter:search" ng-include="bookTemplate">
-        </li>
+    <!-- Repeats bookTemplate (book.entry.html) for each book in data.books -->
+    <li ng-repeat="book in data.books | filter:search" ng-include="bookTemplate">
+    </li>
   </ul>
 </div>

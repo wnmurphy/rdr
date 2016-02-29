@@ -1,3 +1,5 @@
+// Copde taken directly from auth0.com
+
 angular.module('booklist.auth', [])
 
 .controller('AuthController', ['$rootScope', '$scope', '$http', 'auth', 'store', '$location', '$timeout',
@@ -12,7 +14,7 @@ angular.module('booklist.auth', [])
           url: '/signin'
         })
         .then(function (response) {
-          console.log(response);
+          // Stores signed in to be used in conditions in other controllers
           $rootScope.signedIn = true;
           $location.path('/');
         })
@@ -25,10 +27,12 @@ angular.module('booklist.auth', [])
       });
     };
     $scope.logout = function() {
+      // Stores signed in to be used in conditions in other controllers
       $rootScope.signedIn = false;
       auth.signout();
       store.remove('profile');
       store.remove('token');
+      // Timeout for logout function to complete before path change
       $timeout(function () {
         $location.path('/');
       }, 1);

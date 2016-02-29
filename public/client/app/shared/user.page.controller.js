@@ -8,17 +8,18 @@ angular.module('booklist.user', [])
   $scope.auth = auth;
   $scope.firstName = $scope.auth.profile.name.split(' ')[0];
 
+  // Loading spinner is hidden when false
   $scope.submitting = false;
 
   $scope.bookTemplate = 'app/shared/book.entry.html';
 
   $scope.bookTitle = '';
   $scope.authorName = '';
-  $scope.publicationYear;
+  $scope.publicationYear = '';
   $scope.amz_url = '';
   $scope.publisher = '';
   $scope.ISBN = '';
-  $scope.reaction = -1;
+  $scope.reaction = undefined;
   $scope.high_res_image = '';
   $scope.medium_image = '';
   $scope.small_image = '';
@@ -26,17 +27,15 @@ angular.module('booklist.user', [])
 
   $scope.amazonResults = [];
 
-  $scope.hasRead = false;
-
   $scope.addToReadingList = function () {
-    $scope.hasRead = false;
     $scope.reaction = 0;
-  }
+  };
 
   $scope.setReaction = function ($event, reaction) {
     var $target = $($event.currentTarget);
     $('.reaction-buttons').find('.selected').removeClass('selected');
     if ($scope.reaction === reaction) {
+      // Removes user reaction if reaction clicked already selected
       $scope.reaction = undefined;
     } else {
       $target.addClass('selected');
@@ -54,6 +53,7 @@ angular.module('booklist.user', [])
   };
 
   $scope.updateReaction = function (book) {
+    // Converts slider scale of 0-100 to 1-5
     book.reaction = book.reactionSlider/25 + 1;
     Books.postBook({
       title: book.title,
@@ -71,8 +71,10 @@ angular.module('booklist.user', [])
     $scope.resetProfile();
     $('.add-book').on('click', function (e) {
       var $target = $(e.target);
-      if (!$target.hasClass('active') && 
+      // If on mobile, does not auto-focus title field because keyboard would not appear when auto-focused
+      if (!$target.hasClass('active') &&
         !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        // Timeouts setting focus until after enter animation completes
         setTimeout(function () {
           $('#title').focus();
         }, 250);
@@ -80,6 +82,7 @@ angular.module('booklist.user', [])
     });
   };
 
+  // Refreshes profile each time profile is loaded
   $scope.resetProfile = function () {
     Books.getProfile()
     .then(function (resp) {
@@ -93,14 +96,16 @@ angular.module('booklist.user', [])
     .catch(function (error) {
       console.error(error);
     });
-  }
+  };
 
+  // Loads potential amazon matches to title/author in 'add book' form
   $scope.checkAmazon = function () {
     $scope.bookTitle = $scope.bookTitle || '';
     $scope.authorName = $scope.authorName || '';
     var title = $scope.bookTitle.trim();
     var authorName = $scope.authorName.trim();
     if (title.length || authorName.length) {
+      // Shows spinner during checkAmazon
       $scope.submitting = true;
       Books.queryAmazon({title: title, authorName: authorName})
       .then(function (results) {
@@ -123,12 +128,15 @@ angular.module('booklist.user', [])
   };
 
   var timer;
-  //this function sets a timer on ngKeyup
+  // Sets a timer on ngChange of author and/or title. This helps limit number of Amazon API requests
   $scope.searchTimer = function () {
+    // Waits until there is a pause in typing of 400 ms before querying Amazon
     $timeout.cancel(timer);
     timer = $timeout($scope.checkAmazon, 400);
-  }
+  };
 
+  // Triggered when an Amazon result is clicked
+  // Stores relevant information returned from Amazon to scope variables
   $scope.selectAmazonResult = function (result) {
     if (result.ItemAttributes[0].Title) {
       $scope.bookTitle = result.ItemAttributes[0].Title[0];
@@ -150,9 +158,13 @@ angular.module('booklist.user', [])
       $scope.ISBN = result.ItemAttributes[0].ISBN[0];
     }
 
+    // Sets local imageSet to first imageSet provided by Amazon
     var imageSet = result.ImageSets[0].ImageSet[0];
-    for (var i = 0; i < result.ImageSets[0].ImageSet.length; i++) {
+
+    // Loops through imageSets provided by Amazon
+    for (var i = 1; i < result.ImageSets[0].ImageSet.length; i++) {
       var checkSet = result.ImageSets[0].ImageSet[i];
+      // Sets local imageSet to primary imageSet if primary is specified by Amazon
       if (checkSet.$.Category === 'primary') {
         imageSet = checkSet;
         break;
@@ -177,7 +189,6 @@ angular.module('booklist.user', [])
         $scope.thumbnail_image = imageSet.ThumbnailImage[0].URL[0];
       }
     }
-
 
     $scope.amazonResults = [];
 
@@ -224,9 +235,9 @@ angular.module('booklist.user', [])
       console.error(error);
       return;
     });
-    //TODO: add the new book to the user's page
   };
 
+  // Resets 'add book' form when book successfuly added
   $scope.clearBookInfo = function () {
     $scope.bookTitle = '';
     $scope.authorName = '';
@@ -235,6 +246,7 @@ angular.module('booklist.user', [])
     $('.reactions').find('.selected').removeClass('selected');
   };
 
+  // Resets scope variables saved from Amazon result when title or author is changed
   $scope.clearAmazonInfo = function () {
     $scope.publicationYear = '';
     $scope.amz_url = '';
@@ -247,11 +259,10 @@ angular.module('booklist.user', [])
     $scope.thumbnail_image = '';
   };
 
+  // Used for filtering front page of profile to not show books in to-read list
   $scope.filterReactions = function (element) {
     return element.reaction > 0;
-  }
+  };
 
   $scope.initialize();
-
-  //get books on signin
 }]);

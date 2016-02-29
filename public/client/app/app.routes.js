@@ -31,6 +31,7 @@ angular.module('booklist', [
       controller: 'FeedController'
     });
 }])
+// From auth0.com
 .config(['authProvider', 'jwtInterceptorProvider', '$httpProvider', function (authProvider, jwtInterceptorProvider, $httpProvider) {
 
   authProvider.init({
@@ -60,7 +61,6 @@ angular.module('booklist', [
         }
       } else {
         $rootScope.signedIn = false;
-        $location.path('/');
       }
     }
   });
