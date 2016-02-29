@@ -1,9 +1,10 @@
 angular.module('booklist.services', [])
 
   .factory('Books', ['$http', '$rootScope', function ($http, $rootScope){
-    // TODO: Make sure that this runs after the user signs in
     var getBooks = function(){
      var apiURL = '/books';
+     // Seperate API calls when user is signed in vs not signed in.
+     // Allows use of user information to return user reactions when signed in.
      if ($rootScope.signedIn) {
        apiURL = '/books/signedin';
      }
@@ -30,7 +31,7 @@ angular.module('booklist.services', [])
       .catch(function (error) {
         console.error(error);
         return error;
-      })
+      });
     };
 
     var postBook = function (book, authorName, reaction){
@@ -76,6 +77,7 @@ angular.module('booklist.services', [])
   }])
   .run(['$rootScope', function ($rootScope){
 
+    // Stores reaction verbiage for easy changing
     $rootScope.reactions = {
       1: 'Hate it',
       2: 'Dislike it',
@@ -84,20 +86,25 @@ angular.module('booklist.services', [])
       5: 'Love it'
     };
 
+    // Stores Math on rootScope to be used in angular HTML atributes
+    // ie. Math.round can be used as $scope.round
     $rootScope.Math = window.Math;
 
-// takes in a string and returns a code that between 0 and codes - 1
+    // Takes in a string and returns a code that between 0 and (codes - 1)
+    // Only works when codes <= 10
     $rootScope.hash = function (string, codes) {
       var code = string.charCodeAt(Math.floor(string.length/2));
       code = code - Math.floor(code/10) * 10;
       code = code.toString(codes);
       code = parseInt(code.charAt(code.length - 1));
       return code;
-    }
+    };
 
+    // Stores blankCover image paths (at least 1, no greater than 10)
     $rootScope.blankCovers = ['/assets/img/black_cover_small.jpg', '/assets/img/red_cover_small.jpg'];
 
   }])
+  // Used for adding image to amazonResult when available
   .directive('amazonThumbnail', function () {
     return {
       restrict: 'A',
