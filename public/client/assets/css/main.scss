@@ -384,13 +384,14 @@ input[type=range]::-webkit-slider-thumb {
 
 }
 
-
 .cover-image {
   border-radius: 5px;
   max-height: 50vh;
   margin-left: auto;
   margin-right: auto;
   display: block;
+  -webkit-filter: drop-shadow(1px 1px 3px rgba(#000,.63));
+          filter: drop-shadow(1px 1px 3px rgba(#000,.63));
 }
 
 .blank-cover {
@@ -404,7 +405,10 @@ input[type=range]::-webkit-slider-thumb {
   justify-content: center;
   top: calc(50vh * .30);
   width: 100%;
+  // max-height: ;
   color: #ffd232;
+  -webkit-filter: drop-shadow(1px 1px 1px rgba(#000,.63));
+          filter: drop-shadow(1px 1px 1px rgba(#000,.63));
 }
 
 .amazon-link {
@@ -413,6 +417,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .cover-title, .cover-author {
   display: flex;
+  text-align: center;
   align-self: center;
   justify-content: center;
   font-family: 'IM Fell English', 'Papyrus', serif;
@@ -420,13 +425,20 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .cover-title {
-  font-size: 3vh;
-
+  display: -webkit-box;
+  max-height: calc(50vh * .5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .cover-author {
   padding-top: 2vh;
   font-size: 2vh;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .book-info {
