@@ -60,7 +60,6 @@ angular.module('booklist', [
         }
       } else {
         $rootScope.signedIn = false;
-        $location.path('/');
       }
     }
   });
