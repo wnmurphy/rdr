@@ -1,7 +1,7 @@
 angular.module('booklist.auth', [])
 
-.controller('AuthController', ['$rootScope', '$scope', '$http', 'auth', 'store', '$location', 
-  function($rootScope, $scope, $http, auth, store, $location){
+.controller('AuthController', ['$rootScope', '$scope', '$http', 'auth', 'store', '$location', '$timeout',
+  function($rootScope, $scope, $http, auth, store, $location, $timeout){
     $scope.login = function () {
       auth.signin({}, function (profile, token) {
         // Success callback
@@ -29,5 +29,8 @@ angular.module('booklist.auth', [])
       auth.signout();
       store.remove('profile');
       store.remove('token');
+      $timeout(function () {
+        $location.path('/');
+      }, 1);
     };
   }]);
