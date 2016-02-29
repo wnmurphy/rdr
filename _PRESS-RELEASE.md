@@ -1,41 +1,19 @@
-# Project Name #
- 
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-Book List
+# Rdr.
 
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-Book lovers easily organize their books and see latest trends in a way that doesn't suck.
+## What is Rdr?
+A simple, stream-lined application for keeping track of the books you have read and the books you want to read.
+
+## Who is Rdr for?
+For book lovers who want an easy-to-use app with the features they need instead of a thousand features they don't need.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-An easy and fun way to keep track of your reading history and find your next read.
+At its core, Rdr offers an uncomplicated way for readers create lists of books. Rdr's main goal is to present the user with right amount of features - the ability to keep track of how a book made you feel, the ability to find new books and the ability to keep track of a reading list - without adding needless features on top. Rdr is for the minimalist in all of us. Rdr is you and your books. That's it.
 
-## Problem ##
-  > Describe the problem your product solves.
-It is difficult to keep track of your reading history and share opinions with other book lovers.
+## The Problem ##
+A service that keeps track of books you've read and want to read is not a new idea. In fact, one popular social network (*cough cough*) dominates the market. Unfortunately, the service which shall remain unnamed offers a bloated product with too many features. Additionally, said unnamed service sacrifices ease-of-use in order to offer a robust social network. But what if you didn't want a full-fledged social network and you only wanted to keep track of your books?
 
-## Solution ##
-  > Describe how your product elegantly solves the problem.
-Allows users to post current and past books, view their reading history, see books other people are reading, and vote.
-
-## Quote from You ##
-  > A quote from a spokesperson in your company.
-It's great.
+## The Solution ##
+Rdr is the answer to all of life's problems. Okay. That may have been a bit of an oversell. Rdr will keep
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-Sign up with the click of a button, and you're ready to start posting.
-
-## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-
-
-## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
-Visit our website at derekzoolanderwebsiteforkidswhocantkeeptrackofbooksgood.io
-
-
-
-
+It's easy. Head over to [Rdr's Website](https://the-book-list.herokuapp.com/#/), login, and you're good to go. You can see other books on the main feed and add your own books on the profile.
