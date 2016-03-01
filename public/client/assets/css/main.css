@@ -7,6 +7,9 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
   font-weight: 100; }
 
+.card-content h1, .card-content h2, .card-content h3, .card-content h4, .card-content h5, .card-content h6 {
+  color: black; }
+
 body {
   background: linear-gradient(to right, #8794a1, #6C7A89); }
 
