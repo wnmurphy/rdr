@@ -123,7 +123,7 @@ angular.module('booklist.user', [])
         $scope.submitting = false;
       });
     } else {
-      console.log('fail');
+      $scope.amazonResults = [];
     }
   };
 
