@@ -8,27 +8,27 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 100; }
 
 body {
-  background: linear-gradient(to right, #407F7F, #226666); }
+  background: linear-gradient(to right, #8794a1, #6C7A89); }
 
 footer {
-  background: linear-gradient(to right, #2E4272, #162955); }
+  background: linear-gradient(to right, #902D41, #69212f); }
 
 .collapsible-header {
   color: #000; }
   .collapsible-header i {
-    color: #4F628E; }
+    color: #902D41; }
 
 .collapsible-header:hover {
   color: #787878; }
   .collapsible-header:hover i {
-    color: #8797bd; }
+    color: #b73953; }
 
 .std-btn {
-  background-color: #407F7F; }
+  background-color: #8794a1; }
   .std-btn:hover {
-    background-color: #4F628E; }
+    background-color: #902D41; }
   .std-btn:active, .reactions .btn.selected {
-    background-color: #2E4272; }
+    background-color: #902D41; }
   .std-btn[disabled=disabled] {
     background-color: #dfdfdf;
     color: #9f9f9f; }
@@ -88,9 +88,9 @@ footer {
   padding: .5em 20px 5px 20px; }
 
 .be-first {
-  color: #226666; }
+  color: #6C7A89; }
   .be-first:hover {
-    color: #2E4272; }
+    color: #902D41; }
 
 .book-info .card-content {
   padding-bottom: 0px; }
@@ -98,10 +98,10 @@ footer {
 /** TRENDS PAGE **/
 .book-entry {
   padding: 3%;
-  border-bottom: 1px #669999 solid; }
+  border-bottom: 1px #a4adb7 solid; }
   .book-entry .cover-image {
     overflow: hidden;
-    background-color: #669999;
+    background-color: #a4adb7;
     max-height: 50vh;
     max-width: 100%; }
   .book-entry .card-content {
@@ -121,19 +121,19 @@ footer {
   margin-bottom: 5px; }
 
 nav {
-  background: linear-gradient(to right, #2E4272, #162955); }
+  background: linear-gradient(to right, #902D41, #69212f); }
 
 /** PROFILE **/
 .input-field label {
-  color: #0D4D4D; }
+  color: #56616c; }
 
 .input-field input[type=text]:focus {
-  border-bottom: 1px solid #226666;
-  box-shadow: 0 1px 0 0 #226666; }
+  border-bottom: 1px solid #6C7A89;
+  box-shadow: 0 1px 0 0 #6C7A89; }
 
 .input-field input[type=text] {
-  border-bottom: 1px solid #407F7F;
-  box-shadow: 0 1px 0 0 #669999; }
+  border-bottom: 1px solid #8794a1;
+  box-shadow: 0 1px 0 0 #a4adb7; }
 
 .feed {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
@@ -153,16 +153,16 @@ nav {
 
 form.book {
   padding: 15px;
-  background-color: #669999;
+  background-color: #a4adb7;
   position: relative; }
   form.book h3 {
-    color: #0D4D4D; }
+    color: #56616c; }
 
 .book-collection {
   max-height: 75vh;
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: #669999;
+  background-color: #a4adb7;
   margin: 0px;
   -webkit-overflow-scrolling: touch; }
 
@@ -170,19 +170,19 @@ form.book {
   margin-bottom: 0px; }
 
 .tabs {
-  border-bottom: 1px solid #669999; }
+  border-bottom: 1px solid #a4adb7; }
 
 .tabs .tab a {
-  color: #0D4D4D;
-  outline-color: #0D4D4D; }
+  color: #56616c;
+  outline-color: #56616c; }
   .tabs .tab a:active {
-    color: #2E4272; }
+    color: #902D41; }
   .tabs .tab a:hover {
-    color: #4F628E;
-    outline-color: #4F628E; }
+    color: #b73953;
+    outline-color: #b73953; }
 
 .tabs .indicator {
-  background-color: #2E4272;
+  background-color: #902D41;
   padding: 1px; }
 
 .tab-divider {
@@ -190,17 +190,17 @@ form.book {
   width: 1px;
   position: absolute;
   left: calc(50%-1.5px);
-  background-color: #669999; }
+  background-color: #a4adb7; }
 
 .collapsible {
-  border-color: #226666;
+  border-color: #6C7A89;
   border-radius: 5px; }
   .collapsible .collapsible-body {
-    border-color: #226666; }
+    border-color: #6C7A89; }
 
 .greet {
   font-size: 2em;
-  color: #122042;
+  color: white;
   font-weight: 100; }
 
 .spinner-layer {
@@ -234,12 +234,12 @@ form.book {
   opacity: 0; }
 
 .collection .collection-item a {
-  color: #407F7F; }
+  color: #8794a1; }
 
 /* SLIDER */
 .tick {
   top: 12px;
-  border: 1.5px solid #4F628E;
+  border: 1.5px solid #b73953;
   height: 5px;
   width: 0px; }
 
@@ -248,10 +248,10 @@ form.book {
   font-size: .8em; }
 
 input[type=range]::-webkit-slider-thumb {
-  background-color: #2E4272;
+  background-color: #902D41;
   z-index: 10; }
   input[type=range]::-webkit-slider-thumb:hover, input[type=range]::-webkit-slider-thumb:active {
-    background-color: #4F628E; }
+    background-color: #b73953; }
 
 .cover-image {
   border-radius: 5px;
@@ -327,7 +327,7 @@ input[type=range] {
   z-index: 1; }
 
 .copyright {
-  background: linear-gradient(to right, #2E4272, #162955); }
+  background: linear-gradient(to right, #902D41, #69212f); }
 
 .hr-ribbon {
   width: 10%; }

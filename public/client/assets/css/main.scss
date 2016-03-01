@@ -1,19 +1,18 @@
 
 /** COLORS **/
-$primary-color: #226666;
-$lightest-color: #669999;
-$lighter-color: #407F7F;
-$darker-color: #0D4D4D;
-$darkest-color: #003333;
+$primary-color: #6C7A89;
+$lightest-color: lighten($primary-color, 20%);
+$lighter-color: lighten($primary-color, 10%);
+$darker-color: darken($primary-color, 10%);
+$darkest-color: darken($primary-color, 14%);
 
-$accent-color: #2E4272;
-$accent-light: #4F628E;
-$accent-lightest: #8797bd;
-$accent-dark: #162955;
-$accent-darkest: #122042;
+$accent-color: #902D41;
+$accent-light: lighten($accent-color, 10%);
+$accent-lightest: lighten($accent-color, 15%);
+$accent-dark: darken($accent-color, 10%);
+$accent-darkest: darken($accent-color, 15%);
 
 $gray-color: #E5E5EA;
-
 
 *, *:after, *:before {
   font-family: 'Railway', sans-serif;
@@ -37,7 +36,7 @@ footer {
   color: #000;
 
   i {
-    color: $accent-light;
+    color: $accent-color;
   }
 }
 
@@ -45,7 +44,7 @@ footer {
   color: #787878;
 
   i {
-    color: $accent-lightest;
+    color: $accent-light;
   }
 }
 
@@ -54,7 +53,7 @@ footer {
   background-color: $lighter-color;
 
   &:hover {
-    background-color: $accent-light;
+    background-color: $accent-color;
   }
 
   &:active {
@@ -311,7 +310,7 @@ form.book {
 
 .greet {
   font-size: 2em;
-  color: $accent-darkest;
+  color: white;
   font-weight: 100;
 }
 
