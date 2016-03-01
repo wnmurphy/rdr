@@ -1,5 +1,7 @@
 # Rdr.
 
+![](screenshots/hello_you.png)
+
 ## What is Rdr?
 A simple, streamlined web app for keeping track of the books you have read and the books you want to read.
 
@@ -13,6 +15,8 @@ At its core, Rdr offers an uncomplicated way for readers to create lists of book
 A service that keeps track of books you've read and want to read is not a new idea. In fact, one popular social network (*cough cough*) dominates the market. Unfortunately, the service which shall remain unnamed offers a bloated product with too many features. Additionally, said unnamed service sacrifices usability in order to offer a robust social network. But what if you didn't want a full-fledged social network and you only wanted to keep track of your books?
 
 ## The Solution ##
+![](screenshots/book_feed.png)
+
 Rdr is the answer to all of life's problems. Okay. That may have been a bit of an oversell. Rdr maintains a core set of features with a focus on protecting a simplified user experience. We don't want to be a giant social network; we want to be the home for book lists. Sounds straightforward, uncomplicated, almost a little too easy? That's on purpose.
 
 ## How to Get Started ##
