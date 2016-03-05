@@ -61,6 +61,24 @@ var routes = [
             res.sendStatus(409);
           });
       }
+    },
+    delete: function(req, res){
+      var bookTitle = req.body.bookTitle;
+      var user = {
+        amz_auth_id: req.user.sub
+      };
+      if (!author || !book) {
+        res.sendStatus(409);
+      } else {
+        helpers.deleteBookFromList(bookTitle, 
+          function(data){
+            res.sendStatus(200);
+          }, function(error){
+            console.error(error);
+            res.sendStatus(409);
+          });
+      }
+      
     }
   },
   {
