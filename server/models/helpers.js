@@ -95,7 +95,6 @@ var getBooks = function (list, limit, success, fail) {
 
 // Returns books in descending order of average reaction
 var deleteBook = function (bookTitle, user, success, fail) {
-  console.log('I made it to helpers.js!!!');
   db.knex
   .delete()
   .from('books_users')
