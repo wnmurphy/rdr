@@ -63,6 +63,23 @@ var routes = [
     }
   },
   {
+    path: '/users/find:username',
+    get: function(req, res) {
+      var username = req.params.username;
+      // what does amazon username look like?
+      // query db for username
+        // on success
+          // (line 157)
+          // helpers.getUsersBooks(username, function(books) {
+          // res.json(books)
+          // }, function(err) {
+          //  console.error(err);
+          //  res.sendStatus();
+          // })
+          // 
+    }
+  }
+  {
     path: '/books',
     get: function (req, res) {
       var limit = req.param('limit');
