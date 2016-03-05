@@ -22,7 +22,7 @@ angular.module('booklist.search', [])
   //     }, '500', 'swing');
   //   }
   // };
-  
+
   $scope.userQuery = function(e) {
     console.log('IN TEST:', e);
     var username = e.target.value;
