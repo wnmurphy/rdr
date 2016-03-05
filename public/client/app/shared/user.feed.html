@@ -1,0 +1,44 @@
+<div class="user-page">
+  <div class="row">
+    <p class="greet">Hello, {{ firstName }}!</p>
+    <form class='input-field col s12'>
+      <i class='material-icons prefix' style='color: #fff'>search</i>
+      <label class='white-text'>Search</label>
+      <input type='text' ng-keyup='$event.keyCode === 13 && test($event)'>
+    </form>
+  </div>
+  <div class="row feed">
+    <ul class="tabs">
+      <li class="tab"><a href="#book-list" ng-click="scrollToTop($event)">Your Book List</a></li>
+      <div class="tab-divider"></div>
+      <li class="tab"><a href="#to-read" ng-click="scrollToTop($event)">To Read List</a></li>
+    </ul>
+    <div id="book-list">
+      <ul class="book-collection">
+        <li ng-repeat="book in books | orderBy:book.id:true | filter: filterReactions" ng-include="bookTemplate">
+        </li>
+        <div class="message card" ng-show="!books.length">
+          <div class="card-content">
+            Search other users book lists above!
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div id="to-read">
+      <ul class="book-collection">
+        <li ng-repeat="book in books | orderBy:book.id:true | filter: { reaction: 0 }" ng-include="bookTemplate">
+        </li>
+        <div class="message card" ng-show="!books.length">
+          <div class="card-content">
+            Search other user's book lists above!
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <script>
+    $('.collapsible').collapsible();
+    $('ul.tabs').tabs();
+  </script>
+
+</div>

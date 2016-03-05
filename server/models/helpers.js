@@ -154,6 +154,10 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
     });
 };
 
+var getUsersBooks = function(user) {
+  
+};
+
 var saveProfile = function (profile, success, fail) {
   findOrCreate(models.User, {amz_auth_id: profile})
     .then(function (user) {

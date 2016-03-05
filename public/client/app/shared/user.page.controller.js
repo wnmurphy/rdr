@@ -44,6 +44,7 @@ angular.module('booklist.user', [])
   };
 
   $scope.scrollToTop = function (e) {
+    console.log('SCROLL EVENT:', e);
     $target = $(e.target);
     if ($target.hasClass('active')) {
       $('.book-collection:not([display="none"])').animate({

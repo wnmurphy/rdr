@@ -3,6 +3,7 @@ angular.module('booklist', [
   'booklist.feed',
   'booklist.user',
   'booklist.auth',
+  'booklist.search',
   'auth0',
   'angular-storage',
   'angular-jwt',
@@ -25,6 +26,11 @@ angular.module('booklist', [
     })
     .when('/privacy', {
       templateUrl: '/app/components/privacy.html'
+    })
+    .when('/searchuser', {
+      templateUrl: '/app/shared/user.feed.html',
+      controller: 'UserFeedController',
+      requiresLogin: true
     })
     .otherwise({
       templateUrl: '/app/shared/book.feed.html',
