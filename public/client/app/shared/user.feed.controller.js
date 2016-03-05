@@ -1,6 +1,6 @@
-angular.module('booklist.user', [])
+angular.module('booklist.search', [])
 
-.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', '$location', 'auth', function($scope, Books, $rootScope, $timeout, $location, auth){
+.controller('UserFeedController', ['$scope', 'Books','$rootScope', '$timeout', '$location', 'auth', function($scope, Books, $rootScope, $timeout, $location, auth){
   $scope.user = {};
   $scope.books = [];
   $scope.path = $location.path();
