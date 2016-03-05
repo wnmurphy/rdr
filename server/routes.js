@@ -61,25 +61,29 @@ var routes = [
             res.sendStatus(409);
           });
       }
-    },
-    delete: function(req, res){
-      var bookTitle = req.body.bookTitle;
+    }
+  },
+  {
+    path: '/users/books/deleteBook',
+    post: function(req, res){
+      var bookTitle = req.body.title;
+      console.log('routes.js bookTitle', bookTitle);
       var user = {
         amz_auth_id: req.user.sub
       };
-      if (!author || !book) {
+      if (!bookTitle) {
         res.sendStatus(409);
       } else {
-        helpers.deleteBookFromList(bookTitle, 
+        helpers.deleteBook(bookTitle, user, 
           function(data){
-            res.sendStatus(200);
+            res.statusCode = 200;
+            res.send(data);
           }, function(error){
             console.error(error);
             res.sendStatus(409);
           });
       }
-      
-    }
+    },
   },
   {
     path: '/user/:email',
