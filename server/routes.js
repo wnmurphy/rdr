@@ -78,7 +78,7 @@ var routes = [
           // })
           // 
     }
-  }
+  },
   {
     path: '/books',
     get: function (req, res) {
