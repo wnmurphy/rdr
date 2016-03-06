@@ -246,9 +246,17 @@ var getUsersBooks = function(email, success, fail) {
   db.knex.select('id')
     .from('users')
     .where('email', email)
-      .then(function (id) {
-        console.log('helpers success:', id);
-        success(id);
+      .then(function (data) {
+        db.knex.select('book_id')
+          .from('books_users')
+          .where('user_id', data[0].id)
+            .then(function (res) {
+              console.log('helpers success:', res);
+              success(res);
+            })
+            .catch(function (err) {
+              console.error(err);
+            });
       })
       .catch(function (err) {
         fail(err);
