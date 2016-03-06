@@ -182,10 +182,6 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
     });
 };
 
-var getUsersBooks = function(user, success, fail) {
-  // db.knex.select('',)
-};
-
 var saveProfile = function (profile, success, fail) {
   findOrCreate(models.User, {amz_auth_id: profile})
     .then(function (user) {
@@ -238,12 +234,24 @@ var insertEmail = function(amzId, email, success, fail) {
     .from('users')
     .where('amz_auth_id', amzId)
     .update( { email: email } )
-      .then(function (email){
-        console.log("Success" + email);
-        success(email);
+      .then(function (res) {
+        success(res);
       })
-      .catch( function (error) {
+      .catch(function (error) {
         fail(error);
+      });
+};
+
+var getUsersBooks = function(email, success, fail) {
+  db.knex.select('id')
+    .from('users')
+    .where('email', email)
+      .then(function (id) {
+        console.log('helpers success:', id);
+        success(id);
+      })
+      .catch(function (err) {
+        fail(err);
       });
 };
 
@@ -255,7 +263,6 @@ module.exports = {
   addBook: addBook,
   getBooks: getBooks,
   getBooksSignedIn: getBooksSignedIn,
-  // getUsersBooks: getUsersBooks,
   saveProfile: saveProfile,
   getProfile: getProfile
 

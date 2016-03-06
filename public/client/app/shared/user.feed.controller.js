@@ -29,19 +29,20 @@ angular.module('booklist.search', [])
   // };
 
   $scope.userQuery = function(e) {
-    $scope.search.field = null;
     var email = $scope.search.field;
-    // Books.getUserProfile(username)
-    //   .then(function(results) {
-    //     $scope.books = results.data;
-    //     // calibrates slider??
-    //     $scope.books.forEach(function(book) {
-    //       book.reactionSlider = (book.reaction - 1) * 25;
-    //     });
-    //   })
-    //   .catch(function(err) {
-    //     console.error('Error getting user profile:', err);
-    //   });
+    $scope.search.field = null;
+    Books.getUserProfile(email)
+      .then(function(success) {
+        // $scope.books = success.data;
+        // calibrates slider??
+        // $scope.books.forEach(function(book) {
+        //   book.reactionSlider = (book.reaction - 1) * 25;
+        // });
+        console.log('userQuery success:', success);
+      })
+      .catch(function(err) {
+        console.error('Error getting user profile:', err);
+      });
   };
 
   // Used for filtering front page of profile to not show books in to-read list

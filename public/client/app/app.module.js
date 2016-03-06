@@ -34,10 +34,10 @@ angular.module('booklist.services', [])
       });
     };
 
-    var getUserProfile = function (user) {
+    var getUserProfile = function (email) {
       return $http({
         method: 'GET',
-        url: '/userProfile/:user'
+        url: '/user/' + email
       })
       .then(function (resp) {
         return resp.data;
@@ -83,8 +83,9 @@ angular.module('booklist.services', [])
     };
 
     return {
-      getProfile: getProfile,
       getBooks: getBooks,
+      getProfile: getProfile,
+      getUserProfile: getUserProfile,
       postBook: postBook,
       queryAmazon: queryAmazon
     };
