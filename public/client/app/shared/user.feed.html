@@ -1,10 +1,11 @@
 <div class="user-page">
   <div class="row">
     <p class="greet">Hello, {{ firstName }}!</p>
+    <!-- <pre>{{ firstName | json }}</pre> -->
     <form class='input-field col s12'>
       <i class='material-icons prefix' style='color: #fff'>search</i>
       <label class='white-text'>Search</label>
-      <input type='text' ng-keyup='$event.keyCode === 13 && test($event)'>
+      <input type='text' ng-keyup='$event.keyCode === 13 && userQuery($event)'>
     </form>
   </div>
   <div class="row feed">

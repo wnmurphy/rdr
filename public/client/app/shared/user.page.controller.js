@@ -97,8 +97,23 @@ angular.module('booklist.user', [])
         }, 250);
       }
     });
+///////////////////////////////////////////////////////////
+     return $http({
+       method: 'PUT',
+       url: '/profile',
+       data: {
+        user: $scope.auth.profile.user_id,
+        email: $scope.auth.profile.email
+      }
+     })
+     .then(function(success) {
+        console.log('Successful email PUT:', success);
+     })
+     .catch(function(err) {
+        console.error(err);
+     });
   };
-
+///////////////////////////////////////////////////////////
   // Refreshes profile each time profile is loaded
   $scope.resetProfile = function () {
     Books.getProfile()

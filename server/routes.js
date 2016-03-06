@@ -18,7 +18,8 @@ var authRoutes = [
   '/signin',
   '/users/books',
   '/profile',
-  '/books/signedin'
+  '/books/signedin',
+  '/userProfile/:user'
 ];
 
 var routes = [
@@ -62,44 +63,31 @@ var routes = [
       }
     }
   },
-  {
-    path: '/users/find:username',
-    get: function(req, res) {
-      var username = req.params.username;
-      // what does amazon username look like?
-      // query db for username
-        // on success
-          // (line 157)
-          // helpers.getUsersBooks(username, function(books) {
-          // res.json(books)
-          // }, function(err) {
-          //  console.error(err);
-          //  res.sendStatus();
-          // })
-          // 
-    }
-  },
-    path: '/users/books/deleteBook',
-    post: function(req, res){
-      var bookTitle = req.body.title;
-      console.log('routes.js bookTitle', bookTitle);
-      var user = {
-        amz_auth_id: req.user.sub
-      };
-      if (!bookTitle) {
-        res.sendStatus(409);
-      } else {
-        helpers.deleteBook(bookTitle, user, 
-          function(data){
-            res.statusCode = 200;
-            res.send(data);
-          }, function(error){
-            console.error(error);
-            res.sendStatus(409);
-          });
-      }
-    }
-  },
+  // {
+  //   path: '/userProfile/:user',
+  //   get: function(req, res) {
+  //     var username = req.params.user;
+  //     // what does amazon username look like?
+  //     // query db for username
+  //     helpers.getUsersBooks(username,
+  //       function(data) {
+  //         res.statusCode = 200;
+  //         res.send(data);
+  //       }, function(err) {
+  //         console.error(err);
+  //         res.sendStatus(400);
+  //       });
+  //       // on success
+  //         // (line 185)
+  //         // helpers.getUsersBooks(username, function(books) {
+  //         // res.json(books)
+  //         // }, function(err) {
+  //         //  console.error(err);
+  //         //  res.sendStatus();
+  //         // })
+  //         //
+  //   }
+  // },
   {
     path: '/users/books/deleteBook',
     post: function(req, res){
@@ -111,7 +99,7 @@ var routes = [
       if (!bookTitle) {
         res.sendStatus(409);
       } else {
-        helpers.deleteBook(bookTitle, user, 
+        helpers.deleteBook(bookTitle, user,
           function(data){
             res.statusCode = 200;
             res.send(data);
@@ -189,6 +177,17 @@ var routes = [
         res.json(books);
       }, function (error) {
         console.log(error);
+        res.sendStatus(409);
+      });
+    },
+    put: function (req, res) {
+      var amz_auth_id = req.body.user;
+      var email = req.body.email;
+      helpers.insertEmail(amz_auth_id, email, function(success) {
+        console.log(success);
+        res.json(success);
+      }, function (error) {
+        console.error(error);
         res.sendStatus(409);
       });
     }

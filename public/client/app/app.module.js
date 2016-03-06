@@ -34,6 +34,20 @@ angular.module('booklist.services', [])
       });
     };
 
+    // var getUserProfile = function (user) {
+    //   return $http({
+    //     method: 'GET',
+    //     url: '/userProfile/:user'
+    //   })
+    //   .then(function (resp) {
+    //     return resp.data;
+    //   })
+    //   .catch(function (error) {
+    //     console.error(error);
+    //     return error;
+    //   });
+    // };
+
     var postBook = function (book, authorName, reaction){
       return $http({
         method: 'POST',

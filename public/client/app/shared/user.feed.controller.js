@@ -6,7 +6,9 @@ angular.module('booklist.search', [])
   $scope.path = $location.path();
 
   $scope.auth = auth;
-  $scope.firstName = $scope.auth.profile.name.split(' ')[0];
+  // $scope.firstName = $scope.auth.profile.name.split(' ')[0];
+  $scope.firstName = $scope.auth.profile.nickname;
+  // $scope.firstName = $scope.auth.profile;
 
   // Loading spinner is hidden when false
   $scope.submitting = false;
@@ -24,14 +26,19 @@ angular.module('booklist.search', [])
   // };
 
   $scope.userQuery = function(e) {
-    console.log('IN TEST:', e);
     var username = e.target.value;
     e.target.value = '';
-    // http GET req to server with username
-      // on success
-        // populate scope.books with user's books
-      // on failure
-        // notify user 'no such user exists'
+    Books.getUserProfile(username)
+      .then(function(results) {
+        $scope.books = results.data;
+        // calibrates slider??
+        $scope.books.forEach(function(book) {
+          book.reactionSlider = (book.reaction - 1) * 25;
+        });
+      })
+      .catch(function(err) {
+        console.error('Error getting user profile:', err);
+      });
   };
 
   // Used for filtering front page of profile to not show books in to-read list
