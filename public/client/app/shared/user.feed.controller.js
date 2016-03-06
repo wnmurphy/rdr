@@ -3,7 +3,10 @@ angular.module('booklist.search', [])
 .controller('UserFeedController', ['$scope', 'Books','$rootScope', '$timeout', '$location', 'auth', function($scope, Books, $rootScope, $timeout, $location, auth){
   $scope.user = {};
   $scope.books = [];
-  $scope.path = $location.path();
+  $scope.search = {
+    field: null
+  };
+  // $scope.path = $location.path();
 
   $scope.auth = auth;
   // $scope.firstName = $scope.auth.profile.name.split(' ')[0];
@@ -26,8 +29,8 @@ angular.module('booklist.search', [])
   // };
 
   $scope.userQuery = function(e) {
-    var username = e.target.value;
-    e.target.value = '';
+    $scope.search.field = null;
+    var email = $scope.search.field;
     // Books.getUserProfile(username)
     //   .then(function(results) {
     //     $scope.books = results.data;
