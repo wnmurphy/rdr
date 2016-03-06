@@ -92,11 +92,9 @@ var routes = [
         amz_auth_id: req.user.sub
       };
       var list = req.body.list;
-      console.log('emptyBookLists called in routes');
       helpers.emptyBookLists(list, user, 
           function(data){
-            res.statusCode = 200;
-            res.send(data);
+            res.send(200);
           }, 
           function(error){
             console.error(error);

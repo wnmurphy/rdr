@@ -1,6 +1,6 @@
 angular.module('booklist.user', [])
 
-.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', '$location', '$http', 'auth', function($scope, Books, $rootScope, $timeout, $location, $http, auth){
+.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', '$location', '$http', '$route', 'auth', function($scope, Books, $rootScope, $timeout, $location, $http, $route, auth){
   $scope.user = {};
   $scope.books = [];
   $scope.path = $location.path();
@@ -48,13 +48,13 @@ angular.module('booklist.user', [])
   };
 
   $scope.emptyBookLists = function (list){
-    console.log('emptyBookLists has been called in user.page!');
     return $http({
       method: 'post',
       url: '/users/books/emptyBookLists',
       data: { list: list }
     })
     .then(function(resp) {
+      $route.reload();
       return resp.data;
     }, function(error) {
       console.log(error);
@@ -111,7 +111,7 @@ angular.module('booklist.user', [])
         }, 250);
       }
     });
-///////////////////////////////////////////////////////////
+
      return $http({
        method: 'PUT',
        url: '/profile',
@@ -127,7 +127,7 @@ angular.module('booklist.user', [])
         console.error(err);
      });
   };
-///////////////////////////////////////////////////////////
+
   // Refreshes profile each time profile is loaded
   $scope.resetProfile = function () {
     Books.getProfile()
