@@ -95,43 +95,6 @@ var getBooks = function (list, limit, success, fail) {
 
 // Returns books in descending order of average reaction
 var deleteBook = function (bookTitle, user, success, fail) {
-  db.knex
-  .delete()
-  .from('books_users')
-  .where(knex.raw('books_users.book_id = books.id'))
-  .where(knex.raw('books.title = booksTitle'))
-  .then(function () {
-      console.log('success');
-      success();
-    })
-  .catch(fail);
-};
-
-//   db.knex.select('users.id')
-//   .from('users')
-//   .where('users.amz_auth_id', user)
-
-//   .innerJoin('books_users', 'users.id', 'books_users.user_id')
-//     .then(function (ids) {
-//       ids.forEach(function (id) {
-//         // if(book.title === bookTitle){
-//         //   db.knex.del(book);
-//         console.log(id);
-//         // }
-//       });
-//       success('success');
-//     })
-//     .catch(fail);
-// };
-
-// db.knex.select('books.id')
-//   .from('books')
-//   .where('books.title', bookTitle) // correctly gets the id for the passed in bookTitle
-//   //.innerJoin('books_users', 'books.id')
-
-//select books_users.book_id, books_users.user_id
-//
-
   db.knex('users.*')
   // .dropForeign('books_users.book_id')  
   .from('books') 
