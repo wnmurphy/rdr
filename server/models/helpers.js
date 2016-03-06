@@ -128,7 +128,7 @@ var emptyBookLists = function (list, user, success, fail) {
   .where('users.amz_auth_id', user.amz_auth_id);
 
   // Delete all records for user in books_users.
-  console.log('What is list? ', list);
+  
   // Empty read list:
   if (list === 'read') {
     db.knex('books_users')
