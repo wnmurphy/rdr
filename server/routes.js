@@ -76,17 +76,33 @@ var routes = [
       } else {
         helpers.deleteBook(bookTitle, user, 
           function(data){
-            console.log('in success fn in routes.post');
             res.statusCode = 200;
             res.send(data);
           }, function(error){
-            console.log('in failure fn in routes.post');
             console.error(error);
             res.sendStatus(409);
           });
       }
     },
   },
+  {
+    path: '/users/books/emptyBookLists',
+    post: function(req, res){
+      var user = {
+        amz_auth_id: req.user.sub
+      };
+      console.log('emptyBookLists called in routes');
+      helpers.emptyBookLists(user, 
+          function(data){
+            res.statusCode = 200;
+            res.send(data);
+          }, 
+          function(error){
+            console.error(error);
+            res.sendStatus(409);
+          });
+      }
+    },
   {
     path: '/user/:email',
     get: function(req, res) {
@@ -100,50 +116,6 @@ var routes = [
           console.error(err);
           res.sendStatus(400);
         });
-    }
-  },
-  {
-    path: '/users/books/deleteBook',
-    post: function(req, res){
-      var bookTitle = req.body.title;
-      console.log('routes.js bookTitle', bookTitle);
-      var user = {
-        amz_auth_id: req.user.sub
-      };
-      if (!bookTitle) {
-        res.sendStatus(409);
-      } else {
-        helpers.deleteBook(bookTitle, user,
-          function(data){
-            res.statusCode = 200;
-            res.send(data);
-          }, function(error){
-            console.error(error);
-            res.sendStatus(409);
-          });
-      }
-    }
-  },
-  {
-    path: '/users/books/deleteBook',
-    post: function(req, res){
-      var bookTitle = req.body.title;
-      console.log('routes.js bookTitle', bookTitle);
-      var user = {
-        amz_auth_id: req.user.sub
-      };
-      if (!bookTitle) {
-        res.sendStatus(409);
-      } else {
-        helpers.deleteBook(bookTitle, user, 
-          function(data){
-            res.statusCode = 200;
-            res.send(data);
-          }, function(error){
-            console.error(error);
-            res.sendStatus(409);
-          });
-      }
     }
   },
   {

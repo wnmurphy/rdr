@@ -56,8 +56,7 @@
             </div>
 
             <input class="std-btn btn" type="submit" ng-disabled="bookSubmission.$invalid || !(reaction > -1)" value="Add Book">
-            <input class="std-btn btn" type="submit" ng-disabled="bookSubmission.$invalid || !(reaction > -1)" value="Empty Book List">
-            <input class="std-btn btn" type="submit" ng-disabled="bookSubmission.$invalid || !(reaction > -1)" value="Empty Read List">
+            <input class="std-btn btn" type="submit" ng-click="emptyBookLists()" value="Empty All Book Lists">
           </form>
         </div>
       </li>
