@@ -6,7 +6,7 @@ angular.module('booklist.user', [])
   $scope.path = $location.path();
 
   $scope.auth = auth;
-  $scope.firstName = $scope.auth.profile.name.split(' ')[0];
+  $scope.firstName = $scope.auth.profile.nickname;
 
   // Loading spinner is hidden when false
   $scope.submitting = false;
@@ -60,7 +60,6 @@ angular.module('booklist.user', [])
   };
 
   $scope.scrollToTop = function (e) {
-    console.log('SCROLL EVENT:', e);
     $target = $(e.target);
     if ($target.hasClass('active')) {
       $('.book-collection:not([display="none"])').animate({

@@ -244,26 +244,32 @@ var insertEmail = function(amzId, email, success, fail) {
 
 var getUsersBooks = function(email, success, fail) {
   var book_ids = [];
+  var bookIdReactions = {};
   db.knex.select('id')
     .from('users')
     .where('email', email)
       .then(function (data) {
-        db.knex.select('book_id')
+        db.knex.select('book_id', 'reaction')
           .from('books_users')
           .where('user_id', data[0].id)
             .then(function (res) {
-              res.forEach(function (idObj) {
-                book_ids.push(idObj.book_id);
+              res.forEach(function (obj) {
+                book_ids.push(obj.book_id);
+                bookIdReactions[obj.book_id] = obj.reaction;
               });
               db.knex.select()
                 .from('books')
                 .whereIn('id', book_ids)
-                  .then(function (YES) {
-                    console.log('FUCK YEAH:', YES);
-                    success(YES);
+                  .then(function (books) {
+                    books.forEach(function (book) {
+                      if (bookIdReactions[book.id] !== undefined) {
+                        book.reaction = bookIdReactions[book.id];
+                      }
+                    });
+                    success(books);
                   }).catch(function (err) {
                     console.error(err);
-                  })
+                  });
             })
             .catch(function (err) {
               console.error(err);

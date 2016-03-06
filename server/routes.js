@@ -70,7 +70,6 @@ var routes = [
       // query db for username
       helpers.getUsersBooks(email,
         function(data) {
-          console.log('routes.js success:', data);
           res.statusCode = 200;
           res.send(data);
         }, function(err) {
@@ -197,7 +196,6 @@ var routes = [
       var amz_auth_id = req.body.user;
       var email = req.body.email;
       helpers.insertEmail(amz_auth_id, email, function(success) {
-        console.log(success);
         res.json(success);
       }, function (error) {
         console.error(error);
