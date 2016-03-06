@@ -28,17 +28,17 @@ angular.module('booklist.search', [])
   $scope.userQuery = function(e) {
     var username = e.target.value;
     e.target.value = '';
-    Books.getUserProfile(username)
-      .then(function(results) {
-        $scope.books = results.data;
-        // calibrates slider??
-        $scope.books.forEach(function(book) {
-          book.reactionSlider = (book.reaction - 1) * 25;
-        });
-      })
-      .catch(function(err) {
-        console.error('Error getting user profile:', err);
-      });
+    // Books.getUserProfile(username)
+    //   .then(function(results) {
+    //     $scope.books = results.data;
+    //     // calibrates slider??
+    //     $scope.books.forEach(function(book) {
+    //       book.reactionSlider = (book.reaction - 1) * 25;
+    //     });
+    //   })
+    //   .catch(function(err) {
+    //     console.error('Error getting user profile:', err);
+    //   });
   };
 
   // Used for filtering front page of profile to not show books in to-read list
