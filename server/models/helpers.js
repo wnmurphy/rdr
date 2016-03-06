@@ -95,31 +95,48 @@ var getBooks = function (list, limit, success, fail) {
 
 // Returns books in descending order of average reaction
 var deleteBook = function (bookTitle, user, success, fail) {
-  console.log('I made it to helpers.js!!!');
-  db.knex
-  .delete()
-  .from('books_users')
-  .where(knex.raw('books_users.book_id = books.id'))
-  .where(knex.raw('books.title = booksTitle'))
-  .then(function () {
-      console.log('success');
-      success();
+  db.knex('users.*')
+  // .dropForeign('books_users.book_id')  
+  .from('books') 
+  .innerJoin('books_users', 'books.id', 'books_users.book_id')
+  .innerJoin('users', 'books_users.user_id', 'users.id')
+  .where('books.title', bookTitle)
+  // .andWhere('users.amz_auth_id', user.amz_auth_id)      
+  // .del()                                   
+    .then(function (result) {
+      console.log(result);
+
+      // books.forEach(function (book) {
+      //   if(book.title === bookTitle){
+        //   db.knex.del(book);
+        //console.log(book);
+        // }
+      // });
+      // success(200);
     })
-  .catch(fail);
+    .catch(fail);
 };
 
 
-//   db.knex
-//   .delete()
-//   .from('books_users_reactions')
-//   .where(knex.raw('books_users_reactions.books_users_id = books_users.book_id'))
-//   .where(knex.raw('books_users.book_id = books.title'))
-//   .andWhere('books.title', bookTitle)
-//   .then(function () {
-//       success();
-//     })
-//   .catch(fail);
-// };
+// Deletes all entries in both book lists for current user.
+var emptyBookLists = function (user, success, fail) {
+  
+  // Use amz_auth_id to get users.id.
+  var user_id = 
+  db.knex('users')
+  .select('users.id')
+  .where('users.amz_auth_id', user.amz_auth_id);
+
+  // Delete all records for user in books_users.
+  db.knex('books_users')
+  .innerJoin('users', 'books_users.user_id', 'users.id') 
+  .where('books_users.user_id', user_id)
+  .del() 
+  .then(function (results) {
+    success();
+  }).catch(fail);
+};
+
 
 // Returns all books that have been read
 // Includes user's reaction if user's reaction exists
@@ -289,6 +306,7 @@ module.exports = {
   getBooks: getBooks,
   getBooksSignedIn: getBooksSignedIn,
   saveProfile: saveProfile,
-  getProfile: getProfile
-
+  getProfile: getProfile,
+  deleteBook: deleteBook,
+  emptyBookLists: emptyBookLists
 };

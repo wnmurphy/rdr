@@ -64,43 +64,6 @@ var routes = [
     }
   },
   {
-    path: '/user/:email',
-    get: function(req, res) {
-      var email = req.params.email;
-      // query db for username
-      helpers.getUsersBooks(email,
-        function(data) {
-          res.statusCode = 200;
-          res.send(data);
-        }, function(err) {
-          console.error(err);
-          res.sendStatus(400);
-        });
-    }
-  },
-  {
-    path: '/users/books/deleteBook',
-    post: function(req, res){
-      var bookTitle = req.body.title;
-      console.log('routes.js bookTitle', bookTitle);
-      var user = {
-        amz_auth_id: req.user.sub
-      };
-      if (!bookTitle) {
-        res.sendStatus(409);
-      } else {
-        helpers.deleteBook(bookTitle, user,
-          function(data){
-            res.statusCode = 200;
-            res.send(data);
-          }, function(error){
-            console.error(error);
-            res.sendStatus(409);
-          });
-      }
-    }
-  },
-  {
     path: '/users/books/deleteBook',
     post: function(req, res){
       var bookTitle = req.body.title;
@@ -120,6 +83,39 @@ var routes = [
             res.sendStatus(409);
           });
       }
+    },
+  },
+  {
+    path: '/users/books/emptyBookLists',
+    post: function(req, res){
+      var user = {
+        amz_auth_id: req.user.sub
+      };
+      console.log('emptyBookLists called in routes');
+      helpers.emptyBookLists(user, 
+          function(data){
+            res.statusCode = 200;
+            res.send(data);
+          }, 
+          function(error){
+            console.error(error);
+            res.sendStatus(409);
+          });
+      }
+    },
+  {
+    path: '/user/:email',
+    get: function(req, res) {
+      var email = req.params.email;
+      // query db for username
+      helpers.getUsersBooks(email,
+        function(data) {
+          res.statusCode = 200;
+          res.send(data);
+        }, function(err) {
+          console.error(err);
+          res.sendStatus(400);
+        });
     }
   },
   {

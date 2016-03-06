@@ -47,6 +47,20 @@ angular.module('booklist.user', [])
     });
   };
 
+  $scope.emptyBookLists = function (){
+    console.log('emptyBookLists has been called in user.page!');
+    return $http({
+      method: 'post',
+      url: '/users/books/emptyBookLists'
+    })
+    .then(function(resp) {
+      return resp.data;
+    }, function(error) {
+      console.log(error);
+      return error;
+    });
+  };  
+
   $scope.setReaction = function ($event, reaction) {
     var $target = $($event.currentTarget);
     $('.reaction-buttons').find('.selected').removeClass('selected');
