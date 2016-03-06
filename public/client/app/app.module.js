@@ -34,19 +34,19 @@ angular.module('booklist.services', [])
       });
     };
 
-    // var getUserProfile = function (user) {
-    //   return $http({
-    //     method: 'GET',
-    //     url: '/userProfile/:user'
-    //   })
-    //   .then(function (resp) {
-    //     return resp.data;
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
-    //     return error;
-    //   });
-    // };
+    var getUserProfile = function (email) {
+      return $http({
+        method: 'GET',
+        url: '/user/' + email
+      })
+      .then(function (resp) {
+        return resp.data;
+      })
+      .catch(function (error) {
+        console.error(error);
+        return error;
+      });
+    };
 
     var postBook = function (book, authorName, reaction){
       return $http({
@@ -83,8 +83,9 @@ angular.module('booklist.services', [])
     };
 
     return {
-      getProfile: getProfile,
       getBooks: getBooks,
+      getProfile: getProfile,
+      getUserProfile: getUserProfile,
       postBook: postBook,
       queryAmazon: queryAmazon
     };

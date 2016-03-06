@@ -182,10 +182,6 @@ var getBooksSignedIn = function (list, limit, user, success, fail) {
     });
 };
 
-var getUsersBooks = function(user, success, fail) {
-  // db.knex.select('',)
-};
-
 var saveProfile = function (profile, success, fail) {
   findOrCreate(models.User, {amz_auth_id: profile})
     .then(function (user) {
@@ -238,12 +234,49 @@ var insertEmail = function(amzId, email, success, fail) {
     .from('users')
     .where('amz_auth_id', amzId)
     .update( { email: email } )
-      .then(function (email){
-        console.log("Success" + email);
-        success(email);
+      .then(function (res) {
+        success(res);
       })
-      .catch( function (error) {
+      .catch(function (error) {
         fail(error);
+      });
+};
+
+var getUsersBooks = function(email, success, fail) {
+  var book_ids = [];
+  var bookIdReactions = {};
+  db.knex.select('id')
+    .from('users')
+    .where('email', email)
+      .then(function (data) {
+        db.knex.select('book_id', 'reaction')
+          .from('books_users')
+          .where('user_id', data[0].id)
+            .then(function (res) {
+              res.forEach(function (obj) {
+                book_ids.push(obj.book_id);
+                bookIdReactions[obj.book_id] = obj.reaction;
+              });
+              db.knex.select()
+                .from('books')
+                .whereIn('id', book_ids)
+                  .then(function (books) {
+                    books.forEach(function (book) {
+                      if (bookIdReactions[book.id] !== undefined) {
+                        book.reaction = bookIdReactions[book.id];
+                      }
+                    });
+                    success(books);
+                  }).catch(function (err) {
+                    console.error(err);
+                  });
+            })
+            .catch(function (err) {
+              console.error(err);
+            });
+      })
+      .catch(function (err) {
+        fail(err);
       });
 };
 
@@ -255,7 +288,6 @@ module.exports = {
   addBook: addBook,
   getBooks: getBooks,
   getBooksSignedIn: getBooksSignedIn,
-  // getUsersBooks: getUsersBooks,
   saveProfile: saveProfile,
   getProfile: getProfile
 

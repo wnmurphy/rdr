@@ -19,7 +19,7 @@ var authRoutes = [
   '/users/books',
   '/profile',
   '/books/signedin',
-  '/userProfile/:user'
+  '/user/:email'
 ];
 
 var routes = [
@@ -63,31 +63,21 @@ var routes = [
       }
     }
   },
-  // {
-  //   path: '/userProfile/:user',
-  //   get: function(req, res) {
-  //     var username = req.params.user;
-  //     // what does amazon username look like?
-  //     // query db for username
-  //     helpers.getUsersBooks(username,
-  //       function(data) {
-  //         res.statusCode = 200;
-  //         res.send(data);
-  //       }, function(err) {
-  //         console.error(err);
-  //         res.sendStatus(400);
-  //       });
-  //       // on success
-  //         // (line 185)
-  //         // helpers.getUsersBooks(username, function(books) {
-  //         // res.json(books)
-  //         // }, function(err) {
-  //         //  console.error(err);
-  //         //  res.sendStatus();
-  //         // })
-  //         //
-  //   }
-  // },
+  {
+    path: '/user/:email',
+    get: function(req, res) {
+      var email = req.params.email;
+      // query db for username
+      helpers.getUsersBooks(email,
+        function(data) {
+          res.statusCode = 200;
+          res.send(data);
+        }, function(err) {
+          console.error(err);
+          res.sendStatus(400);
+        });
+    }
+  },
   {
     path: '/users/books/deleteBook',
     post: function(req, res){
@@ -206,7 +196,6 @@ var routes = [
       var amz_auth_id = req.body.user;
       var email = req.body.email;
       helpers.insertEmail(amz_auth_id, email, function(success) {
-        console.log(success);
         res.json(success);
       }, function (error) {
         console.error(error);
