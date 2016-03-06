@@ -76,9 +76,11 @@ var routes = [
       } else {
         helpers.deleteBook(bookTitle, user, 
           function(data){
+            console.log('in success fn in routes.post');
             res.statusCode = 200;
             res.send(data);
           }, function(error){
+            console.log('in failure fn in routes.post');
             console.error(error);
             res.sendStatus(409);
           });

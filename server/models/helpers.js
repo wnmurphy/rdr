@@ -107,18 +107,50 @@ var deleteBook = function (bookTitle, user, success, fail) {
   .catch(fail);
 };
 
+//   db.knex.select('users.id')
+//   .from('users')
+//   .where('users.amz_auth_id', user)
 
-//   db.knex
-//   .delete()
-//   .from('books_users_reactions')
-//   .where(knex.raw('books_users_reactions.books_users_id = books_users.book_id'))
-//   .where(knex.raw('books_users.book_id = books.title'))
-//   .andWhere('books.title', bookTitle)
-//   .then(function () {
-//       success();
+//   .innerJoin('books_users', 'users.id', 'books_users.user_id')
+//     .then(function (ids) {
+//       ids.forEach(function (id) {
+//         // if(book.title === bookTitle){
+//         //   db.knex.del(book);
+//         console.log(id);
+//         // }
+//       });
+//       success('success');
 //     })
-//   .catch(fail);
+//     .catch(fail);
 // };
+
+// db.knex.select('books.id')
+//   .from('books')
+//   .where('books.title', bookTitle) // correctly gets the id for the passed in bookTitle
+//   //.innerJoin('books_users', 'books.id')
+
+//select books_users.book_id, books_users.user_id
+//
+
+db.knex.del('users.*')
+  .from('books')
+  .innerJoin('books_users', 'books.id', 'books_users.book_id')
+  .innerJoin('users', 'books_users.user_id', 'users.id')
+  .where('books.title', bookTitle)
+  .andWhere('users.amz_auth_id', user.amz_auth_id)
+                                                           
+    .then(function (result) {
+      console.log(result);
+      // books.forEach(function (book) {
+      //   if(book.title === bookTitle){
+        //   db.knex.del(book);
+        //console.log(book);
+        // }
+      // });
+      // success(200);
+    })
+    .catch(fail);
+};
 
 // Returns all books that have been read
 // Includes user's reaction if user's reaction exists
@@ -288,6 +320,6 @@ module.exports = {
   getBooks: getBooks,
   getBooksSignedIn: getBooksSignedIn,
   saveProfile: saveProfile,
-  getProfile: getProfile
-
+  getProfile: getProfile,
+  deleteBook: deleteBook
 };
