@@ -74,6 +74,7 @@ var routes = [
           function(data){
             res.sendStatus(200);
           }, function(error){
+            console.log('in failure fn in routes.post');
             console.error(error);
             res.sendStatus(409);
           });

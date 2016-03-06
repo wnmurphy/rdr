@@ -105,18 +105,9 @@ var deleteBook = function (bookTitle, user, success, fail) {
   // .del()                                   
     .then(function (result) {
       console.log(result);
-
-      // books.forEach(function (book) {
-      //   if(book.title === bookTitle){
-        //   db.knex.del(book);
-        //console.log(book);
-        // }
-      // });
-      // success(200);
     })
     .catch(fail);
 };
-
 
 // Deletes all entries in both book lists for current user.
 var emptyBookLists = function (list, user, success, fail) {
@@ -151,6 +142,26 @@ var emptyBookLists = function (list, user, success, fail) {
       success(results);
     }).catch(fail);
   }
+};
+
+db.knex.del('users.*')
+  .from('books')
+  .innerJoin('books_users', 'books.id', 'books_users.book_id')
+  .innerJoin('users', 'books_users.user_id', 'users.id')
+  .where('books.title', bookTitle)
+  .andWhere('users.amz_auth_id', user.amz_auth_id)
+                                                           
+    .then(function (result) {
+      console.log(result);
+      // books.forEach(function (book) {
+      //   if(book.title === bookTitle){
+        //   db.knex.del(book);
+        //console.log(book);
+        // }
+      // });
+      // success(200);
+    })
+    .catch(fail);
 };
 
 // Returns all books that have been read
@@ -363,6 +374,10 @@ module.exports = {
   getBooksSignedIn: getBooksSignedIn,
   saveProfile: saveProfile,
   getProfile: getProfile,
+<<<<<<< HEAD
   deleteBook: deleteBook,
   emptyBookLists: emptyBookLists
+=======
+  deleteBook: deleteBook
+>>>>>>> Delete function now selecting correct user by book.
 };
