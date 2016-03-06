@@ -119,8 +119,8 @@ var deleteBook = function (bookTitle, user, success, fail) {
 
 
 // Deletes all entries in both book lists for current user.
-var emptyBookLists = function (user, success, fail) {
-  
+var emptyBookLists = function (list, user, success, fail) {
+ 
   // Use amz_auth_id to get users.id.
   var user_id = 
   db.knex('users')
@@ -128,15 +128,30 @@ var emptyBookLists = function (user, success, fail) {
   .where('users.amz_auth_id', user.amz_auth_id);
 
   // Delete all records for user in books_users.
-  db.knex('books_users')
-  .innerJoin('users', 'books_users.user_id', 'users.id') 
-  .where('books_users.user_id', user_id)
-  .del() 
-  .then(function (results) {
-    success();
-  }).catch(fail);
-};
+  console.log('What is list? ', list);
+  // Empty read list:
+  if (list === 'read') {
+    db.knex('books_users')
+    .innerJoin('users', 'books_users.user_id', 'users.id') 
+    .where('books_users.user_id', user_id)
+    .andWhere('books_users.reaction', '0')
+    .del() 
+    .then(function (results) {
+      success(results);
+    }).catch(fail);
 
+  // Empty book list:
+  } else if (list === 'book') {
+     db.knex('books_users')
+    .innerJoin('users', 'books_users.user_id', 'users.id') 
+    .where('books_users.user_id', user_id)
+    .andWhere('books_users.reaction', '>', '0') 
+    .del() 
+    .then(function (results) {
+      success(results);
+    }).catch(fail);
+  }
+};
 
 // Returns all books that have been read
 // Includes user's reaction if user's reaction exists

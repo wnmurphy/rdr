@@ -47,11 +47,12 @@ angular.module('booklist.user', [])
     });
   };
 
-  $scope.emptyBookLists = function (){
+  $scope.emptyBookLists = function (list){
     console.log('emptyBookLists has been called in user.page!');
     return $http({
       method: 'post',
-      url: '/users/books/emptyBookLists'
+      url: '/users/books/emptyBookLists',
+      data: { list: list }
     })
     .then(function(resp) {
       return resp.data;
