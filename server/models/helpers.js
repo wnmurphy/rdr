@@ -243,6 +243,7 @@ var insertEmail = function(amzId, email, success, fail) {
 };
 
 var getUsersBooks = function(email, success, fail) {
+  var book_ids = [];
   db.knex.select('id')
     .from('users')
     .where('email', email)
@@ -251,8 +252,18 @@ var getUsersBooks = function(email, success, fail) {
           .from('books_users')
           .where('user_id', data[0].id)
             .then(function (res) {
-              console.log('helpers success:', res);
-              success(res);
+              res.forEach(function (idObj) {
+                book_ids.push(idObj.book_id);
+              });
+              db.knex.select()
+                .from('books')
+                .whereIn('id', book_ids)
+                  .then(function (YES) {
+                    console.log('FUCK YEAH:', YES);
+                    success(YES);
+                  }).catch(function (err) {
+                    console.error(err);
+                  })
             })
             .catch(function (err) {
               console.error(err);
