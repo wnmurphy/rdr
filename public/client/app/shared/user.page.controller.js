@@ -4,6 +4,7 @@ angular.module('booklist.user', [])
   $scope.user = {};
   $scope.books = [];
   $scope.path = $location.path();
+  $scope.readit = true;
 
   $scope.auth = auth;
   $scope.firstName = $scope.auth.profile.nickname;
