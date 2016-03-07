@@ -265,12 +265,23 @@ var insertEmail = function(amzId, email, success, fail) {
   db.knex.select('email')
     .from('users')
     .where('amz_auth_id', amzId)
-    .update( { email: email } )
       .then(function (res) {
-        success(res);
+        if (res[0].email === null) {
+          db.knex('users')
+            .where('amz_auth_id', amzId)
+            .update({ email: email })
+              .then(function (res) {
+                success(res);
+              })
+              .catch(function (err) {
+                fail(err);
+              });
+        } else {
+          success('User email already exists');
+        }
       })
-      .catch(function (error) {
-        fail(error);
+      .catch(function (err) {
+        fail(err);
       });
 };
 

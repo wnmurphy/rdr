@@ -112,20 +112,24 @@ angular.module('booklist.user', [])
       }
     });
 
-     return $http({
-       method: 'PUT',
-       url: '/profile',
-       data: {
+    $http({
+      method: 'PUT',
+      url: '/profile',
+      data: {
         user: $scope.auth.profile.user_id,
         email: $scope.auth.profile.email
       }
-     })
-     .then(function(success) {
+    })
+    .then(function(success) {
+      if (isNaN(success.data)) {
+        console.log(success.data);
+      } else {
         console.log('Successful email PUT:', success);
-     })
-     .catch(function(err) {
-        console.error(err);
-     });
+      }
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
   };
 
   // Refreshes profile each time profile is loaded
