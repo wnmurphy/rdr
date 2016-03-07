@@ -288,10 +288,15 @@ var insertEmail = function(amzId, email, success, fail) {
 var getUsersBooks = function(email, success, fail) {
   var book_ids = [];
   var bookIdReactions = {};
+  var bookIdAuthors = {
+    author_ids: []
+  };
+  // query for user IDs using user email
   db.knex.select('id')
     .from('users')
     .where('email', email)
       .then(function (data) {
+        // query for book IDs and reactions using user IDs
         db.knex.select('book_id', 'reaction')
           .from('books_users')
           .where('user_id', data[0].id)
@@ -300,6 +305,7 @@ var getUsersBooks = function(email, success, fail) {
                 book_ids.push(obj.book_id);
                 bookIdReactions[obj.book_id] = obj.reaction;
               });
+              // query for books using book IDs
               db.knex.select()
                 .from('books')
                 .whereIn('id', book_ids)
@@ -308,8 +314,20 @@ var getUsersBooks = function(email, success, fail) {
                       if (bookIdReactions[book.id] !== undefined) {
                         book.reaction = bookIdReactions[book.id];
                       }
+                      book.author = {};
+                      bookIdAuthors[book.id] = book.author_id;
+                      bookIdAuthors.author_ids.push(book.author_id);
                     });
-                    success(books);
+                    // query for authors of books
+                    db.knex.select('name', 'id')
+                      .from('authors')
+                      .whereIn('id', bookIdAuthors.author_ids)
+                        .then(function (authors) {
+                          success({ books: books, authors: authors });
+                        })
+                        .catch(function (err) {
+                          console.error(err);
+                        })
                   }).catch(function (err) {
                     console.error(err);
                   });
