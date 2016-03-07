@@ -111,10 +111,19 @@ module.exports = function(grunt) {
           sourceMap: "true"
         }
       }
-    }
+    },
+    shell: {
+      prodServer: {
+        command: [
+            'git add .',
+            'git commit -m "Pushing to production"',
+            'git push heroku master'
+        ].join('&&')
+      }
+    },    
 
   });
-
+  grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-test');
@@ -129,6 +138,23 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['mochaTest']);
 
   grunt.registerTask('default', ['watch']);
+
+  grunt.registerTask('upload', function(n) {
+    if(grunt.option('production')) {
+      console.log("Pushing to production!"),
+      // upload to heroku
+      grunt.task.run(['shell:prodServer']);
+    } else {
+      grunt.task.run([ 'server-dev' ]);
+    }
+  });
+
+  grunt.registerTask('deploy', [
+    // 'test',
+    'build',
+    'upload'
+  ]);  
+ 
 
   grunt.registerTask('heroku:production', [
     'build'
