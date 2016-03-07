@@ -396,7 +396,6 @@ angular.module('booklist.auth', [])
 
   $scope.addReaction = function (reaction, book) {
     reaction = Number(reaction);
-    // console.log('yolo:', book);
     Books.updateReaction(reaction, book.id)
       .then(function (success) {
         console.log('Successful reaction PUT:', success);
@@ -435,21 +434,20 @@ angular.module('booklist.auth', [])
     $scope.reaction = 0;
   };
 
-  // $scope.deleteBookFromList = function (bookTitle) {
-  //   console.log('bookTitle: ', bookTitle)
-  //   console.log('deleteBookFromList has been called in user.page!');
-  //   return $http({
-  //     method: 'post',
-  //     url: '/users/books/deleteBook',
-  //     data: { title: bookTitle }
-  //   })
-  //   .then(function(resp) {
-  //     return resp.data;
-  //   }, function(error) {
-  //     console.log(error);
-  //     return error;
-  //   });
-  // };
+  $scope.deleteBookFromList = function (bookTitle) {
+    return $http({
+      method: 'post',
+      url: '/users/books/deleteBook',
+      data: { title: bookTitle }
+    })
+    .then(function(resp) {
+      $scope.resetProfile();
+      return resp.data;
+    }, function(error) {
+      console.log(error);
+      return error;
+    });
+  };
 
   $scope.emptyBookLists = function (list) {
     return $http({
@@ -458,17 +456,7 @@ angular.module('booklist.auth', [])
       data: { list: list }
     })
     .then(function(resp) {
-      $scope.books.forEach(function (book, i) {
-        if (list === 'book') {
-          if (book.reaction > 0) {
-            $scope.books.splice(i, 1);
-          }
-        } else if (list === 'read') {
-          if (book.reaction === 0) {
-            $scope.books.splice(i, 1);
-          }
-        }
-      });
+      $scope.resetProfile();
     }, function(error) {
       console.log(error);
       return error;
