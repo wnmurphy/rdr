@@ -1,9 +1,9 @@
 angular.module('booklist.search', [])
 
-.controller('UserFeedController', ['$scope', 'Books','$rootScope', '$timeout', '$location', 'auth', function($scope, Books, $rootScope, $timeout, $location, auth){
+.controller('UserFeedController', ['$scope', 'Books','$rootScope', '$timeout', '$location', 'auth', function ($scope, Books, $rootScope, $timeout, $location, auth) {
   $scope.user = {};
   $scope.books = [];
-  
+
   // search bar model
   $scope.search = {
     field: null

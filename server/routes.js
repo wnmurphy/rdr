@@ -128,6 +128,16 @@ var routes = [
         console.error(error);
         res.sendStatus(409);
       });
+    },
+    put: function (req, res) {
+      var reaction = req.body.reaction;
+      var bookId = req.body.bookId;
+      helpers.updateBookReaction(reaction, bookId, function (success) {
+        res.json(success);
+      }, function (error) {
+        console.error(error);
+        res.sendStatus(400);
+      })
     }
   },
   {

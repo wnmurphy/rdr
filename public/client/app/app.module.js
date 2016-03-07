@@ -34,20 +34,6 @@ angular.module('booklist.services', [])
       });
     };
 
-    var getUserProfile = function (email) {
-      return $http({
-        method: 'GET',
-        url: '/user/' + email
-      })
-      .then(function (resp) {
-        return resp.data;
-      })
-      .catch(function (error) {
-        console.error(error);
-        return error;
-      });
-    };
-
     var postBook = function (book, authorName, reaction){
       return $http({
         method: 'POST',
@@ -82,7 +68,40 @@ angular.module('booklist.services', [])
       });
     };
 
+    var getUserProfile = function (email) {
+      return $http({
+        method: 'GET',
+        url: '/user/' + email
+      })
+      .then(function (resp) {
+        return resp.data;
+      })
+      .catch(function (error) {
+        console.error(error);
+        return error;
+      });
+    };
+
+    var updateReaction = function (reaction, bookId) {
+      return $http({
+        method: 'PUT',
+        url:'/books',
+        data: {
+          reaction: reaction,
+          bookId: bookId
+        }
+      })
+      .then(function (resp) {
+        return resp.data;
+      })
+      .catch(function (err) {
+        console.error(err);
+        return error;
+      });
+    };
+
     return {
+      updateReaction: updateReaction,
       getBooks: getBooks,
       getProfile: getProfile,
       getUserProfile: getUserProfile,

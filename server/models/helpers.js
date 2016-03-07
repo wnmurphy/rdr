@@ -341,8 +341,20 @@ var getUsersBooks = function(email, success, fail) {
       });
 };
 
-module.exports = {
+var updateBookReaction = function (reaction, bookId, success, fail) {
+  db.knex('books_users')
+    .where('book_id', bookId)
+    .update({ reaction: reaction })
+      .then(function (res) {
+        success(res);
+      })
+      .catch(function (err) {
+        fail(err);
+      });
+};
 
+module.exports = {
+  updateBookReaction: updateBookReaction,
   insertEmail: insertEmail,
   getUsersBooks: getUsersBooks,
   findOrCreate: findOrCreate,
