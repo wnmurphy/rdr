@@ -1,7 +1,6 @@
 <div class="user-page">
   <div class="row">
-    <p class="greet">Hello, {{ firstName }}!</p>
-    <!-- <pre>{{ firstName | json }}</pre> -->
+    <p class="greet">Hello, {{ firstName || 'you' }}</p>
     <form class='input-field col s12' ng-submit=userQuery($event)>
       <i class='material-icons prefix' style='color: #fff'>
       search
@@ -22,7 +21,7 @@
         </li>
         <div class="message card" ng-show="!books.length">
           <div class="card-content">
-            Search other users book lists above!
+            Search other user's book lists above!
           </div>
         </div>
       </ul>

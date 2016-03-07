@@ -265,22 +265,38 @@ var insertEmail = function(amzId, email, success, fail) {
   db.knex.select('email')
     .from('users')
     .where('amz_auth_id', amzId)
-    .update( { email: email } )
       .then(function (res) {
-        success(res);
+        if (res[0].email === null) {
+          db.knex('users')
+            .where('amz_auth_id', amzId)
+            .update({ email: email })
+              .then(function (res) {
+                success(res);
+              })
+              .catch(function (err) {
+                fail(err);
+              });
+        } else {
+          success('User email already exists');
+        }
       })
-      .catch(function (error) {
-        fail(error);
+      .catch(function (err) {
+        fail(err);
       });
 };
 
 var getUsersBooks = function(email, success, fail) {
   var book_ids = [];
   var bookIdReactions = {};
+  var bookIdAuthors = {
+    author_ids: []
+  };
+  // query for user IDs using user email
   db.knex.select('id')
     .from('users')
     .where('email', email)
       .then(function (data) {
+        // query for book IDs and reactions using user IDs
         db.knex.select('book_id', 'reaction')
           .from('books_users')
           .where('user_id', data[0].id)
@@ -289,6 +305,7 @@ var getUsersBooks = function(email, success, fail) {
                 book_ids.push(obj.book_id);
                 bookIdReactions[obj.book_id] = obj.reaction;
               });
+              // query for books using book IDs
               db.knex.select()
                 .from('books')
                 .whereIn('id', book_ids)
@@ -297,8 +314,20 @@ var getUsersBooks = function(email, success, fail) {
                       if (bookIdReactions[book.id] !== undefined) {
                         book.reaction = bookIdReactions[book.id];
                       }
+                      book.author = {};
+                      bookIdAuthors[book.id] = book.author_id;
+                      bookIdAuthors.author_ids.push(book.author_id);
                     });
-                    success(books);
+                    // query for authors of books
+                    db.knex.select('name', 'id')
+                      .from('authors')
+                      .whereIn('id', bookIdAuthors.author_ids)
+                        .then(function (authors) {
+                          success({ books: books, authors: authors });
+                        })
+                        .catch(function (err) {
+                          console.error(err);
+                        })
                   }).catch(function (err) {
                     console.error(err);
                   });
@@ -312,8 +341,20 @@ var getUsersBooks = function(email, success, fail) {
       });
 };
 
-module.exports = {
+var updateBookReaction = function (reaction, bookId, success, fail) {
+  db.knex('books_users')
+    .where('book_id', bookId)
+    .update({ reaction: reaction })
+      .then(function (res) {
+        success(res);
+      })
+      .catch(function (err) {
+        fail(err);
+      });
+};
 
+module.exports = {
+  updateBookReaction: updateBookReaction,
   insertEmail: insertEmail,
   getUsersBooks: getUsersBooks,
   findOrCreate: findOrCreate,

@@ -1,12 +1,30 @@
 angular.module('booklist.user', [])
 
-.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', '$location', '$http', '$route', 'auth', function($scope, Books, $rootScope, $timeout, $location, $http, $route, auth){
+.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', '$location', '$http', '$route', 'auth', function ($scope, Books, $rootScope, $timeout, $location, $http, $route, auth) {
   $scope.user = {};
   $scope.books = [];
   $scope.path = $location.path();
 
   $scope.auth = auth;
   $scope.firstName = $scope.auth.profile.nickname;
+
+  $scope.addReaction = function (reaction, book) {
+    reaction = Number(reaction);
+    // console.log('yolo:', book);
+    Books.updateReaction(reaction, book.id)
+      .then(function (success) {
+        console.log('Successful reaction PUT:', success);
+        if (reaction > 0) {
+          book.reactionSlider = JSON.stringify(reaction * 25);
+        } else {
+          book.reactionSlider = '0';
+        }
+        book.reaction = reaction + 1;
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
+  };
 
   // Loading spinner is hidden when false
   $scope.submitting = false;
@@ -31,31 +49,40 @@ angular.module('booklist.user', [])
     $scope.reaction = 0;
   };
 
-  $scope.deleteBookFromList = function (bookTitle){
-    console.log('bookTitle: ', bookTitle)
-    console.log('deleteBookFromList has been called in user.page!');
-    return $http({
-      method: 'post',
-      url: '/users/books/deleteBook',
-      data: { title: bookTitle }
-    })
-    .then(function(resp) {
-      return resp.data;
-    }, function(error) {
-      console.log(error);
-      return error;
-    });
-  };
+  // $scope.deleteBookFromList = function (bookTitle) {
+  //   console.log('bookTitle: ', bookTitle)
+  //   console.log('deleteBookFromList has been called in user.page!');
+  //   return $http({
+  //     method: 'post',
+  //     url: '/users/books/deleteBook',
+  //     data: { title: bookTitle }
+  //   })
+  //   .then(function(resp) {
+  //     return resp.data;
+  //   }, function(error) {
+  //     console.log(error);
+  //     return error;
+  //   });
+  // };
 
-  $scope.emptyBookLists = function (list){
+  $scope.emptyBookLists = function (list) {
     return $http({
       method: 'post',
       url: '/users/books/emptyBookLists',
       data: { list: list }
     })
     .then(function(resp) {
-      $route.reload();
-      return resp.data;
+      $scope.books.forEach(function (book, i) {
+        if (list === 'book') {
+          if (book.reaction > 0) {
+            $scope.books.splice(i, 1);
+          }
+        } else if (list === 'read') {
+          if (book.reaction === 0) {
+            $scope.books.splice(i, 1);
+          }
+        }
+      });
     }, function(error) {
       console.log(error);
       return error;
@@ -112,20 +139,26 @@ angular.module('booklist.user', [])
       }
     });
 
-     return $http({
-       method: 'PUT',
-       url: '/profile',
-       data: {
+    $http({
+      method: 'PUT',
+      url: '/profile',
+      data: {
         user: $scope.auth.profile.user_id,
         email: $scope.auth.profile.email
       }
-     })
-     .then(function(success) {
+    })
+    .then(function(success) {
+      // if email already exists
+      if (isNaN(success.data)) {
+        // logs 'User email already exists'
+        console.log(success.data);
+      } else {
         console.log('Successful email PUT:', success);
-     })
-     .catch(function(err) {
-        console.error(err);
-     });
+      }
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
   };
 
   // Refreshes profile each time profile is loaded

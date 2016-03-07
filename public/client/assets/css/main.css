@@ -391,4 +391,7 @@ input[type=email]:focus:not([readonly]) {
   border-bottom: 1px solid #8794a1;
   box-shadow: 0 1px 0 0 #a4adb7; }
 
+#finished {
+  display: inline-flex; }
+
 /*# sourceMappingURL=main.css.map */

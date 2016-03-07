@@ -1,9 +1,9 @@
 angular.module('booklist.search', [])
 
-.controller('UserFeedController', ['$scope', 'Books','$rootScope', '$timeout', '$location', 'auth', function($scope, Books, $rootScope, $timeout, $location, auth){
+.controller('UserFeedController', ['$scope', 'Books','$rootScope', '$timeout', '$location', 'auth', function ($scope, Books, $rootScope, $timeout, $location, auth) {
   $scope.user = {};
   $scope.books = [];
-  
+
   // search bar model
   $scope.search = {
     field: null
@@ -31,9 +31,15 @@ angular.module('booklist.search', [])
     var email = $scope.search.field;
     $scope.search.field = null;
     Books.getUserProfile(email)
-      .then(function(success) {
-        // console.log('userQuery success:', success);
-        $scope.books = success;
+      .then(function(data) {
+        data.books.forEach(function (book) {
+          data.authors.forEach(function (author) {
+            if (author.id === book.author_id) {
+              book.author.name = author.name;
+            }
+          });
+        });
+        $scope.books = data.books;
         $scope.books.forEach(function(book) {
           book.reactionSlider = (book.reaction - 1) * 25;
         });
