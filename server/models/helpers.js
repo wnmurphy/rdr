@@ -95,28 +95,29 @@ var getBooks = function (list, limit, success, fail) {
 
 // Returns books in descending order of average reaction
 var deleteBook = function (bookTitle, user, success, fail) {
-  db.knex('users.*')
-  // .dropForeign('books_users.book_id')  
-  .from('books') 
-  .innerJoin('books_users', 'books.id', 'books_users.book_id')
-  .innerJoin('users', 'books_users.user_id', 'users.id')
-  .where('books.title', bookTitle)
-  // .andWhere('users.amz_auth_id', user.amz_auth_id)      
-  // .del()                                   
+  
+  var user_id = 
+  db.knex('users')
+  .select('users.id')
+  .where('users.amz_auth_id', user.amz_auth_id);
+
+  var book_title = 
+  db.knex('books')
+  .select('books.id')
+  .where('books.title', bookTitle);
+
+  // Select and delete book based on user_id and bookTitle.
+  db.knex('books_users')
+  .innerJoin('books', 'books_users.book_id', 'books.id')
+  .where('books_users.book_id', book_title)
+  .andWhere('books_users.user_id', user_id)   
+  .del()                              
     .then(function (result) {
       console.log(result);
-
-      // books.forEach(function (book) {
-      //   if(book.title === bookTitle){
-        //   db.knex.del(book);
-        //console.log(book);
-        // }
-      // });
-      // success(200);
+      success(200);
     })
     .catch(fail);
 };
-
 
 // Deletes all entries in both book lists for current user.
 var emptyBookLists = function (list, user, success, fail) {

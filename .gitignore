@@ -1,9 +1,6 @@
 node_modules/
-bower_components/
 *.log
-
-build/
-dist/
+*.txt
 public/client/assets/libs/
 
 .env
