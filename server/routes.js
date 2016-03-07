@@ -74,7 +74,6 @@ var routes = [
           function(data){
             res.sendStatus(200);
           }, function(error){
-            console.log('in failure fn in routes.post');
             console.error(error);
             res.sendStatus(409);
           });
@@ -86,7 +85,6 @@ var routes = [
     path: '/users/books/deleteBook',
     post: function(req, res){
       var bookTitle = req.body.title;
-      console.log('routes.js bookTitle', bookTitle);
       var user = {
         amz_auth_id: req.user.sub
       };
