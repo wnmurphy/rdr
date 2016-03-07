@@ -95,8 +95,7 @@ var routes = [
       } else {
         helpers.deleteBook(bookTitle, user, 
           function(data){
-            res.statusCode = 200;
-            res.send(data);
+            res.send(200);
           }, function(error){
             console.error(error);
             res.sendStatus(409);

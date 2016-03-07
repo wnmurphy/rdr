@@ -72,17 +72,7 @@ angular.module('booklist.user', [])
       data: { list: list }
     })
     .then(function(resp) {
-      $scope.books.forEach(function (book, i) {
-        if (list === 'book') {
-          if (book.reaction > 0) {
-            $scope.books.splice(i, 1);
-          }
-        } else if (list === 'read') {
-          if (book.reaction === 0) {
-            $scope.books.splice(i, 1);
-          }
-        }
-      });
+      $scope.resetProfile();
     }, function(error) {
       console.log(error);
       return error;

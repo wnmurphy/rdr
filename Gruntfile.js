@@ -144,9 +144,7 @@ module.exports = function(grunt) {
       console.log("Pushing to production!"),
       // upload to heroku
       grunt.task.run(['shell:prodServer']);
-    } else {
-      grunt.task.run([ 'server-dev' ]);
-    }
+    } 
   });
 
   grunt.registerTask('deploy', [
