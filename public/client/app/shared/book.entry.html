@@ -41,7 +41,7 @@
         </div>
         <div class="action-buttons" ng-if="!book.reaction">
           <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book)" ng-if="book.reaction === undefined && signedIn">Add</a>
-          <div id='finished' ng-if='signedIn'>
+          <div id='finished' ng-show='signedIn && readit === true'>
             <select class='browser-default' ng-model='finished' ng-Change='addReaction(finished, book)'>
               <option value="" disabled selected>Read it?</option>
               <option value='0'>Hate It</option>
