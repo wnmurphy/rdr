@@ -436,32 +436,38 @@ angular.module('booklist.auth', [])
   };
 
   $scope.deleteBookFromList = function (bookTitle) {
-    return $http({
-      method: 'post',
-      url: '/users/books/deleteBook',
-      data: { title: bookTitle }
-    })
-    .then(function(resp) {
-      $scope.resetProfile();
-      return resp.data;
-    }, function(error) {
-      console.log(error);
-      return error;
-    });
+    var goAhead = confirm('Remove this book from list?')
+    if(goAhead){
+      return $http({
+        method: 'post',
+        url: '/users/books/deleteBook',
+        data: { title: bookTitle }
+      })
+      .then(function(resp) {
+        $scope.resetProfile();
+        return resp.data;
+      }, function(error) {
+        console.log(error);
+        return error;
+      });
+    }
   };
 
   $scope.emptyBookLists = function (list) {
-    return $http({
-      method: 'post',
-      url: '/users/books/emptyBookLists',
-      data: { list: list }
-    })
-    .then(function(resp) {
-      $scope.resetProfile();
-    }, function(error) {
-      console.log(error);
-      return error;
-    });
+    var goAhead = confirm('Remove all books from this list?')
+    if(goAhead){
+      return $http({
+        method: 'post',
+        url: '/users/books/emptyBookLists',
+        data: { list: list }
+      })
+      .then(function(resp) {
+        $scope.resetProfile();
+      }, function(error) {
+        console.log(error);
+        return error;
+      });
+    }
   };  
 
   $scope.setReaction = function ($event, reaction) {
