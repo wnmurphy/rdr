@@ -395,23 +395,6 @@ angular.module('booklist.auth', [])
   $scope.auth = auth;
   $scope.firstName = $scope.auth.profile.nickname;
 
-  $scope.addReaction = function (reaction, book) {
-    reaction = Number(reaction);
-    Books.updateReaction(reaction, book.id)
-      .then(function (success) {
-        console.log('Successful reaction PUT:', success);
-        if (reaction > 0) {
-          book.reactionSlider = JSON.stringify(reaction * 25);
-        } else {
-          book.reactionSlider = '0';
-        }
-        book.reaction = reaction + 1;
-      })
-      .catch(function (err) {
-        console.error(err);
-      });
-  };
-
   // Loading spinner is hidden when false
   $scope.submitting = false;
 
@@ -430,6 +413,23 @@ angular.module('booklist.auth', [])
   $scope.thumbnail_image = '';
 
   $scope.amazonResults = [];
+
+  $scope.addReaction = function (reaction, book) {
+    reaction = Number(reaction) + 1;
+    Books.updateReaction(reaction, book.id)
+      .then(function (success) {
+        console.log('Successful reaction PUT:', success);
+        if (reaction > 0) {
+          book.reactionSlider = JSON.stringify((reaction - 1)* 25);
+        } else {
+          book.reactionSlider = '0';
+        }
+        book.reaction = reaction;
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
+  };
 
   $scope.addToReadingList = function () {
     $scope.reaction = 0;
